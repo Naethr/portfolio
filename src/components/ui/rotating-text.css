@@ -1,0 +1,68 @@
+.text-rotate {
+  display: inline-flex;
+  white-space: pre-wrap;
+  position: relative;
+  align-items: center;
+  max-width: 100%;
+}
+
+.text-rotate-viewport {
+  display: inline-grid;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  align-items: center;
+  min-height: 1.16em;
+  white-space: nowrap;
+}
+
+.text-rotate-measure {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.text-rotate-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-rotate-word {
+  display: inline-flex;
+  align-items: center;
+}
+
+.text-rotate-track {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.text-rotate-lines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.08em;
+}
+
+.text-rotate-line,
+.text-rotate-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.text-rotate-space {
+  white-space: pre;
+}
