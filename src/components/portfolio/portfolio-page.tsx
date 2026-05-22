@@ -1,14 +1,13 @@
 'use client';
 
+import Image from "next/image";
+
 import {
   ArrowRight,
-  ArrowUpRight,
-  BracketsAngle,
   EnvelopeSimple,
-  FadersHorizontal,
-  GitBranch,
-  Lightning,
+  ImageSquare,
 } from "@phosphor-icons/react";
+import { motion } from "motion/react";
 
 import {
   projects,
@@ -19,26 +18,14 @@ import {
 
 import { GradientDots } from "../ui/gradient-dots";
 import { SectionReveal } from "../ui/section-reveal";
-import { HeroRotatingText } from "./hero-rotating-text";
+import { HeroGooeyText } from "./hero-gooey-text";
+import { ProjectWindowCard } from "./project-window-card";
 import { SectionHeading } from "./section-heading";
 
-const profilePillars = [
-  {
-    icon: BracketsAngle,
-    title: "Développement utile",
-    text: "Construire peu, mais juste. Chaque écran doit servir le produit et rester simple à maintenir.",
-  },
-  {
-    icon: Lightning,
-    title: "Expérience fluide",
-    text: "Temps de chargement, interactions, transitions et hiérarchie visuelle sont traités comme des sujets de fond.",
-  },
-  {
-    icon: FadersHorizontal,
-    title: "Système durable",
-    text: "Composants, structure de code et contenu sont pensés pour évoluer sans casser l'ensemble.",
-  },
-];
+const aboutPhoto = {
+  src: null as string | null,
+  alt: "Portrait de Théo Villalba",
+};
 
 function frame(className?: string) {
   return [
@@ -62,13 +49,13 @@ function HeroSection() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100dvh] items-center overflow-hidden py-20 sm:py-24"
+      className="relative flex min-h-[calc(100dvh-5rem)] items-center py-24 sm:py-28 lg:py-32"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute left-1/2 top-[8%] h-[28rem] w-[min(92vw,72rem)] -translate-x-1/2 rounded-[3rem] border border-white/8 bg-[rgba(7,11,22,0.52)] opacity-70 blur-3xl" />
+        <div className="absolute left-1/2 top-[8%] h-[28rem] w-[min(92vw,72rem)] -translate-x-1/2 bg-[rgba(7,11,22,0.52)] opacity-70 blur-3xl" />
         <div className="absolute inset-x-[-12%] top-[2%] h-[38rem] sm:inset-x-[-4%]">
           <GradientDots
             dotSize={10}
@@ -80,26 +67,22 @@ function HeroSection() {
         </div>
       </div>
 
-      <SectionReveal className={frame("w-full")}>
-        <div
-          className={panel(
-            "relative overflow-hidden px-6 py-8 sm:px-8 sm:py-9 lg:px-10 lg:py-10",
-          )}
-        >
+      <div className="w-full">
+        <div className="relative px-2 py-12 sm:px-4 sm:py-14 lg:px-8 lg:py-16">
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 right-0 hidden w-[40%] bg-[radial-gradient(circle_at_top_right,rgba(67,137,255,0.14),transparent_65%)] lg:block"
+            className="absolute inset-x-[18%] top-0 h-full bg-[radial-gradient(circle_at_center,rgba(67,137,255,0.13),transparent_68%)]"
           />
 
-          <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:items-end">
+          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 text-center">
             <div className="space-y-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-slate-300/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-slate-300/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(67,137,255,0.85)]" />
                 Portfolio
               </span>
 
               <div className="space-y-4">
-                <h1 className="max-w-3xl font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.08em] text-white">
+                <h1 className="max-w-3xl font-tech text-[clamp(3rem,6vw,5.2rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-white">
                   Théo VILLALBA
                 </h1>
                 <p className="max-w-2xl font-display text-[clamp(1.1rem,2.1vw,1.4rem)] font-medium leading-[1.08] tracking-[-0.04em] text-slate-300">
@@ -107,16 +90,16 @@ function HeroSection() {
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div className="rotating-shell max-w-max px-3 py-2 sm:px-4">
-                  <HeroRotatingText texts={rotatingTechnologies} />
+              <div className="flex flex-col items-center gap-5">
+                <div className="rotating-shell max-w-full px-3 py-3 sm:px-4 sm:py-4">
+                  <HeroGooeyText texts={rotatingTechnologies} />
                 </div>
                 <p className="max-w-[54ch] text-sm leading-7 text-slate-300 sm:text-base">
                   Développeur fullstack passionné
                 </p>
               </div>
 
-              <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a
                   href="#projets"
                   className="group inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3.5 text-sm font-medium text-white shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300 hover:bg-[rgba(67,137,255,0.2)]"
@@ -134,51 +117,9 @@ function HeroSection() {
                 </a>
               </div>
             </div>
-
-            <div className="grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                {skillGroups.map((group) => (
-                  <article
-                    key={group.title}
-                    className="rounded-[1.35rem] border border-white/8 bg-white/[0.035] px-4 py-4"
-                  >
-                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                      {group.title}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-slate-200">
-                      {group.items[0]}
-                    </p>
-                    <p className="text-sm leading-6 text-slate-400">
-                      {group.items[1]}
-                    </p>
-                  </article>
-                ))}
-              </div>
-
-              <div className="grid gap-3 rounded-[1.5rem] border border-white/8 bg-black/18 p-5 sm:grid-cols-2">
-                {projects.slice(0, 2).map((project) => (
-                  <article
-                    key={project.name}
-                    className="rounded-[1.15rem] border border-white/8 bg-white/[0.035] px-4 py-4"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                        {project.status}
-                      </span>
-                      <span className="font-mono text-xs text-slate-500">
-                        {project.year}
-                      </span>
-                    </div>
-                    <p className="mt-4 max-w-[16ch] text-base font-medium leading-6 tracking-[-0.04em] text-white">
-                      {project.name}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
-      </SectionReveal>
+      </div>
     </section>
   );
 }
@@ -188,55 +129,121 @@ function ProfileSection() {
     <section id="profil" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
         <SectionHeading
-          eyebrow="Profil"
-          title="Une approche sobre, technique et orientée résultat."
-          description="Je conçois des interfaces qui respirent, des bases solides côté code et des parcours qui donnent immédiatement confiance."
+          eyebrow="À propos"
+          title="Un développeur qui cherche la clarté avant l'effet."
+          description="J'aime les produits lisibles, les décisions techniques défendables et les interfaces qui inspirent confiance dès le premier écran."
         />
 
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.96fr)_minmax(320px,0.82fr)] lg:items-stretch">
           <div className={frame()}>
             <div className={panel("flex h-full flex-col justify-between gap-8 p-6 sm:p-8")}>
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                  Stack
+                  Approche
                 </p>
-                <p className="max-w-[22ch] text-[clamp(2rem,3.8vw,3.2rem)] font-semibold leading-[0.96] tracking-[-0.075em] text-white">
-                  Un socle volontairement concentré.
+                <p className="max-w-[18ch] text-[clamp(2rem,3.8vw,3.2rem)] font-semibold leading-[0.96] tracking-[-0.075em] text-white">
+                  Concevoir juste. Construire proprement. Livrer sans bruit.
+                </p>
+                <p className="max-w-[62ch] text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+                  Je travaille surtout sur des interfaces web où la perception de qualité compte autant que la structure interne.
+                  Mon objectif n&apos;est pas d&apos;empiler des outils, mais de prendre des décisions simples, robustes et tenables dans le temps.
+                </p>
+                <p className="max-w-[62ch] text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
+                  Je privilégie les stacks réduites, un frontend net, des composants compréhensibles et une exécution qui reste crédible quand le produit grandit.
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2">
-                {skillGroups.flatMap((group) => group.items.slice(0, 2)).map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-3 font-mono text-sm text-slate-300"
-                  >
-                    {item}
-                  </div>
-                ))}
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
+                    Produit
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-200">
+                    MVP lisible, scope cadré et priorités claires.
+                  </p>
+                </div>
+                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
+                    Frontend
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-200">
+                    Hiérarchie forte, transitions nettes, responsive propre.
+                  </p>
+                </div>
+                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
+                    Code
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-200">
+                    Base maintenable, structure claire et dette contrôlée.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="grid gap-4">
-            {profilePillars.map(({ icon: Icon, title, text }) => (
-              <article key={title} className={frame()}>
-                <div className={panel("flex h-full items-start gap-4 p-5 sm:p-6")}>
-                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/8 bg-black/26 text-[var(--accent)] shadow-[0_0_24px_-16px_rgba(67,137,255,0.82)]">
-                    <Icon size={22} weight="regular" />
-                  </span>
+          <motion.div
+            initial={{ opacity: 0, x: 28, y: 18, scale: 0.98 }}
+            whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            className={frame("h-full")}
+          >
+            <div className={panel("about-photo-shell relative flex h-full min-h-[24rem] items-end overflow-hidden p-5 sm:min-h-[30rem] sm:p-6")}>
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-[14%] top-[10%] h-28 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.28),transparent_72%)] blur-3xl"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]" />
+              <div className="absolute inset-[1.1rem] rounded-[1.4rem] border border-white/8" />
+
+              <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(10,14,24,0.88),rgba(6,8,16,0.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-6">
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-xl font-semibold tracking-[-0.045em] text-white">
-                      {title}
-                    </h3>
-                    <p className="mt-3 max-w-[62ch] text-sm leading-7 text-slate-300">
-                      {text}
+                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
+                      Portrait
+                    </p>
+                    <p className="mt-3 max-w-[20ch] text-lg font-medium leading-7 tracking-[-0.04em] text-white">
+                      Placeholder prêt à être remplacé par une photo réelle.
                     </p>
                   </div>
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.04] text-[var(--accent)] shadow-[0_0_28px_-18px_rgba(67,137,255,0.95)]">
+                    <ImageSquare size={22} weight="regular" />
+                  </span>
                 </div>
-              </article>
-            ))}
-          </div>
+
+                {aboutPhoto.src ? (
+                  <div className="relative mt-8 flex flex-1 overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/24">
+                    <Image
+                      src={aboutPhoto.src}
+                      alt={aboutPhoto.alt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 32rem"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative mt-8 flex flex-1 items-end justify-center overflow-hidden rounded-[1.35rem] border border-dashed border-white/12 bg-[radial-gradient(circle_at_top,rgba(67,137,255,0.12),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] px-6 pt-10">
+                    <div className="absolute inset-x-8 top-6 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-[radial-gradient(circle_at_bottom,rgba(67,137,255,0.18),transparent_72%)]" />
+                    <div className="relative flex w-full max-w-[18rem] flex-col items-center">
+                      <div className="h-16 w-16 rounded-full border border-white/12 bg-white/[0.05]" />
+                      <div className="mt-4 h-[17rem] w-full rounded-t-[7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]" />
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-sm leading-6 text-slate-400">
+                    Remplacement futur : injecter votre image dans ce bloc sans modifier la structure.
+                  </p>
+                  <span className="rounded-full border border-white/10 bg-black/22 px-3 py-1.5 font-mono text-[0.64rem] uppercase tracking-[0.24em] text-slate-500">
+                    Fade + slide + glow subtil
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </SectionReveal>
     </section>
@@ -282,32 +289,6 @@ function StackSection() {
   );
 }
 
-function ProjectPreview({
-  technologies,
-}: {
-  technologies: string[];
-}) {
-  return (
-    <div className="project-preview rounded-[1.35rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-4">
-      <div className="flex items-center gap-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#ff6f7c]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#ffcc66]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#45d483]" />
-      </div>
-      <div className="mt-5 grid gap-2">
-        {technologies.slice(0, 4).map((technology) => (
-          <div
-            key={technology}
-            className="rounded-[0.95rem] border border-white/8 bg-black/24 px-4 py-3"
-          >
-            <p className="font-mono text-xs text-slate-300">{technology}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function ProjectsSection() {
   return (
     <section id="projets" className="py-20 sm:py-24">
@@ -318,82 +299,9 @@ function ProjectsSection() {
           description="Chaque projet cherche un équilibre net entre lisibilité, performances, structure technique et sensation premium."
         />
 
-        <div className="grid gap-4">
-          {projects.map((project, index) => (
-            <article key={project.name} className={frame()}>
-              <div
-                className={panel(
-                  `grid gap-8 p-6 sm:p-7 ${
-                    index === 0
-                      ? "lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)]"
-                      : "lg:grid-cols-[minmax(0,0.95fr)_minmax(260px,1.05fr)]"
-                  }`,
-                )}
-              >
-                <div className="flex flex-col">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
-                      {project.status}
-                    </span>
-                    <span className="font-mono text-xs text-slate-500">
-                      {project.year}
-                    </span>
-                  </div>
-
-                  <div className="mt-8 space-y-4">
-                    <h3 className="max-w-[15ch] text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[0.96] tracking-[-0.07em] text-white">
-                      {project.name}
-                    </h3>
-                    <p className="max-w-[60ch] text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-8 flex flex-wrap gap-2.5">
-                    {project.technologies.map((technology) => (
-                      <span
-                        key={technology}
-                        className="rounded-full border border-white/10 bg-black/24 px-3 py-2 font-mono text-xs text-slate-300"
-                      >
-                        {technology}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 rounded-[1.35rem] border border-white/8 bg-black/24 p-5">
-                    <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                      point fort
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-slate-200 sm:text-base">
-                      {project.metric}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href={project.githubUrl}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2.5 text-sm font-medium text-slate-100 transition-colors duration-300 hover:border-white/18 hover:bg-white/6"
-                    >
-                      GitHub
-                      <GitBranch size={16} weight="regular" />
-                    </a>
-                    {project.liveUrl ? (
-                      <a
-                        href={project.liveUrl}
-                        className="inline-flex items-center gap-2 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.12)] px-4 py-2.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-[rgba(67,137,255,0.18)]"
-                      >
-                        Voir le contexte
-                        <ArrowUpRight size={16} weight="regular" />
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-
-                <div className="flex items-stretch">
-                  <ProjectPreview technologies={project.technologies} />
-                </div>
-              </div>
-            </article>
+        <div className="grid gap-6">
+          {projects.map((project) => (
+            <ProjectWindowCard key={project.slug} project={project} />
           ))}
         </div>
       </SectionReveal>
@@ -455,9 +363,9 @@ export function PortfolioPage() {
     <main id="content" className="flex-1">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <HeroSection />
-        <ProfileSection />
-        <StackSection />
         <ProjectsSection />
+        <StackSection />
+        <ProfileSection />
         <ContactSection />
       </div>
     </main>

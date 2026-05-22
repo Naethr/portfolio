@@ -4,6 +4,7 @@ export type ProjectLink = {
 };
 
 export type Project = {
+  slug: string;
   name: string;
   description: string;
   technologies: string[];
@@ -15,20 +16,20 @@ export type Project = {
 };
 
 export const navigationLinks: ProjectLink[] = [
-  { label: "Profil", href: "#profil" },
-  { label: "Stack", href: "#stack" },
   { label: "Projets", href: "#projets" },
+  { label: "Stack", href: "#stack" },
+  { label: "À propos", href: "#profil" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const rotatingTechnologies = [
   "Ruby on Rails",
   "React",
-  "Typescript",
   "Next.js",
-  "Tailwind.css",
+  "Node.js",
   "Express.js",
   "NestJS",
+  "Tailwind CSS",
 ];
 
 export const skillGroups = [
@@ -51,6 +52,7 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
+    slug: "composable-commerce",
     name: "Plateforme e-commerce composable",
     description:
       "Refonte d'une expérience d'achat orientée vitesse, lisibilité produit et composants réutilisables côté front.",
@@ -62,6 +64,7 @@ export const projects: Project[] = [
     metric: "Architecture pensée Core Web Vitals et conversion.",
   },
   {
+    slug: "ops-dashboard",
     name: "Dashboard ops pour équipe produit",
     description:
       "Interface de suivi releases, incidents et métriques internes avec une navigation rapide et un design orienté signal.",
@@ -72,6 +75,7 @@ export const projects: Project[] = [
     metric: "UI dense mais respirante, optimisée pour la prise de décision.",
   },
   {
+    slug: "editorial-headless-core",
     name: "Socle éditorial headless",
     description:
       "Base technique pour publier vite, maintenir simplement et faire évoluer un produit contenu sans dette visuelle.",
