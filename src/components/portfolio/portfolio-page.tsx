@@ -1,9 +1,12 @@
 'use client';
 
+import { useState } from "react";
 import Image from "next/image";
 
 import {
   ArrowRight,
+  CaretLeft,
+  CaretRight,
   EnvelopeSimple,
   ImageSquare,
 } from "@phosphor-icons/react";
@@ -307,6 +310,20 @@ function StackSection() {
 }
 
 function ProjectsSection() {
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const canNavigate = projects.length > 1;
+  const previousProjectIndex =
+    (activeProjectIndex - 1 + projects.length) % projects.length;
+  const nextProjectIndex = (activeProjectIndex + 1) % projects.length;
+
+  function showPreviousProject() {
+    setActiveProjectIndex(previousProjectIndex);
+  }
+
+  function showNextProject() {
+    setActiveProjectIndex(nextProjectIndex);
+  }
+
   return (
     <section id="projets" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
@@ -316,10 +333,74 @@ function ProjectsSection() {
           description="Chaque projet cherche un équilibre net entre lisibilité, performances, structure technique et sensation premium."
         />
 
-        <div className="grid gap-6">
-          {projects.map((project) => (
-            <ProjectWindowCard key={project.slug} project={project} />
-          ))}
+        <div className="group/project-carousel relative mx-auto max-w-6xl overflow-hidden py-3 sm:py-6">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-8 left-0 z-10 w-16 bg-gradient-to-r from-[#050816] to-transparent sm:w-24"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-8 right-0 z-10 w-16 bg-gradient-to-l from-[#050816] to-transparent sm:w-24"
+          />
+
+          <div className="relative mx-auto flex min-h-[42rem] items-center justify-center sm:min-h-[38rem] lg:min-h-[34rem]">
+            {canNavigate ? (
+              <>
+                <motion.div
+                  key={`previous-${projects[previousProjectIndex].slug}`}
+                  aria-hidden="true"
+                  initial={{ opacity: 0, x: "-28%", scale: 0.82 }}
+                  animate={{ opacity: 0.38, x: "-68%", scale: 0.86 }}
+                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                  className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
+                >
+                  <ProjectWindowCard project={projects[previousProjectIndex]} />
+                </motion.div>
+
+                <motion.div
+                  key={`next-${projects[nextProjectIndex].slug}`}
+                  aria-hidden="true"
+                  initial={{ opacity: 0, x: "28%", scale: 0.82 }}
+                  animate={{ opacity: 0.38, x: "68%", scale: 0.86 }}
+                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                  className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
+                >
+                  <ProjectWindowCard project={projects[nextProjectIndex]} />
+                </motion.div>
+              </>
+            ) : null}
+
+            <motion.div
+              key={projects[activeProjectIndex].slug}
+              initial={{ opacity: 0, x: 28, scale: 0.97 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-20 w-full max-w-[58rem]"
+            >
+              <ProjectWindowCard project={projects[activeProjectIndex]} />
+            </motion.div>
+          </div>
+
+          {canNavigate ? (
+            <div className="pointer-events-none absolute inset-x-2 top-1/2 z-30 flex -translate-y-1/2 items-center justify-between sm:inset-x-4">
+              <button
+                type="button"
+                aria-label="Projet précédent"
+                onClick={showPreviousProject}
+                className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
+              >
+                <CaretLeft size={18} weight="regular" />
+              </button>
+              <button
+                type="button"
+                aria-label="Projet suivant"
+                onClick={showNextProject}
+                className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
+              >
+                <CaretRight size={18} weight="regular" />
+              </button>
+            </div>
+          ) : null}
         </div>
       </SectionReveal>
     </section>
