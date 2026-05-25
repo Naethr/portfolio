@@ -17,6 +17,7 @@ import {
 } from "@/data/portfolio";
 
 import { GradientDots } from "../ui/gradient-dots";
+import MagicRings from "../ui/magic-rings";
 import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
 import { ProjectWindowCard } from "./project-window-card";
@@ -51,28 +52,44 @@ function HeroSection() {
       id="top"
       className="relative flex min-h-[calc(100dvh-5rem)] items-center py-24 sm:py-28 lg:py-32"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <div className="absolute left-1/2 top-[8%] h-[28rem] w-[min(92vw,72rem)] -translate-x-1/2 bg-[rgba(7,11,22,0.52)] opacity-70 blur-3xl" />
-        <div className="absolute inset-x-[-12%] top-[2%] h-[38rem] sm:inset-x-[-4%]">
-          <GradientDots
-            dotSize={10}
-            spacing={12}
-            duration={22}
-            colorCycleDuration={10}
-            className="opacity-28 [mask-image:radial-gradient(circle_at_center,black_0%,black_45%,transparent_82%)]"
-          />
-        </div>
-      </div>
-
       <div className="w-full">
         <div className="relative px-2 py-12 sm:px-4 sm:py-14 lg:px-8 lg:py-16">
           <div
             aria-hidden="true"
             className="absolute inset-x-[18%] top-0 h-full bg-[radial-gradient(circle_at_center,rgba(67,137,255,0.13),transparent_68%)]"
           />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[calc(100dvh+18rem)] min-h-[56rem] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden opacity-85"
+          >
+            <div className="absolute inset-y-0 left-0 w-full [mask-image:linear-gradient(90deg,black_0%,black_22%,rgba(0,0,0,0.8)_31%,transparent_44%,transparent_56%,rgba(0,0,0,0.8)_69%,black_78%,black_100%)]">
+              <MagicRings
+                color="#7cb0ff"
+                colorTwo="#4389ff"
+                ringCount={6}
+                speed={1.2}
+                attenuation={7.25}
+                lineThickness={1.5}
+                baseRadius={0.62}
+                radiusStep={0.085}
+                scaleRate={0.07}
+                opacity={0.9}
+                blur={0.2}
+                noiseAmount={0.03}
+                rotation={0}
+                ringGap={1.45}
+                stretchX={1.9}
+                edgeCoverage={0.94}
+                fadeIn={0.72}
+                fadeOut={1.28}
+                followMouse={false}
+                mouseInfluence={0.1}
+                hoverScale={1.12}
+                parallax={0.035}
+                clickBurst={false}
+              />
+            </div>
+          </div>
 
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 text-center">
             <div className="space-y-8">
@@ -360,8 +377,24 @@ function ContactSection() {
 
 export function PortfolioPage() {
   return (
-    <main id="content" className="flex-1">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+    <main id="content" className="relative flex-1 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      >
+        <div className="absolute left-1/2 top-0 h-full min-h-[60rem] w-[min(92vw,72rem)] -translate-x-1/2 bg-[rgba(7,11,22,0.52)] opacity-70 blur-3xl" />
+        <div className="absolute inset-x-[-12%] inset-y-0 sm:inset-x-[-4%]">
+          <GradientDots
+            dotSize={10}
+            spacing={12}
+            duration={22}
+            colorCycleDuration={10}
+            className="opacity-28 [mask-image:linear-gradient(180deg,black_0%,black_82%,transparent_100%)]"
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <HeroSection />
         <ProjectsSection />
         <StackSection />
