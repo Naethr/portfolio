@@ -85,9 +85,16 @@ const constellationSkills: Skill[] = [
       "vite",
       "tailwind",
       "bootstrap",
-      "vercel",
-      "codex",
+      "nextjs",
     ],
+  },
+  {
+    id: "nextjs",
+    name: "Next.js",
+    category: "frontend",
+    description:
+      "React framework used to build production-ready web applications with routing, rendering and deployment workflows.",
+    related: ["react", "javascript", "typescript", "vercel", "bootstrap", "tailwind"],
   },
   {
     id: "vite",
@@ -95,7 +102,7 @@ const constellationSkills: Skill[] = [
     category: "frontend",
     description:
       "Outillage rapide pour développer des frontends modernes et produire des builds optimisés.",
-    related: ["react", "typescript", "vercel"],
+    related: ["react", "typescript", "javascript"],
   },
   {
     id: "typescript",
@@ -103,7 +110,7 @@ const constellationSkills: Skill[] = [
     category: "frontend",
     description:
       "Ajoute de la sûreté de typage et améliore la maintenabilité du code frontend comme backend.",
-    related: ["react", "vite", "nestjs", "codex"],
+    related: ["react", "vite", "node", "nextjs"],
   },
   {
     id: "javascript",
@@ -111,7 +118,7 @@ const constellationSkills: Skill[] = [
     category: "frontend",
     description:
       "Langage central des interfaces web dynamiques, de la logique applicative et de l'écosystème Node.js.",
-    related: ["react", "node"],
+    related: ["react", "node", "vite", "nextjs"],
   },
   {
     id: "tailwind",
@@ -119,7 +126,7 @@ const constellationSkills: Skill[] = [
     category: "frontend",
     description:
       "Styling utility-first pour concevoir rapidement des interfaces responsive, cohérentes et faciles à ajuster.",
-    related: ["react"],
+    related: ["react", "rails", "nextjs"],
   },
   {
     id: "bootstrap",
@@ -127,7 +134,15 @@ const constellationSkills: Skill[] = [
     category: "frontend",
     description:
       "Pratique pour assembler vite des layouts responsive et des patterns UI standards.",
-    related: ["react"],
+    related: ["react", "rails", "nextjs"],
+  },
+  {
+    id: "hotwire",
+    name: "Hotwire",
+    category: "frontend",
+    description:
+      "Frontend framework for building reactive Rails interfaces with minimal JavaScript.",
+    related: ["rails"],
   },
   {
     id: "rails",
@@ -135,7 +150,7 @@ const constellationSkills: Skill[] = [
     category: "backend",
     description:
       "Framework backend productif pour créer des applications web structurées et livrer rapidement un MVP solide.",
-    related: ["postgresql", "sqlite"],
+    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
   },
   {
     id: "node",
@@ -143,7 +158,7 @@ const constellationSkills: Skill[] = [
     category: "backend",
     description:
       "Runtime JavaScript utilisé pour les APIs, les services backend et l'outillage de développement.",
-    related: ["express", "nestjs", "javascript"],
+    related: ["express", "nestjs", "javascript", "typescript"],
   },
   {
     id: "express",
@@ -151,7 +166,7 @@ const constellationSkills: Skill[] = [
     category: "backend",
     description:
       "Framework minimal pour construire des APIs REST et de la logique serveur simple à maintenir.",
-    related: ["node"],
+    related: ["node", "prisma"],
   },
   {
     id: "nestjs",
@@ -159,7 +174,7 @@ const constellationSkills: Skill[] = [
     category: "backend",
     description:
       "Framework Node.js structuré pour des architectures backend scalables avec TypeScript.",
-    related: ["node", "typescript", "prisma"],
+    related: ["node", "prisma"],
   },
   {
     id: "sqlite",
@@ -183,7 +198,7 @@ const constellationSkills: Skill[] = [
     category: "database",
     description:
       "ORM type-safe pour modéliser, interroger et maintenir des données relationnelles.",
-    related: ["postgresql", "sqlite", "nestjs"],
+    related: ["postgresql", "sqlite", "nestjs", "express"],
   },
   {
     id: "github",
@@ -191,7 +206,7 @@ const constellationSkills: Skill[] = [
     category: "tools",
     description:
       "Versioning, collaboration, suivi de projet et base du workflow de livraison.",
-    related: ["vercel", "codex"],
+    related: ["vercel", "vscode"],
   },
   {
     id: "vscode",
@@ -199,7 +214,7 @@ const constellationSkills: Skill[] = [
     category: "tools",
     description:
       "Environnement principal pour écrire, déboguer et naviguer efficacement dans le code.",
-    related: ["codex", "ai-workflow"],
+    related: ["codex", "ai-workflow", "github"],
   },
   {
     id: "vercel",
@@ -207,7 +222,7 @@ const constellationSkills: Skill[] = [
     category: "tools",
     description:
       "Plateforme de déploiement pour livrer rapidement le frontend et valider des previews propres.",
-    related: ["vite", "react", "github"],
+    related: ["github", "nextjs"],
   },
   {
     id: "codex",
@@ -215,7 +230,7 @@ const constellationSkills: Skill[] = [
     category: "ai",
     description:
       "Workflow de développement assisté par IA pour accélérer l'implémentation, l'itération et la revue de code.",
-    related: ["github", "vscode", "typescript", "react", "ai-workflow"],
+    related: ["vscode", "ai-workflow"],
   },
   {
     id: "ai-workflow",
@@ -229,14 +244,16 @@ const constellationSkills: Skill[] = [
 
 const skillPositions: Record<string, { x: number; y: number }> = {
   react: { x: 31, y: 28 },
+  nextjs: { x: 23, y: 55 },
   vite: { x: 18, y: 18 },
   typescript: { x: 43, y: 20 },
   javascript: { x: 30, y: 45 },
   tailwind: { x: 15, y: 38 },
   bootstrap: { x: 47, y: 42 },
+  hotwire: { x: 53, y: 34 },
   rails: { x: 68, y: 28 },
-  node: { x: 72, y: 48 },
-  express: { x: 84, y: 39 },
+  node: { x: 72, y: 44 },
+  express: { x: 84, y: 57 },
   nestjs: { x: 61, y: 57 },
   sqlite: { x: 54, y: 79 },
   postgresql: { x: 74, y: 78 },
@@ -244,7 +261,7 @@ const skillPositions: Record<string, { x: number; y: number }> = {
   github: { x: 30, y: 72 },
   vscode: { x: 15, y: 65 },
   vercel: { x: 43, y: 62 },
-  codex: { x: 29, y: 84 },
+  codex: { x: 39, y: 84 },
   "ai-workflow": { x: 19, y: 86 },
 };
 
@@ -489,7 +506,7 @@ export function StackConstellation() {
                 />
               ))}
 
-              <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-wrap gap-2">
+              <div className="absolute bottom-8 left-6 right-6 z-20 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-3 sm:px-4">
                 {skillCategoryOrder.map((categoryId) => {
                   const category = skillCategories[categoryId];
 

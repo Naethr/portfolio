@@ -63,14 +63,14 @@ export const projects: Project[] = [
     year: "2026",
     metric: "Une appli IA destinée à aider à l'apprentissage avant tout.",
     intention:
-      "Créer un copilote qui ralentit juste assez pour faire réfléchir : il questionne, reformule et guide le raisonnement jusqu'au déclic.",
+      "Créer une app IA qui agit comme un mentor: il questionne, reformule et guide le raisonnement jusqu'au déclic.",
   },
   {
     slug: "questonaut",
     name: "Questonaut - Tracker d'habitudes gamifié",
     description:
       "Un tracker d'habitude gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidien.",
-    technologies: ["Ruby on Rails", "Hotwire", "Turbo", "Stimulus", "JavaScript"],
+    technologies: ["Ruby on Rails", "Hotwire", "Stimulus", "JavaScript"],
     githubUrl: "https://github.com/Naethr/questonaut_habit_tracker_app",
     status: "En cours (MVP terminé)",
     year: "2026",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
     name: "Portfolio",
     description:
       "Le portfolio que vous consultez actuellement.",
-    technologies: ["Next.js", "React", "TypeScript", "Motion"],
+    technologies: ["Next.js", "React", "TypeScript"],
     githubUrl: "https://github.com/Naethr/portfolio",
     status: "Déployé",
     year: "2026",
