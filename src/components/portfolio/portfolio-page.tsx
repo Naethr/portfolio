@@ -15,7 +15,6 @@ import { motion } from "motion/react";
 import {
   projects,
   rotatingTechnologies,
-  skillGroups,
   socialLinks,
 } from "@/data/portfolio";
 
@@ -25,6 +24,7 @@ import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
 import { ProjectWindowCard } from "./project-window-card";
 import { SectionHeading } from "./section-heading";
+import { StackConstellation } from "./stack-constellation";
 
 const aboutPhoto = {
   src: null as string | null,
@@ -271,42 +271,7 @@ function ProfileSection() {
 }
 
 function StackSection() {
-  return (
-    <section id="stack" className="py-20 sm:py-24">
-      <SectionReveal className="space-y-10">
-        <SectionHeading
-          eyebrow="Stack"
-          title="Peu d'outils, mais bien choisis."
-          description="L'objectif reste toujours le même : livrer vite, garder le contrôle et faire évoluer proprement."
-        />
-
-        <div className="grid gap-4 lg:grid-cols-3">
-          {skillGroups.map((group) => (
-            <article key={group.title} className={frame()}>
-              <div className={panel("h-full p-6 sm:p-7")}>
-                <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                  {group.title}
-                </p>
-                <p className="mt-6 max-w-[28ch] text-lg leading-8 text-slate-200">
-                  {group.description}
-                </p>
-                <ul className="mt-8 grid gap-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-[1rem] border border-white/8 bg-black/22 px-4 py-3 font-mono text-sm text-slate-300"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
-        </div>
-      </SectionReveal>
-    </section>
-  );
+  return <StackConstellation />;
 }
 
 function ProjectsSection() {
