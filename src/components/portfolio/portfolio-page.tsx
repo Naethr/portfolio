@@ -114,9 +114,6 @@ function HeroSection() {
                 <div className="rotating-shell max-w-full px-3 py-3 sm:px-4 sm:py-4">
                   <HeroGooeyText texts={rotatingTechnologies} />
                 </div>
-                <p className="max-w-[54ch] text-sm leading-7 text-slate-300 sm:text-base">
-                  Développeur fullstack passionné
-                </p>
               </div>
 
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -276,8 +273,8 @@ function StackSection() {
       <SectionReveal className="space-y-10">
         <SectionHeading
           eyebrow="Stack"
-          title="Peu d'outils, mais bien choisis."
-          description="L'objectif reste toujours le même : livrer vite, garder le contrôle et faire évoluer proprement."
+          title="Stack & Skills"
+          description="Les outils que j'utilise pour faire évoluer chaque projet."
         />
 
         <div className="grid gap-4 lg:grid-cols-3">
