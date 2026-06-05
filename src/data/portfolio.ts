@@ -10,9 +10,10 @@ export type Project = {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  status: "En ligne" | "En cours" | "Privé";
+  status: "En ligne" | "En cours" | "Privé" | "MVP";
   year: string;
   metric: string;
+  intention?: string;
 };
 
 export const navigationLinks: ProjectLink[] = [
@@ -52,43 +53,44 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
-    slug: "composable-commerce",
-    name: "Plateforme e-commerce composable",
+    slug: "sokwak.com",
+    name: "Sokwak AI",
     description:
-      "Refonte d'une expérience d'achat orientée vitesse, lisibilité produit et composants réutilisables côté front.",
-    technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-    githubUrl: "https://github.com/theovillalba",
-    liveUrl: "#contact",
-    status: "En ligne",
+      "Une IA qui n’écrit pas la solution à ta place, mais t’aide à apprendre à la trouver.",
+    technologies: ["Express.js", "TypeScript", "React", "Next.js"],
+    githubUrl: "https://github.com/Naethr/Rubberduck_AI",
+    status: "MVP",
     year: "2026",
-    metric: "Architecture pensée Core Web Vitals et conversion.",
+    metric: "Une appli IA destinée à aider à l'apprentissage avant tout.",
+    intention:
+      "Créer un copilote qui ralentit juste assez pour faire réfléchir : il questionne, reformule et guide le raisonnement jusqu'au déclic.",
   },
   {
-    slug: "ops-dashboard",
-    name: "Dashboard ops pour équipe produit",
+    slug: "questonaut",
+    name: "Questonaut - Tracker d'habitudes gamifié",
     description:
-      "Interface de suivi releases, incidents et métriques internes avec une navigation rapide et un design orienté signal.",
-    technologies: ["React", "Express.js", "PostgreSQL", "Motion"],
-    githubUrl: "https://github.com/theovillalba",
-    status: "En cours",
-    year: "2025",
-    metric: "UI dense mais respirante, optimisée pour la prise de décision.",
+      "Un tracker d'habitude gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidien.",
+    technologies: ["Ruby on Rails", "Hotwire", "Turbo", "Stimulus", "JavaScript"],
+    githubUrl: "https://github.com/Naethr/questonaut_habit_tracker_app",
+    status: "En cours (MVP terminé)",
+    year: "2026",
+    metric: "UI gamifiée avec système de niveau et badges de récompenses pour aider à se tenir à ses habitudes.",
   },
   {
-    slug: "editorial-headless-core",
-    name: "Socle éditorial headless",
+    slug: "portfolio",
+    name: "Portfolio",
     description:
-      "Base technique pour publier vite, maintenir simplement et faire évoluer un produit contenu sans dette visuelle.",
-    technologies: ["Ruby on Rails", "Next.js", "SEO", "CMS headless"],
-    githubUrl: "https://github.com/theovillalba",
-    status: "Privé",
-    year: "2025",
-    metric: "Sections modulaires, rendering propre et workflow éditorial cadré.",
+      "Le portfolio que vous consultez actuellement.",
+    technologies: ["Next.js", "React", "TypeScript", "Motion"],
+    githubUrl: "https://github.com/Naethr/portfolio",
+    status: "Déployé",
+    year: "2026",
+    metric: "Une interface propre et claire.",
   },
 ];
 
 export const socialLinks: ProjectLink[] = [
-  { label: "GitHub", href: "https://github.com/theovillalba" },
-  { label: "LinkedIn", href: "https://www.linkedin.com" },
+  { label: "GitHub", href: "https://github.com/Naethr" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/th%C3%A9o-villalba-52a7343a3/" },
   { label: "Email", href: "mailto:hello@theovillalba.dev" },
 ];
