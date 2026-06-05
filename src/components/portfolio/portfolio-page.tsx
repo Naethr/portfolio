@@ -15,7 +15,6 @@ import { motion } from "motion/react";
 import {
   projects,
   rotatingTechnologies,
-  skillGroups,
   socialLinks,
 } from "@/data/portfolio";
 
@@ -25,6 +24,7 @@ import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
 import { ProjectWindowCard } from "./project-window-card";
 import { SectionHeading } from "./section-heading";
+import { StackConstellation } from "./stack-constellation";
 
 const aboutPhoto = {
   src: null as string | null,
@@ -268,6 +268,7 @@ function ProfileSection() {
 }
 
 function StackSection() {
+  return <StackConstellation />;
   return (
     <section id="stack" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
