@@ -114,9 +114,6 @@ function HeroSection() {
                 <div className="rotating-shell max-w-full px-3 py-3 sm:px-4 sm:py-4">
                   <HeroGooeyText texts={rotatingTechnologies} />
                 </div>
-                <p className="max-w-[54ch] text-sm leading-7 text-slate-300 sm:text-base">
-                  Développeur fullstack passionné
-                </p>
               </div>
 
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -272,6 +269,42 @@ function ProfileSection() {
 
 function StackSection() {
   return <StackConstellation />;
+  return (
+    <section id="stack" className="py-20 sm:py-24">
+      <SectionReveal className="space-y-10">
+        <SectionHeading
+          eyebrow="Stack"
+          title="Stack & Skills"
+          description="Les outils que j'utilise pour faire évoluer chaque projet."
+        />
+
+        <div className="grid gap-4 lg:grid-cols-3">
+          {skillGroups.map((group) => (
+            <article key={group.title} className={frame()}>
+              <div className={panel("h-full p-6 sm:p-7")}>
+                <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
+                  {group.title}
+                </p>
+                <p className="mt-6 max-w-[28ch] text-lg leading-8 text-slate-200">
+                  {group.description}
+                </p>
+                <ul className="mt-8 grid gap-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded-[1rem] border border-white/8 bg-black/22 px-4 py-3 font-mono text-sm text-slate-300"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </SectionReveal>
+    </section>
+  );
 }
 
 function ProjectsSection() {

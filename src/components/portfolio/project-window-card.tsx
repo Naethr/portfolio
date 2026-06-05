@@ -49,9 +49,6 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
               <span className="rounded-full border border-[rgba(67,137,255,0.2)] bg-[rgba(67,137,255,0.1)] px-3 py-1 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-slate-300">
                 Projet
               </span>
-              <span className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-slate-500">
-                {project.technologies.length} briques
-              </span>
             </div>
 
             <div className="mt-6 space-y-4">
@@ -98,9 +95,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
                 <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
                   Stack utilisée
                 </p>
-                <p className="mt-2 text-sm leading-6 text-slate-300">
-                  Les briques clés affichées directement dans la fenêtre.
-                </p>
+
               </div>
               <span className="rounded-full border border-white/8 bg-black/22 px-3 py-1 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-slate-500">
                 {project.slug}
@@ -128,7 +123,8 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
                 Intention
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-200">
-                Une fenêtre claire, lisible et extensible pour ajouter d&apos;autres projets sans revoir la structure.
+                {project.intention ??
+                  "Une fenêtre claire, lisible et extensible pour ajouter d'autres projets sans revoir la structure."}
               </p>
             </div>
           </div>
