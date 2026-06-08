@@ -118,7 +118,7 @@ function TimelineItem({
           <h3 className="text-base font-semibold leading-6 tracking-[-0.035em] text-white">
             {item.title}
           </h3>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
+          <p className="mt-2 text-sm leading-6 text-slate-300">
             {item.description}
           </p>
         </motion.article>
@@ -147,27 +147,27 @@ function TimelineItem({
 
 function AboutIntro() {
   return (
-    <div className="grid gap-6 rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.055)] sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
+    <div className="mb-12 grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
       <div className="max-w-3xl space-y-5">
-        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
+        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
           À propos
         </span>
         <h2 className="text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-white text-balance">
-          À propos
+          Derrière l'écran
         </h2>
 
-        <div className="max-w-[62ch] space-y-3">
-          <p className="text-base leading-8 text-slate-300 sm:text-lg sm:leading-9">
+        <div className="max-w-[62ch] space-y-3 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+          <p>
             Je suis Théo, développeur full-stack junior passionné par le
             développement web et les nouvelles technologies.
           </p>
-          <p className="text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
+          <p>
             Après une reconversion récente, je construis des applications web
             modernes, maintenables et orientées produit, avec une attention
             portée à la clarté du code, à l&apos;expérience utilisateur et à la
             simplicité des solutions.
           </p>
-          <p className="text-sm leading-7 text-slate-400">
+          <p>
             J&apos;aime transformer une idée en produit concret, apprendre vite,
             itérer proprement et créer des projets utiles.
           </p>
@@ -177,20 +177,21 @@ function AboutIntro() {
       <motion.div
         initial={{ opacity: 0, x: 22, scale: 0.98 }}
         whileInView={{ opacity: 1, x: 0, scale: 1 }}
+        whileHover={{ y: -3, scale: 1.006 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border border-white/10 bg-black/24 shadow-[0_24px_70px_-44px_rgba(67,137,255,0.75)] sm:max-w-[17rem] lg:mr-0"
+        className="group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border border-white/10 bg-black/24 shadow-[0_22px_62px_-46px_rgba(67,137,255,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(67,137,255,0.68)] sm:max-w-[17rem] lg:mr-0"
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-10 rounded-[999px] bg-[linear-gradient(180deg,rgba(5,7,14,0),rgba(5,7,14,0.26))]"
+          className="absolute inset-0 z-10 rounded-[999px] bg-[linear-gradient(180deg,rgba(5,7,14,0),rgba(5,7,14,0.26))] transition-opacity duration-500 group-hover:opacity-80"
         />
         <Image
           src={aboutPhoto.src}
           alt={aboutPhoto.alt}
           fill
           sizes="(max-width: 1024px) 17rem, 18rem"
-          className="scale-[1.04] rounded-[999px] object-cover object-center"
+          className="scale-[1.04] rounded-[999px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.055]"
         />
       </motion.div>
     </div>
@@ -291,29 +292,20 @@ function HeroSection() {
 
 function ProfileSection() {
   return (
-    <section id="profil" className="py-20 sm:py-24 lg:py-28">
-      <SectionReveal className={frame("overflow-hidden")}>
-        <div className={panel("relative overflow-hidden p-4 sm:p-5 lg:p-6")}>
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-[8%] top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -left-24 top-8 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.18),transparent_68%)] blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-28 right-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_68%)] blur-3xl"
-          />
-
+    <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 bg-[#050816]/80 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
+      />
+      <SectionReveal>
+        <div className="relative p-4 sm:p-5 lg:p-6">
           <div className="relative space-y-5">
             <AboutIntro />
 
-            <div className="rounded-[1.35rem] border border-white/8 bg-white/[0.025] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] sm:p-7 lg:p-8">
+            <div className="p-5 sm:p-7 lg:p-8">
               <div className="mb-7 flex items-end justify-between gap-4">
                 <div>
-                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
+                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
                     Parcours
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold tracking-[-0.055em] text-white sm:text-3xl">
