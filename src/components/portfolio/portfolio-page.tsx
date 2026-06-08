@@ -8,7 +8,6 @@ import {
   CaretLeft,
   CaretRight,
   EnvelopeSimple,
-  ImageSquare,
 } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 
@@ -27,9 +26,48 @@ import { SectionHeading } from "./section-heading";
 import { StackConstellation } from "./stack-constellation";
 
 const aboutPhoto = {
-  src: null as string | null,
-  alt: "Portrait de Théo Villalba",
+  src: "/images/Portrait.png",
+  alt: "Portrait de Théo",
 };
+
+const timelineItems = [
+  {
+    date: "Avril 2026",
+    title: "Stack JavaScript moderne",
+    description:
+      "React, Next.js, TypeScript et Node.js pour construire des interfaces dynamiques et des applications web full-stack.",
+  },
+  {
+    date: "Avril 2026",
+    title: "Certification backend & Rails",
+    description:
+      "Approche full-stack avec Ruby on Rails : MVC, CRUD, bases de données, Hotwire et logique backend structurée.",
+  },
+  {
+    date: "Début 2026",
+    title: "Formation intensive THP",
+    description:
+      "Projets en équipe, pratique quotidienne, Ruby, POO et développement web appliqué.",
+  },
+  {
+    date: "Décembre 2025",
+    title: "Premiers pas avec Ruby",
+    description:
+      "Renforcement de la logique de programmation et des bases backend.",
+  },
+  {
+    date: "Septembre - Novembre 2025",
+    title: "Fondamentaux web",
+    description:
+      "HTML, CSS et responsive design avec le parcours FreeCodeCamp.",
+  },
+  {
+    date: "Août 2025",
+    title: "Reconversion vers le web",
+    description:
+      "Décision de me reconvertir vers le développement web et les nouvelles technologies.",
+  },
+];
 
 function frame(className?: string) {
   return [
@@ -47,6 +85,117 @@ function panel(className?: string) {
   ]
     .filter(Boolean)
     .join(" ");
+}
+
+function TimelineItem({
+  item,
+  index,
+}: {
+  item: (typeof timelineItems)[number];
+  index: number;
+}) {
+  const isRight = index % 2 === 1;
+
+  return (
+    <li className="relative grid grid-cols-[4.75rem_minmax(0,1fr)] gap-3 sm:grid-cols-[5.5rem_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,1fr)] lg:gap-4">
+      <div
+        className={[
+          "order-2 lg:order-none",
+          isRight ? "lg:col-start-3" : "lg:col-start-1",
+        ].join(" ")}
+      >
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{
+            duration: 0.42,
+            delay: Math.min(index * 0.035, 0.14),
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="rounded-[1rem] border border-white/8 bg-white/[0.035] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 hover:border-white/14 hover:bg-white/[0.055]"
+        >
+          <h3 className="text-base font-semibold leading-6 tracking-[-0.035em] text-white">
+            {item.title}
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-slate-300">
+            {item.description}
+          </p>
+        </motion.article>
+      </div>
+
+      <div className="relative order-1 col-start-1 row-start-1 flex items-start justify-center pt-3 lg:order-none lg:col-start-2">
+        <span className="max-w-[4.4rem] rounded-full border border-[rgba(67,137,255,0.28)] bg-[#07101f] px-2 py-1 text-center font-mono text-[0.56rem] uppercase leading-4 tracking-[0.12em] text-slate-300 shadow-[0_0_22px_-14px_rgba(67,137,255,0.95)] sm:max-w-[5rem] lg:max-w-[6.8rem]">
+          {item.date}
+        </span>
+        <span
+          aria-hidden="true"
+          className="absolute left-1/2 top-[2.9rem] h-2.5 w-2.5 -translate-x-1/2 rounded-full border border-[rgba(67,137,255,0.6)] bg-[#07101f] shadow-[0_0_0_5px_rgba(67,137,255,0.08),0_0_20px_rgba(67,137,255,0.5)]"
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className={[
+          "hidden lg:block",
+          isRight ? "lg:col-start-1" : "lg:col-start-3",
+        ].join(" ")}
+      />
+    </li>
+  );
+}
+
+function AboutIntro() {
+  return (
+    <div className="mb-12 grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
+      <div className="max-w-3xl space-y-5">
+        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
+          À propos
+        </span>
+        <h2 className="text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-white text-balance">
+          Derrière l'écran
+        </h2>
+
+        <div className="max-w-[62ch] space-y-3 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+          <p>
+            Je suis Théo, développeur full-stack junior passionné par le
+            développement web et les nouvelles technologies.
+          </p>
+          <p>
+            Après une reconversion récente, je construis des applications web
+            modernes, maintenables et orientées produit, avec une attention
+            portée à la clarté du code, à l&apos;expérience utilisateur et à la
+            simplicité des solutions.
+          </p>
+          <p>
+            J&apos;aime transformer une idée en produit concret, apprendre vite,
+            itérer proprement et créer des projets utiles.
+          </p>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 22, scale: 0.98 }}
+        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+        whileHover={{ y: -3, scale: 1.006 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border border-white/10 bg-black/24 shadow-[0_22px_62px_-46px_rgba(67,137,255,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(67,137,255,0.68)] sm:max-w-[17rem] lg:mr-0"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-10 rounded-[999px] bg-[linear-gradient(180deg,rgba(5,7,14,0),rgba(5,7,14,0.26))] transition-opacity duration-500 group-hover:opacity-80"
+        />
+        <Image
+          src={aboutPhoto.src}
+          alt={aboutPhoto.alt}
+          fill
+          sizes="(max-width: 1024px) 17rem, 18rem"
+          className="scale-[1.04] rounded-[999px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.055]"
+        />
+      </motion.div>
+    </div>
+  );
 }
 
 function HeroSection() {
@@ -143,124 +292,45 @@ function HeroSection() {
 
 function ProfileSection() {
   return (
-    <section id="profil" className="py-20 sm:py-24">
-      <SectionReveal className="space-y-10">
-        <SectionHeading
-          eyebrow="À propos"
-          title="Un développeur qui cherche la clarté avant l'effet."
-          description="J'aime les produits lisibles, les décisions techniques défendables et les interfaces qui inspirent confiance dès le premier écran."
-        />
+    <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 bg-[#050816]/80 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
+      />
+      <SectionReveal>
+        <div className="relative p-4 sm:p-5 lg:p-6">
+          <div className="relative space-y-5">
+            <AboutIntro />
 
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.96fr)_minmax(320px,0.82fr)] lg:items-stretch">
-          <div className={frame()}>
-            <div className={panel("flex h-full flex-col justify-between gap-8 p-6 sm:p-8")}>
-              <div className="space-y-5">
-                <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                  Approche
-                </p>
-                <p className="max-w-[18ch] text-[clamp(2rem,3.8vw,3.2rem)] font-semibold leading-[0.96] tracking-[-0.075em] text-white">
-                  Concevoir juste. Construire proprement. Livrer sans bruit.
-                </p>
-                <p className="max-w-[62ch] text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
-                  Je travaille surtout sur des interfaces web où la perception de qualité compte autant que la structure interne.
-                  Mon objectif n&apos;est pas d&apos;empiler des outils, mais de prendre des décisions simples, robustes et tenables dans le temps.
-                </p>
-                <p className="max-w-[62ch] text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
-                  Je privilégie les stacks réduites, un frontend net, des composants compréhensibles et une exécution qui reste crédible quand le produit grandit.
-                </p>
+            <div className="p-5 sm:p-7 lg:p-8">
+              <div className="mb-7 flex items-end justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
+                    Parcours
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.055em] text-white sm:text-3xl">
+                    Progression structurée, étape par étape.
+                  </h3>
+                </div>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                    Produit
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-slate-200">
-                    MVP lisible, scope cadré et priorités claires.
-                  </p>
-                </div>
-                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                    Frontend
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-slate-200">
-                    Hiérarchie forte, transitions nettes, responsive propre.
-                  </p>
-                </div>
-                <div className="rounded-[1.1rem] border border-white/8 bg-white/[0.035] px-4 py-4">
-                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                    Code
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-slate-200">
-                    Base maintenable, structure claire et dette contrôlée.
-                  </p>
-                </div>
+              <div className="relative">
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-3 left-[2.375rem] top-3 w-px bg-gradient-to-b from-[rgba(67,137,255,0.08)] via-[rgba(67,137,255,0.4)] to-white/8 sm:left-[2.75rem] lg:left-1/2"
+                />
+                <ol className="relative space-y-4">
+                  {timelineItems.map((item, index) => (
+                    <TimelineItem
+                      key={`${item.date}-${item.title}`}
+                      item={item}
+                      index={index}
+                    />
+                  ))}
+                </ol>
               </div>
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 28, y: 18, scale: 0.98 }}
-            whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className={frame("h-full")}
-          >
-            <div className={panel("about-photo-shell relative flex h-full min-h-[24rem] items-end overflow-hidden p-5 sm:min-h-[30rem] sm:p-6")}>
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-[14%] top-[10%] h-28 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.28),transparent_72%)] blur-3xl"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]" />
-              <div className="absolute inset-[1.1rem] rounded-[1.4rem] border border-white/8" />
-
-              <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(10,14,24,0.88),rgba(6,8,16,0.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
-                      Portrait
-                    </p>
-                    <p className="mt-3 max-w-[20ch] text-lg font-medium leading-7 tracking-[-0.04em] text-white">
-                      Placeholder prêt à être remplacé par une photo réelle.
-                    </p>
-                  </div>
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.04] text-[var(--accent)] shadow-[0_0_28px_-18px_rgba(67,137,255,0.95)]">
-                    <ImageSquare size={22} weight="regular" />
-                  </span>
-                </div>
-
-                {aboutPhoto.src ? (
-                  <div className="relative mt-8 flex flex-1 overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/24">
-                    <Image
-                      src={aboutPhoto.src}
-                      alt={aboutPhoto.alt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 32rem"
-                      className="object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="relative mt-8 flex flex-1 items-end justify-center overflow-hidden rounded-[1.35rem] border border-dashed border-white/12 bg-[radial-gradient(circle_at_top,rgba(67,137,255,0.12),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] px-6 pt-10">
-                    <div className="absolute inset-x-8 top-6 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 h-28 bg-[radial-gradient(circle_at_bottom,rgba(67,137,255,0.18),transparent_72%)]" />
-                    <div className="relative flex w-full max-w-[18rem] flex-col items-center">
-                      <div className="h-16 w-16 rounded-full border border-white/12 bg-white/[0.05]" />
-                      <div className="mt-4 h-[17rem] w-full rounded-t-[7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]" />
-                    </div>
-                  </div>
-                )}
-
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-sm leading-6 text-slate-400">
-                    Remplacement futur : injecter votre image dans ce bloc sans modifier la structure.
-                  </p>
-                  <span className="rounded-full border border-white/10 bg-black/22 px-3 py-1.5 font-mono text-[0.64rem] uppercase tracking-[0.24em] text-slate-500">
-                    Fade + slide + glow subtil
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </SectionReveal>
     </section>
@@ -396,7 +466,7 @@ function ContactSection() {
                 className="inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3.5 text-sm font-medium text-white shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300 hover:bg-[rgba(67,137,255,0.2)]"
               >
                 <EnvelopeSimple size={18} weight="regular" />
-                hello@theovillalba.dev
+                theovbpro@gmail.com
               </a>
 
               <div className="flex flex-wrap gap-3">
