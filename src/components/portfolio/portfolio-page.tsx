@@ -5,11 +5,27 @@ import Image from "next/image";
 
 import {
   ArrowRight,
+  CaretDown,
   CaretLeft,
   CaretRight,
+  CertificateIcon,
   EnvelopeSimple,
 } from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import {
+  siCss,
+  siExpress,
+  siGithub,
+  siHtml5,
+  siNestjs,
+  siNextdotjs,
+  siNodedotjs,
+  siReact,
+  siRuby,
+  siRubyonrails,
+  siVercel,
+  type SimpleIcon,
+} from "simple-icons";
 
 import {
   projects,
@@ -30,42 +46,252 @@ const aboutPhoto = {
   alt: "Portrait de Théo",
 };
 
-const timelineItems = [
+type TimelineAccent = "foundation" | "stack";
+type TimelineTone = "teal" | "blue";
+type TimelineFallbackIcon = typeof CertificateIcon;
+type TimelineSimpleIconId =
+  | "css"
+  | "express"
+  | "github"
+  | "html"
+  | "nestjs"
+  | "next"
+  | "node"
+  | "rails"
+  | "react"
+  | "ruby"
+  | "vercel";
+
+type TimelineLogo =
+  | { type: "simple"; id: TimelineSimpleIconId }
+  | { type: "fallback"; label: string; icon?: TimelineFallbackIcon };
+
+const techIcons: Record<
+  TimelineSimpleIconId,
   {
-    date: "Avril 2026",
-    title: "Stack JavaScript moderne",
-    description:
-      "React, Next.js, TypeScript et Node.js pour construire des interfaces dynamiques et des applications web full-stack.",
+    icon: SimpleIcon;
+    label: string;
+  }
+> = {
+  css: { icon: siCss, label: "CSS" },
+  express: { icon: siExpress, label: "Express.js" },
+  github: { icon: siGithub, label: "GitHub" },
+  html: { icon: siHtml5, label: "HTML5" },
+  nestjs: { icon: siNestjs, label: "NestJS" },
+  next: { icon: siNextdotjs, label: "Next.js" },
+  node: { icon: siNodedotjs, label: "Node.js" },
+  rails: { icon: siRubyonrails, label: "Ruby on Rails" },
+  react: { icon: siReact, label: "React" },
+  ruby: { icon: siRuby, label: "Ruby" },
+  vercel: { icon: siVercel, label: "Vercel" },
+};
+
+type TimelineDateItem = {
+  id: string;
+  type: "date";
+  label: string;
+  accent: TimelineAccent;
+};
+
+type TimelineEventItem = {
+  id: string;
+  type: "event";
+  title: string;
+  detail?: string;
+  logos?: TimelineLogo[];
+  accent: TimelineAccent;
+};
+
+type TimelineItem = TimelineDateItem | TimelineEventItem;
+
+const timelineAccentStyles: Record<
+  TimelineAccent,
+  {
+    date: string;
+  }
+> = {
+  foundation: {
+    date:
+      "border-[rgba(148,163,184,0.28)] bg-[rgba(148,163,184,0.08)] text-slate-200",
+  },
+  stack: {
+    date:
+      "border-[rgba(148,163,184,0.28)] bg-[rgba(148,163,184,0.08)] text-slate-200",
+  },
+};
+
+const timelineToneStyles: Record<
+  TimelineTone,
+  {
+    button: string;
+    activeButton: string;
+    detail: string;
+    connector: string;
+  }
+> = {
+  teal: {
+    button:
+      "border-[rgba(45,212,191,0.32)] bg-[rgba(45,212,191,0.09)] hover:border-[rgba(45,212,191,0.52)] hover:bg-[rgba(45,212,191,0.14)]",
+    activeButton:
+      "border-[rgba(45,212,191,0.62)] bg-[rgba(45,212,191,0.14)] shadow-[0_24px_60px_-44px_rgba(45,212,191,0.76)]",
+    detail: "border-[rgba(45,212,191,0.32)] bg-[rgba(45,212,191,0.08)]",
+    connector: "bg-[rgba(45,212,191,0.58)]",
+  },
+  blue: {
+    button:
+      "border-[rgba(67,137,255,0.34)] bg-[rgba(67,137,255,0.095)] hover:border-[rgba(67,137,255,0.56)] hover:bg-[rgba(67,137,255,0.145)]",
+    activeButton:
+      "border-[rgba(67,137,255,0.68)] bg-[rgba(67,137,255,0.15)] shadow-[0_24px_60px_-44px_rgba(67,137,255,0.88)]",
+    detail: "border-[rgba(67,137,255,0.34)] bg-[rgba(67,137,255,0.085)]",
+    connector: "bg-[rgba(67,137,255,0.6)]",
+  },
+};
+
+const timelineLineStyles = {
+  line: "bg-[rgba(132,154,190,0.58)]",
+  point:
+    "border-[rgba(132,154,190,0.82)] bg-[#0b1220] shadow-[0_0_0_6px_rgba(132,154,190,0.1),0_0_22px_rgba(132,154,190,0.42)]",
+};
+
+const timelineItems: TimelineItem[] = [
+  {
+    id: "date-august-2025",
+    type: "date",
+    label: "Août 2025",
+    accent: "foundation",
   },
   {
-    date: "Avril 2026",
-    title: "Certification backend & Rails",
-    description:
-      "Approche full-stack avec Ruby on Rails : MVC, CRUD, bases de données, Hotwire et logique backend structurée.",
+    id: "career-shift",
+    type: "event",
+    title: "Reconversion vers le dev web",
+    accent: "foundation",
   },
   {
-    date: "Début 2026",
-    title: "Formation intensive THP",
-    description:
-      "Projets en équipe, pratique quotidienne, Ruby, POO et développement web appliqué.",
+    id: "date-september-2025",
+    type: "date",
+    label: "Septembre 2025",
+    accent: "foundation",
   },
   {
-    date: "Décembre 2025",
-    title: "Premiers pas avec Ruby",
-    description:
-      "Renforcement de la logique de programmation et des bases backend.",
+    id: "freecodecamp-responsive-web-design",
+    type: "event",
+    title: "Parcours “Responsive Web Design” FreeCodeCamp",
+    accent: "foundation",
   },
   {
-    date: "Septembre - Novembre 2025",
-    title: "Fondamentaux web",
-    description:
-      "HTML, CSS et responsive design avec le parcours FreeCodeCamp.",
+    id: "html-css-fundamentals",
+    type: "event",
+    title: "Fondamentaux HTML/CSS",
+    detail: "Mise en page, fondamentaux du web, responsive design",
+    logos: [
+      { type: "simple", id: "html" },
+      { type: "simple", id: "css" },
+    ],
+    accent: "foundation",
   },
   {
-    date: "Août 2025",
-    title: "Reconversion vers le web",
-    description:
-      "Décision de me reconvertir vers le développement web et les nouvelles technologies.",
+    id: "date-november-2025",
+    type: "date",
+    label: "Novembre 2025",
+    accent: "foundation",
+  },
+  {
+    id: "end-responsive-web-design",
+    type: "event",
+    title: "Fin du parcours “Responsive Web Design”",
+    accent: "foundation",
+  },
+  {
+    id: "ruby-fundamentals",
+    type: "event",
+    title: "Fondamentaux Ruby",
+    logos: [{ type: "simple", id: "ruby" }],
+    accent: "foundation",
+  },
+  {
+    id: "date-january-2026",
+    type: "date",
+    label: "Janvier 2026",
+    accent: "foundation",
+  },
+  {
+    id: "thp-start",
+    type: "event",
+    title: "Début de formation THP",
+    detail: "Formation intensive de Dev Web",
+    accent: "foundation",
+  },
+  {
+    id: "ruby",
+    type: "event",
+    title: "Ruby",
+    detail: "Niveau : maîtrise · scripts · POO",
+    logos: [{ type: "simple", id: "ruby" }],
+    accent: "foundation",
+  },
+  {
+    id: "tools-mastery",
+    type: "event",
+    title: "Maîtrise d’outils",
+    detail: "GitHub · Vercel · VS Code",
+    logos: [
+      { type: "simple", id: "github" },
+      { type: "simple", id: "vercel" },
+      { type: "fallback", label: "VS Code" },
+    ],
+    accent: "foundation",
+  },
+  {
+    id: "rails-sql",
+    type: "event",
+    title: "Ruby on Rails / SQL",
+    detail: "MVC · CRUD · base de données · Hotwire",
+    logos: [{ type: "simple", id: "rails" }],
+    accent: "stack",
+  },
+  {
+    id: "backend-certification",
+    type: "event",
+    title: "Certification backend",
+    logos: [{ type: "fallback", label: "Certification", icon: CertificateIcon }],
+    accent: "stack",
+  },
+  {
+    id: "date-april-2026",
+    type: "date",
+    label: "Avril 2026",
+    accent: "stack",
+  },
+  {
+    id: "react-next",
+    type: "event",
+    title: "React / Next.js",
+    detail: "Composants · JavaScript · TypeScript",
+    logos: [
+      { type: "simple", id: "react" },
+      { type: "simple", id: "next" },
+    ],
+    accent: "stack",
+  },
+  {
+    id: "node-js",
+    type: "event",
+    title: "Node.js",
+    detail: "Express.js · NestJS · backend JavaScript",
+    logos: [
+      { type: "simple", id: "node" },
+      { type: "simple", id: "express" },
+      { type: "simple", id: "nestjs" },
+    ],
+    accent: "stack",
+  },
+  {
+    id: "ai-project",
+    type: "event",
+    title: "Projet IA",
+    detail: "Projet Sokwak AI · intégration d’API moderne OpenAI",
+    logos: [{ type: "fallback", label: "OpenAI" }],
+    accent: "stack",
   },
 ];
 
@@ -87,61 +313,227 @@ function panel(className?: string) {
     .join(" ");
 }
 
-function TimelineItem({
-  item,
-  index,
-}: {
-  item: (typeof timelineItems)[number];
-  index: number;
-}) {
-  const isRight = index % 2 === 1;
+function isTimelineEvent(item: TimelineItem): item is TimelineEventItem {
+  return item.type === "event";
+}
+
+type TimelineRenderItem =
+  | { item: TimelineDateItem; eventIndex: null }
+  | { item: TimelineEventItem; eventIndex: number };
+
+const timelineRenderItems = timelineItems.reduce<TimelineRenderItem[]>(
+  (items, item) => {
+    if (!isTimelineEvent(item)) {
+      return [...items, { item, eventIndex: null }];
+    }
+
+    const eventIndex = items.reduce(
+      (count, entry) => count + (isTimelineEvent(entry.item) ? 1 : 0),
+      0,
+    );
+
+    return [...items, { item, eventIndex }];
+  },
+  [],
+);
+
+function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
+  const accent = timelineAccentStyles[item.accent];
 
   return (
-    <li className="relative grid grid-cols-[4.75rem_minmax(0,1fr)] gap-3 sm:grid-cols-[5.5rem_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,1fr)] lg:gap-4">
-      <div
+    <li className="relative grid grid-cols-[5rem_1rem_minmax(0,1fr)] py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2">
+      <span
         className={[
-          "order-2 lg:order-none",
-          isRight ? "lg:col-start-3" : "lg:col-start-1",
+          "relative z-10 col-start-1 min-w-[6.75rem] justify-self-center rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.58rem] uppercase leading-none tracking-[0.12em] shadow-[0_0_24px_-16px_rgba(148,163,184,0.9)] lg:col-start-2",
+          accent.date,
         ].join(" ")}
       >
-        <motion.article
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{
-            duration: 0.42,
-            delay: Math.min(index * 0.035, 0.14),
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="rounded-[1rem] border border-white/8 bg-white/[0.035] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 hover:border-white/14 hover:bg-white/[0.055]"
-        >
-          <h3 className="text-base font-semibold leading-6 tracking-[-0.035em] text-white">
-            {item.title}
-          </h3>
-          <p className="mt-2 text-sm leading-6 text-slate-300">
-            {item.description}
-          </p>
-        </motion.article>
-      </div>
+        {item.label}
+      </span>
+    </li>
+  );
+}
 
-      <div className="relative order-1 col-start-1 row-start-1 flex items-start justify-center pt-3 lg:order-none lg:col-start-2">
-        <span className="max-w-[4.4rem] rounded-full border border-[rgba(67,137,255,0.28)] bg-[#07101f] px-2 py-1 text-center font-mono text-[0.56rem] uppercase leading-4 tracking-[0.12em] text-slate-300 shadow-[0_0_22px_-14px_rgba(67,137,255,0.95)] sm:max-w-[5rem] lg:max-w-[6.8rem]">
-          {item.date}
-        </span>
+function TechIcon({
+  logo,
+  tone,
+}: {
+  logo: TimelineLogo;
+  tone: TimelineTone;
+}) {
+  const styles = timelineToneStyles[tone];
+  const label = logo.type === "simple" ? techIcons[logo.id].label : logo.label;
+  const Icon = logo.type === "fallback" ? logo.icon : undefined;
+
+  return (
+    <span
+      className={[
+        "inline-flex h-7 min-w-7 items-center justify-center rounded-[0.55rem] border px-1.5 font-mono text-[0.56rem] font-semibold uppercase tracking-[-0.02em] text-slate-100 transition duration-300",
+        styles.detail,
+      ].join(" ")}
+      title={label}
+      aria-label={label}
+    >
+      {logo.type === "simple" ? (
         <span
-          aria-hidden="true"
-          className="absolute left-1/2 top-[2.9rem] h-2.5 w-2.5 -translate-x-1/2 rounded-full border border-[rgba(67,137,255,0.6)] bg-[#07101f] shadow-[0_0_0_5px_rgba(67,137,255,0.08),0_0_20px_rgba(67,137,255,0.5)]"
+          className="inline-flex [&_path]:fill-current [&_svg]:h-[1rem] [&_svg]:w-[1rem] [&_svg]:fill-current"
+          dangerouslySetInnerHTML={{ __html: techIcons[logo.id].icon.svg }}
         />
-      </div>
+      ) : Icon ? (
+        <Icon size={15} weight="duotone" />
+      ) : (
+        logo.label
+      )}
+    </span>
+  );
+}
 
-      <div
+function TimelineStep({
+  item,
+  index,
+  eventIndex,
+  isActive,
+  onSelect,
+}: {
+  item: TimelineEventItem;
+  index: number;
+  eventIndex: number;
+  isActive: boolean;
+  onSelect: (id: string) => void;
+}) {
+  const tone: TimelineTone = eventIndex % 2 === 0 ? "teal" : "blue";
+  const toneStyles = timelineToneStyles[tone];
+  const isLeft = eventIndex % 2 === 0;
+  const detailId = `timeline-detail-${item.id}`;
+  const hasDetail = Boolean(item.detail);
+  const hasLogos = Boolean(item.logos?.length);
+  const cardClassName = [
+    "group/timeline-card h-auto w-full max-w-full rounded-[0.85rem] border px-3 py-2.5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-[21rem] lg:w-fit lg:min-w-[13rem] lg:max-w-[22rem]",
+    hasDetail
+      ? "cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-34px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 active:scale-[0.99]"
+      : "cursor-default",
+    toneStyles.button,
+    isActive ? toneStyles.activeButton : "",
+  ].join(" ");
+  const cardContent = (
+    <span className="flex items-start gap-2.5">
+      {hasLogos ? (
+        <span className="flex max-w-[7.5rem] shrink-0 flex-wrap gap-1.5 pt-0.5">
+          {item.logos?.map((logo) => (
+            <TechIcon
+              key={`${item.id}-${logo.type === "simple" ? logo.id : logo.label}`}
+              logo={logo}
+              tone={tone}
+            />
+          ))}
+        </span>
+      ) : null}
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-semibold leading-5 tracking-[-0.025em] text-white text-balance">
+          {item.title}
+        </span>
+        {isActive && item.detail ? (
+          <motion.span
+            id={detailId}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-2 block border-t border-white/8 pt-2 text-xs leading-5 text-slate-300"
+            aria-live="polite"
+          >
+            {item.detail}
+          </motion.span>
+        ) : null}
+      </span>
+      {hasDetail ? (
+        <CaretDown
+          aria-hidden="true"
+          size={14}
+          weight="bold"
+          className={[
+            "mt-0.5 shrink-0 text-slate-400 transition duration-300 group-hover/timeline-card:text-slate-200",
+            isActive ? "rotate-180 text-slate-100" : "",
+          ].join(" ")}
+        />
+      ) : null}
+    </span>
+  );
+
+  return (
+    <motion.li
+      layout="position"
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{
+        duration: 0.38,
+        delay: Math.min(index * 0.035, 0.14),
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="relative grid grid-cols-[5rem_1rem_minmax(0,1fr)] items-start py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2"
+    >
+      <span
         aria-hidden="true"
         className={[
-          "hidden lg:block",
-          isRight ? "lg:col-start-1" : "lg:col-start-3",
+          "z-10 col-start-1 row-start-1 mt-3.5 h-3 w-3 justify-self-center rounded-full border transition duration-300 lg:col-start-2",
+          timelineLineStyles.point,
+          isActive ? "scale-125" : "",
         ].join(" ")}
       />
-    </li>
+      <span
+        aria-hidden="true"
+        className={[
+          "col-start-2 row-start-1 mt-[1.12rem] h-px w-full lg:hidden",
+          toneStyles.connector,
+        ].join(" ")}
+      />
+      <div
+        className={[
+          "col-start-3 row-start-1 min-w-0",
+          isLeft
+            ? "lg:col-start-1 lg:justify-self-end"
+            : "lg:col-start-3 lg:justify-self-start",
+        ].join(" ")}
+      >
+        <div className="flex min-w-0 items-start">
+          {isLeft ? null : (
+            <span
+              aria-hidden="true"
+              className={[
+                "mt-[1.12rem] hidden h-px w-6 shrink-0 lg:block",
+                toneStyles.connector,
+              ].join(" ")}
+            />
+          )}
+          {hasDetail ? (
+            <motion.button
+              layout
+              type="button"
+              aria-expanded={isActive}
+              aria-controls={detailId}
+              aria-label={`${isActive ? "Masquer" : "Afficher"} ${item.title}`}
+              onClick={() => onSelect(item.id)}
+              className={cardClassName}
+            >
+              {cardContent}
+            </motion.button>
+          ) : (
+            <motion.article layout className={cardClassName}>
+              {cardContent}
+            </motion.article>
+          )}
+          {isLeft ? (
+            <span
+              aria-hidden="true"
+              className={[
+                "mt-[1.12rem] hidden h-px w-6 shrink-0 lg:block",
+                toneStyles.connector,
+              ].join(" ")}
+            />
+          ) : null}
+        </div>
+      </div>
+    </motion.li>
   );
 }
 
@@ -291,6 +683,10 @@ function HeroSection() {
 }
 
 function ProfileSection() {
+  const [activeTimelineItemId, setActiveTimelineItemId] = useState<
+    string | null
+  >(null);
+
   return (
     <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
       <div
@@ -314,19 +710,33 @@ function ProfileSection() {
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="relative min-w-0 overflow-x-clip py-1">
                 <div
                   aria-hidden="true"
-                  className="absolute bottom-3 left-[2.375rem] top-3 w-px bg-gradient-to-b from-[rgba(67,137,255,0.08)] via-[rgba(67,137,255,0.4)] to-white/8 sm:left-[2.75rem] lg:left-1/2"
+                  className={[
+                    "absolute bottom-2 left-10 top-2 w-px lg:left-1/2 lg:-translate-x-1/2",
+                    timelineLineStyles.line,
+                  ].join(" ")}
                 />
-                <ol className="relative space-y-4">
-                  {timelineItems.map((item, index) => (
-                    <TimelineItem
-                      key={`${item.date}-${item.title}`}
-                      item={item}
-                      index={index}
-                    />
-                  ))}
+                <ol className="relative space-y-6 lg:space-y-9">
+                  {timelineRenderItems.map(({ item, eventIndex }, index) =>
+                    isTimelineEvent(item) ? (
+                      <TimelineStep
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        eventIndex={eventIndex ?? 0}
+                        isActive={activeTimelineItemId === item.id}
+                        onSelect={(id) =>
+                          setActiveTimelineItemId((currentId) =>
+                            currentId === id ? null : id,
+                          )
+                        }
+                      />
+                    ) : (
+                      <TimelineDateMarker key={item.id} item={item} />
+                    ),
+                  )}
                 </ol>
               </div>
             </div>
