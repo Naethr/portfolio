@@ -10,7 +10,13 @@ export type Project = {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  status: "En ligne" | "En cours" | "Privé" | "MVP";
+  status:
+    | "En ligne"
+    | "En cours"
+    | "Privé"
+    | "MVP"
+    | "En cours (MVP terminé)"
+    | "Déployé";
   year: string;
   metric: string;
   intention?: string;
@@ -20,6 +26,7 @@ export const navigationLinks: ProjectLink[] = [
   { label: "Projets", href: "#projets" },
   { label: "Stack", href: "#stack" },
   { label: "À propos", href: "#profil" },
+  { label: "Mon parcours", href: "#parcours" },
 ];
 
 export const rotatingTechnologies = [

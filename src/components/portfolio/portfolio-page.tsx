@@ -531,7 +531,7 @@ function TimelineStep({
 
 function AboutIntro() {
   return (
-    <div className="mb-12 grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
+    <div className="mb-14 grid gap-6 p-5 sm:mb-16 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
       <div className="max-w-3xl space-y-5">
         <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
           À propos
@@ -686,14 +686,14 @@ function ProfileSection() {
           <div className="relative space-y-5">
             <AboutIntro />
 
-            <div className="p-5 sm:p-7 lg:p-8">
-              <div className="mb-7 flex items-end justify-between gap-4">
+            <div id="parcours" className="scroll-mt-28 p-5 sm:p-7 lg:p-8">
+              <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
                 <div>
-                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
+                  <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
                     Parcours
-                  </p>
+                  </span>
                   <h3 className="mt-2 text-2xl font-semibold tracking-[-0.055em] text-white sm:text-3xl">
-                    Progression structurée, étape par étape.
+                    Mon parcours de développeur
                   </h3>
                 </div>
               </div>
@@ -753,8 +753,8 @@ function ProjectsSection() {
       <SectionReveal className="space-y-10">
         <SectionHeading
           eyebrow="Projets"
-          title="Quelques réalisations où design et ingénierie avancent ensemble."
-          description="Chaque projet cherche un équilibre net entre lisibilité, performances, structure technique et sensation premium."
+          title="Quelques projets réalisés seul ou en équipe."
+          description="Chacun m’a permis de travailler un aspect concret du développement web : interface, logique métier, architecture ou performance."
         />
 
         <div className="group/project-carousel relative mx-auto max-w-6xl overflow-hidden py-3 sm:py-6">
