@@ -20,7 +20,6 @@ export const navigationLinks: ProjectLink[] = [
   { label: "Projets", href: "#projets" },
   { label: "Stack", href: "#stack" },
   { label: "À propos", href: "#profil" },
-  { label: "Contact", href: "#contact" },
 ];
 
 export const rotatingTechnologies = [
