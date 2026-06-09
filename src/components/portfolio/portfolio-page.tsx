@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import {
   ArrowRight,
+  BookOpenIcon,
   CaretLeft,
   CaretRight,
   CertificateIcon,
@@ -19,6 +20,7 @@ import {
   siNestjs,
   siNextdotjs,
   siNodedotjs,
+  siOpenaigym,
   siReact,
   siRuby,
   siRubyonrails,
@@ -56,6 +58,7 @@ type TimelineSimpleIconId =
   | "nestjs"
   | "next"
   | "node"
+  | "openaigym"
   | "rails"
   | "react"
   | "ruby"
@@ -79,6 +82,7 @@ const techIcons: Record<
   nestjs: { icon: siNestjs, label: "NestJS" },
   next: { icon: siNextdotjs, label: "Next.js" },
   node: { icon: siNodedotjs, label: "Node.js" },
+  openaigym: { icon: siOpenaigym, label: "OpenAI Gym" },
   rails: { icon: siRubyonrails, label: "Ruby on Rails" },
   react: { icon: siReact, label: "React" },
   ruby: { icon: siRuby, label: "Ruby" },
@@ -96,6 +100,7 @@ type TimelineEventItem = {
   id: string;
   type: "event";
   title: string;
+  emphasizedText?: string;
   detail?: string;
   logos?: TimelineLogo[];
   accent: TimelineAccent;
@@ -158,6 +163,7 @@ const timelineItems: TimelineItem[] = [
     type: "event",
     title: "Projet IA",
     detail: "Projet Sokwak AI · intégration d’API moderne OpenAI",
+    logos: [{ type: "simple", id: "openaigym" }],
     accent: "stack",
   },
   {
@@ -176,6 +182,7 @@ const timelineItems: TimelineItem[] = [
     id: "backend-certification",
     type: "event",
     title: "Certification backend",
+    detail: "Obtenue à mi-parcours THP",
     logos: [{ type: "fallback", label: "Certification", icon: CertificateIcon }],
     accent: "stack",
   },
@@ -228,6 +235,7 @@ const timelineItems: TimelineItem[] = [
     type: "event",
     title: "Début de formation THP",
     detail: "Formation intensive de Dev Web",
+    logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
   {
@@ -246,7 +254,10 @@ const timelineItems: TimelineItem[] = [
   {
     id: "end-responsive-web-design",
     type: "event",
-    title: "Fin du parcours “Responsive Web Design”",
+    title: "Fin du parcours Responsive Web Design",
+    emphasizedText: "Responsive Web Design",
+    detail: "FreeCodeCamp",
+    logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
   {
@@ -269,7 +280,10 @@ const timelineItems: TimelineItem[] = [
   {
     id: "freecodecamp-responsive-web-design",
     type: "event",
-    title: "Parcours “Responsive Web Design” FreeCodeCamp",
+    title: "Parcours Responsive Web Design",
+    emphasizedText: "Responsive Web Design",
+    detail: "FreeCodeCamp",
+    logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
   {
@@ -282,6 +296,7 @@ const timelineItems: TimelineItem[] = [
     id: "career-shift",
     type: "event",
     title: "Reconversion vers le dev web",
+    logos: [{ type: "fallback", label: "</>" }],
     accent: "foundation",
   },
   {
@@ -385,6 +400,22 @@ function TechIcon({
   );
 }
 
+function TimelineTitle({ item }: { item: TimelineEventItem }) {
+  if (!item.emphasizedText || !item.title.includes(item.emphasizedText)) {
+    return item.title;
+  }
+
+  const [before, after] = item.title.split(item.emphasizedText);
+
+  return (
+    <>
+      {before}
+      <em>{item.emphasizedText}</em>
+      {after}
+    </>
+  );
+}
+
 function TimelineStep({
   item,
   index,
@@ -420,7 +451,7 @@ function TimelineStep({
       ) : null}
       <span className="min-w-0 flex-1">
         <span className="block text-sm font-semibold leading-5 tracking-[-0.025em] text-white text-balance">
-          {item.title}
+          <TimelineTitle item={item} />
         </span>
         {item.detail ? (
           <motion.span
