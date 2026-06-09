@@ -445,7 +445,7 @@ export function StackConstellation() {
     <section id="stack" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
         <SectionHeading
-          eyebrow="Constellation interactive"
+          eyebrow="Stack"
           title="Compétences & Stack"
           description="Une vue connectée des technologies que j'utilise pour concevoir, construire et livrer des applications web modernes."
         />
