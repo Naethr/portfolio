@@ -5,7 +5,6 @@ import Image from "next/image";
 
 import {
   ArrowRight,
-  CaretDown,
   CaretLeft,
   CaretRight,
   CertificateIcon,
@@ -112,11 +111,11 @@ const timelineAccentStyles: Record<
 > = {
   foundation: {
     date:
-      "border-[rgba(148,163,184,0.28)] bg-[rgba(148,163,184,0.08)] text-slate-200",
+      "border-[rgba(45,212,191,0.46)] bg-[#061816] text-[#99f6e4]",
   },
   stack: {
     date:
-      "border-[rgba(148,163,184,0.28)] bg-[rgba(148,163,184,0.08)] text-slate-200",
+      "border-[rgba(45,212,191,0.46)] bg-[#061816] text-[#99f6e4]",
   },
 };
 
@@ -131,11 +130,11 @@ const timelineToneStyles: Record<
 > = {
   teal: {
     button:
-      "border-[rgba(45,212,191,0.32)] bg-[rgba(45,212,191,0.09)] hover:border-[rgba(45,212,191,0.52)] hover:bg-[rgba(45,212,191,0.14)]",
+      "border-[rgba(139,92,246,0.34)] bg-[rgba(139,92,246,0.085)] hover:border-[rgba(139,92,246,0.54)] hover:bg-[rgba(139,92,246,0.13)]",
     activeButton:
-      "border-[rgba(45,212,191,0.62)] bg-[rgba(45,212,191,0.14)] shadow-[0_24px_60px_-44px_rgba(45,212,191,0.76)]",
-    detail: "border-[rgba(45,212,191,0.32)] bg-[rgba(45,212,191,0.08)]",
-    connector: "bg-[rgba(45,212,191,0.58)]",
+      "border-[rgba(139,92,246,0.64)] bg-[rgba(139,92,246,0.13)] shadow-[0_24px_60px_-44px_rgba(139,92,246,0.76)]",
+    detail: "border-[rgba(139,92,246,0.34)] bg-[rgba(139,92,246,0.075)]",
+    connector: "bg-[rgba(139,92,246,0.56)]",
   },
   blue: {
     button:
@@ -148,24 +147,17 @@ const timelineToneStyles: Record<
 };
 
 const timelineLineStyles = {
-  line: "bg-[rgba(132,154,190,0.58)]",
+  line: "bg-[rgba(45,212,191,0.58)]",
   point:
-    "border-[rgba(132,154,190,0.82)] bg-[#0b1220] shadow-[0_0_0_6px_rgba(132,154,190,0.1),0_0_22px_rgba(132,154,190,0.42)]",
+    "border-[rgba(45,212,191,0.84)] bg-[#0b1220] shadow-[0_0_0_6px_rgba(45,212,191,0.1),0_0_22px_rgba(45,212,191,0.42)]",
 };
 
 const timelineItems: TimelineItem[] = [
-  {
-    id: "date-april-2026",
-    type: "date",
-    label: "Avril 2026",
-    accent: "stack",
-  },
   {
     id: "ai-project",
     type: "event",
     title: "Projet IA",
     detail: "Projet Sokwak AI · intégration d’API moderne OpenAI",
-    logos: [{ type: "fallback", label: "OpenAI" }],
     accent: "stack",
   },
   {
@@ -181,6 +173,19 @@ const timelineItems: TimelineItem[] = [
     accent: "stack",
   },
   {
+    id: "backend-certification",
+    type: "event",
+    title: "Certification backend",
+    logos: [{ type: "fallback", label: "Certification", icon: CertificateIcon }],
+    accent: "stack",
+  },
+  {
+    id: "date-april-2026",
+    type: "date",
+    label: "Avril 2026",
+    accent: "stack",
+  },
+  {
     id: "react-next",
     type: "event",
     title: "React / Next.js",
@@ -189,13 +194,6 @@ const timelineItems: TimelineItem[] = [
       { type: "simple", id: "react" },
       { type: "simple", id: "next" },
     ],
-    accent: "stack",
-  },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Certification backend",
-    logos: [{ type: "fallback", label: "Certification", icon: CertificateIcon }],
     accent: "stack",
   },
   {
@@ -214,7 +212,6 @@ const timelineItems: TimelineItem[] = [
     logos: [
       { type: "simple", id: "github" },
       { type: "simple", id: "vercel" },
-      { type: "fallback", label: "VS Code" },
     ],
     accent: "foundation",
   },
@@ -344,7 +341,7 @@ function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
     <li className="relative grid grid-cols-[5rem_1rem_minmax(0,1fr)] py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2">
       <span
         className={[
-          "relative z-10 col-start-1 min-w-[6.75rem] justify-self-center rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.58rem] uppercase leading-none tracking-[0.12em] shadow-[0_0_24px_-16px_rgba(148,163,184,0.9)] lg:col-start-2",
+          "relative z-20 col-start-1 min-w-[6.75rem] justify-self-center rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.58rem] uppercase leading-none tracking-[0.12em] shadow-[0_0_24px_-16px_rgba(45,212,191,0.9)] lg:col-start-2",
           accent.date,
         ].join(" ")}
       >
@@ -392,28 +389,21 @@ function TimelineStep({
   item,
   index,
   eventIndex,
-  isActive,
-  onSelect,
 }: {
   item: TimelineEventItem;
   index: number;
   eventIndex: number;
-  isActive: boolean;
-  onSelect: (id: string) => void;
 }) {
   const tone: TimelineTone = eventIndex % 2 === 0 ? "teal" : "blue";
   const toneStyles = timelineToneStyles[tone];
   const isLeft = eventIndex % 2 === 0;
-  const detailId = `timeline-detail-${item.id}`;
   const hasDetail = Boolean(item.detail);
   const hasLogos = Boolean(item.logos?.length);
   const cardClassName = [
     "group/timeline-card h-auto w-full max-w-full rounded-[0.85rem] border px-3 py-2.5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-[21rem] lg:w-fit lg:min-w-[13rem] lg:max-w-[22rem]",
-    hasDetail
-      ? "cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-34px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 active:scale-[0.99]"
-      : "cursor-default",
+    "cursor-default",
     toneStyles.button,
-    isActive ? toneStyles.activeButton : "",
+    hasDetail ? toneStyles.activeButton : "",
   ].join(" ");
   const cardContent = (
     <span className="flex items-start gap-2.5">
@@ -432,30 +422,17 @@ function TimelineStep({
         <span className="block text-sm font-semibold leading-5 tracking-[-0.025em] text-white text-balance">
           {item.title}
         </span>
-        {isActive && item.detail ? (
+        {item.detail ? (
           <motion.span
-            id={detailId}
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="mt-2 block border-t border-white/8 pt-2 text-xs leading-5 text-slate-300"
-            aria-live="polite"
           >
             {item.detail}
           </motion.span>
         ) : null}
       </span>
-      {hasDetail ? (
-        <CaretDown
-          aria-hidden="true"
-          size={14}
-          weight="bold"
-          className={[
-            "mt-0.5 shrink-0 text-slate-400 transition duration-300 group-hover/timeline-card:text-slate-200",
-            isActive ? "rotate-180 text-slate-100" : "",
-          ].join(" ")}
-        />
-      ) : null}
     </span>
   );
 
@@ -477,7 +454,6 @@ function TimelineStep({
         className={[
           "z-10 col-start-1 row-start-1 mt-3.5 h-3 w-3 justify-self-center rounded-full border transition duration-300 lg:col-start-2",
           timelineLineStyles.point,
-          isActive ? "scale-125" : "",
         ].join(" ")}
       />
       <span
@@ -505,23 +481,9 @@ function TimelineStep({
               ].join(" ")}
             />
           )}
-          {hasDetail ? (
-            <motion.button
-              layout
-              type="button"
-              aria-expanded={isActive}
-              aria-controls={detailId}
-              aria-label={`${isActive ? "Masquer" : "Afficher"} ${item.title}`}
-              onClick={() => onSelect(item.id)}
-              className={cardClassName}
-            >
-              {cardContent}
-            </motion.button>
-          ) : (
-            <motion.article layout className={cardClassName}>
-              {cardContent}
-            </motion.article>
-          )}
+          <motion.article layout className={cardClassName}>
+            {cardContent}
+          </motion.article>
           {isLeft ? (
             <span
               aria-hidden="true"
@@ -683,10 +645,6 @@ function HeroSection() {
 }
 
 function ProfileSection() {
-  const [activeTimelineItemId, setActiveTimelineItemId] = useState<
-    string | null
-  >(null);
-
   return (
     <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
       <div
@@ -726,12 +684,6 @@ function ProfileSection() {
                         item={item}
                         index={index}
                         eventIndex={eventIndex ?? 0}
-                        isActive={activeTimelineItemId === item.id}
-                        onSelect={(id) =>
-                          setActiveTimelineItemId((currentId) =>
-                            currentId === id ? null : id,
-                          )
-                        }
                       />
                     ) : (
                       <TimelineDateMarker key={item.id} item={item} />
