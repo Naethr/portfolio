@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight, GitBranch } from "@phosphor-icons/react";
 
 import type { Project } from "@/data/portfolio";
@@ -6,11 +7,30 @@ type ProjectWindowCardProps = {
   project: Project;
 };
 
+const projectScreenshots: Partial<
+  Record<string, { src: string; alt: string; width: number; height: number }>
+> = {
+  "sokwak.com": {
+    src: "/images/sokwak.png",
+    alt: "Capture d’écran du projet Sokwak",
+    width: 1004,
+    height: 679,
+  },
+  questonaut: {
+    src: "/images/questonaut.png",
+    alt: "Capture d’écran du projet Questonaut",
+    width: 1345,
+    height: 940,
+  },
+};
+
 function browserPath(slug: string) {
   return `theovillalba.dev/projects/${slug}`;
 }
 
 export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
+  const screenshot = projectScreenshots[project.slug];
+
   return (
     <article className="project-window-card rounded-[1.9rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-2 shadow-[0_28px_90px_-56px_rgba(0,0,0,0.96)]">
       <div className="project-window relative overflow-hidden rounded-[1.45rem] border border-white/7 bg-[linear-gradient(180deg,rgba(7,10,18,0.96),rgba(5,7,14,0.98))]">
@@ -60,14 +80,24 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
               </p>
             </div>
 
-            <div className="mt-6 rounded-[1.2rem] border border-white/8 bg-black/22 p-5">
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                point fort
-              </p>
-              <p className="mt-3 text-sm leading-7 text-slate-200 sm:text-base">
-                {project.metric}
-              </p>
-            </div>
+            {screenshot ? (
+              <div className="mx-auto mt-6 flex w-fit max-w-[18rem] justify-center overflow-hidden rounded-[1.2rem] border border-white/8 bg-white/[0.025]">
+                <Image
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  width={screenshot.width}
+                  height={screenshot.height}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="block h-auto max-h-[180px] w-auto max-w-full object-contain"
+                />
+              </div>
+            ) : project.slug !== "portfolio" ? (
+              <div className="mt-6 flex min-h-28 items-center justify-center rounded-[1.2rem] border border-dashed border-white/10 bg-black/22 p-5">
+                <p className="font-mono text-[0.66rem] uppercase tracking-[0.22em] text-slate-500">
+                  Illustration à venir
+                </p>
+              </div>
+            ) : null}
 
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -89,7 +119,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
             </div>
           </div>
 
-          <div className="rounded-[1.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-4 sm:p-5">
+          <div className="self-start rounded-[1.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-4 sm:p-5">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">

@@ -81,6 +81,8 @@ export const projects: Project[] = [
     status: "En cours (MVP terminé)",
     year: "2026",
     metric: "UI gamifiée avec système de niveau et badges de récompenses pour aider à se tenir à ses habitudes.",
+    intention:
+      "Proposer une UI gamifiée, avec système de niveau et badges de récompenses, pour aider l'utilisateur à se tenir à ses habitudes.",
   },
   {
     slug: "portfolio",
@@ -92,6 +94,7 @@ export const projects: Project[] = [
     status: "Déployé",
     year: "2026",
     metric: "Une interface propre et claire.",
+    intention: "Créer une interface propre, claire avec des composants modernes",
   },
 ];
 
