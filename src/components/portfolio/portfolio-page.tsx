@@ -31,7 +31,6 @@ import {
 import {
   projects,
   rotatingTechnologies,
-  socialLinks,
 } from "@/data/portfolio";
 
 import { GradientDots } from "../ui/gradient-dots";
@@ -836,44 +835,29 @@ function ContactSection() {
   return (
     <section id="contact" className="py-20 sm:py-24">
       <SectionReveal className={frame()}>
-        <div className={panel("p-8 sm:p-10 lg:p-12")}>
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-            <div className="space-y-5">
-              <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
-                Contact
-              </span>
-              <h2 className="max-w-3xl text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl">
-                Besoin d&apos;une interface plus nette, plus crédible et mieux
-                construite ?
-              </h2>
-              <p className="max-w-[58ch] text-base leading-8 text-slate-300">
-                Disponible pour des missions fullstack, des refontes frontend
-                et des produits où l&apos;exécution compte autant que
-                l&apos;idée.
-              </p>
-            </div>
+        <div className="relative overflow-hidden rounded-[1.55rem] border border-[rgba(139,92,246,0.42)] bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.22),transparent_42%),linear-gradient(180deg,rgba(12,10,24,0.94),rgba(5,7,14,0.98))] px-6 py-12 text-center shadow-[0_0_70px_-36px_rgba(139,92,246,0.95),inset_0_1px_0_rgba(255,255,255,0.06)] sm:px-10 sm:py-16 lg:px-16">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(167,139,250,0.82),transparent)]"
+          />
 
-            <div className="grid gap-3">
-              <a
-                href="mailto:hello@theovillalba.dev"
-                className="inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3.5 text-sm font-medium text-white shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300 hover:bg-[rgba(67,137,255,0.2)]"
-              >
-                <EnvelopeSimple size={18} weight="regular" />
-                theovbpro@gmail.com
-              </a>
+          <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
+            <h2 className="max-w-3xl text-balance text-center text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+              Une idée, une question, ou simplement envie d&apos;échanger ?
+            </h2>
 
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition-colors duration-300 hover:border-white/18 hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+            <p className="max-w-2xl text-center text-base leading-8 text-slate-300 sm:text-lg">
+              Je suis disponible pour tous vos projets, ainsi que vos
+              opportunités et discussions autour du développement web.
+            </p>
+
+            <a
+              href="mailto:theovbpro@gmail.com"
+              className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border border-[rgba(167,139,250,0.52)] bg-[rgba(139,92,246,0.18)] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[0_0_34px_-16px_rgba(139,92,246,0.92)] transition duration-300 hover:border-[rgba(196,181,253,0.72)] hover:bg-[rgba(139,92,246,0.26)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 active:scale-[0.98] sm:w-auto"
+            >
+              <EnvelopeSimple size={18} weight="regular" />
+              theovbpro@gmail.com
+            </a>
           </div>
         </div>
       </SectionReveal>
