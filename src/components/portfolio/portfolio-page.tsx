@@ -592,10 +592,6 @@ function HeroSection() {
         <div className="relative px-2 py-12 sm:px-4 sm:py-14 lg:px-8 lg:py-16">
           <div
             aria-hidden="true"
-            className="absolute inset-x-[18%] top-0 h-full bg-[radial-gradient(circle_at_center,rgba(67,137,255,0.13),transparent_68%)]"
-          />
-          <div
-            aria-hidden="true"
             className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[calc(100dvh+18rem)] min-h-[56rem] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden opacity-85"
           >
             <div className="absolute inset-y-0 left-0 w-full [mask-image:linear-gradient(90deg,black_0%,black_22%,rgba(0,0,0,0.8)_31%,transparent_44%,transparent_56%,rgba(0,0,0,0.8)_69%,black_78%,black_100%)]">
