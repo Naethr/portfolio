@@ -13,6 +13,8 @@ export function SiteFooter() {
             <a
               key={link.href}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="transition-colors duration-300 hover:text-white"
             >
               {link.label}

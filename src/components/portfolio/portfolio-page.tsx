@@ -849,6 +849,8 @@ function ContactSection() {
 
             <a
               href="mailto:theovbpro@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border border-[rgba(167,139,250,0.52)] bg-[rgba(139,92,246,0.18)] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[0_0_34px_-16px_rgba(139,92,246,0.92)] transition duration-300 hover:border-[rgba(196,181,253,0.72)] hover:bg-[rgba(139,92,246,0.26)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 active:scale-[0.98] sm:w-auto"
             >
               <EnvelopeSimple size={18} weight="regular" />

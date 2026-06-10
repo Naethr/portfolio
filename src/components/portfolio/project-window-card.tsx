@@ -102,6 +102,8 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
             <div className="mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
               <a
                 href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-2 text-[0.82rem] font-medium text-slate-100 transition-colors duration-300 hover:border-white/18 hover:bg-white/6 md:gap-2 md:px-4 md:py-2.5 md:text-sm"
               >
                 GitHub
@@ -110,6 +112,8 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.12)] px-3 py-2 text-[0.82rem] font-medium text-white transition-colors duration-300 hover:bg-[rgba(67,137,255,0.18)] md:gap-2 md:px-4 md:py-2.5 md:text-sm"
                 >
                   Voir le contexte
