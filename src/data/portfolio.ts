@@ -101,5 +101,5 @@ export const projects: Project[] = [
 export const socialLinks: ProjectLink[] = [
   { label: "GitHub", href: "https://github.com/Naethr" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/th%C3%A9o-villalba-52a7343a3/" },
-  { label: "Email", href: "mailto:hello@theovillalba.dev" },
+  { label: "Email", href: "mailto:theovbpro@gmail.com" },
 ];
