@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | Théo Villalba",
   },
   description:
-    "Portfolio développeur en français, sombre et premium, centré sur la performance, les interfaces soignées et une architecture fullstack propre.",
+    "Développeur Full Stack. Découvrez mes projets et mon parcours.",
   keywords: [
     "Théo Villalba",
     "Développeur fullstack",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Théo Villalba | Développeur fullstack",
     description:
-      "Portfolio développeur sombre et moderne, entre interfaces premium, performance et architecture maintenable.",
+      "Développeur Full Stack. Découvrez mes projets et mon parcours.",
     type: "website",
     locale: "fr_FR",
     siteName: "Portfolio Théo Villalba",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Théo Villalba | Développeur fullstack",
     description:
-      "Portfolio développeur orienté interfaces premium, performance et produits web crédibles.",
+      "Développeur Full Stack. Découvrez mes projets et mon parcours.",
   },
   robots: {
     index: true,
