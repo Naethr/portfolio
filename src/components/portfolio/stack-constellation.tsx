@@ -285,20 +285,20 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
   const category = skillCategories[skill.category];
 
   return (
-    <aside className={frame("h-full")}>
-      <div className={panel("flex h-full flex-col justify-between gap-8 p-6 sm:p-7")}>
+    <aside className={frame("h-full min-w-0")}>
+      <div className={panel("flex h-full min-w-0 flex-col justify-between gap-7 p-5 sm:gap-8 sm:p-7")}>
         <div className="space-y-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
+          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
                 Détail actif
               </p>
-              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.055em] text-white">
+              <h3 className="mt-4 text-xl font-semibold tracking-[-0.055em] text-white sm:text-2xl">
                 {skill.name}
               </h3>
             </div>
             <span
-              className="rounded-full border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.2em]"
+              className="inline-block w-fit max-w-full break-words rounded-full border px-3 py-1.5 font-mono text-[0.62rem] uppercase leading-4 tracking-[0.2em]"
               style={{
                 borderColor: category.accent,
                 backgroundColor: category.soft,
@@ -322,7 +322,7 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
             {relatedSkills.map((relatedSkill) => (
               <span
                 key={relatedSkill.id}
-                className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm text-slate-200"
+                className="inline-block max-w-full break-words rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm leading-5 text-slate-200"
               >
                 {relatedSkill.name}
               </span>
@@ -376,69 +376,291 @@ function SkillNode({
   );
 }
 
-function MobileSkillGrid({
+const mobileSkillOrder: Record<SkillCategory, string[]> = {
+  backend: ["rails", "node", "express", "nestjs"],
+  frontend: [
+    "react",
+    "nextjs",
+    "vite",
+    "typescript",
+    "javascript",
+    "tailwind",
+    "bootstrap",
+    "hotwire",
+  ],
+  database: ["postgresql", "sqlite", "prisma"],
+  tools: ["github", "vscode", "vercel"],
+  ai: ["codex", "ai-workflow"],
+};
+
+const mobileCategoryOrder: SkillCategory[] = [
+  "backend",
+  "frontend",
+  "database",
+  "tools",
+  "ai",
+];
+
+function getMobileCategorySkills(categoryId: SkillCategory) {
+  const orderedSkillIds = new Set(mobileSkillOrder[categoryId]);
+  const orderedSkills = mobileSkillOrder[categoryId]
+    .map((skillId) => skillById.get(skillId))
+    .filter((skill): skill is Skill => Boolean(skill));
+
+  const remainingSkills = constellationSkills.filter(
+    (skill) => skill.category === categoryId && !orderedSkillIds.has(skill.id),
+  );
+
+  return [...orderedSkills, ...remainingSkills];
+}
+
+function splitMobileSkills(skills: Skill[]) {
+  return skills.reduce(
+    (columns, skill, index) => {
+      columns[index % 2 === 0 ? "left" : "right"].push(skill);
+      return columns;
+    },
+    { left: [] as Skill[], right: [] as Skill[] },
+  );
+}
+
+function MobileSkillNode({
+  skill,
+  side,
+  isActive,
+  isRelated,
+  onSelect,
+}: {
+  skill: Skill;
+  side: "left" | "right";
+  isActive: boolean;
+  isRelated: boolean;
+  onSelect: (skillId: string) => void;
+}) {
+  const category = skillCategories[skill.category];
+  const connectorTone =
+    isActive || isRelated ? category.accent : "rgba(255,255,255,0.13)";
+
+  return (
+    <li
+      className={[
+        "relative flex",
+        side === "left" ? "justify-end" : "justify-start",
+      ].join(" ")}
+    >
+      <span
+        aria-hidden="true"
+        className={[
+          "pointer-events-none absolute top-1/2 h-px w-3 -translate-y-1/2",
+          side === "left" ? "-right-4" : "-left-4",
+        ].join(" ")}
+        style={{ backgroundColor: connectorTone }}
+      />
+      <button
+        type="button"
+        aria-label={`Afficher le détail de ${skill.name}`}
+        aria-pressed={isActive}
+        onClick={() => onSelect(skill.id)}
+        onFocus={() => onSelect(skill.id)}
+        className={[
+          "relative z-10 max-w-full rounded-full border px-3 py-2 text-left text-[0.8rem] leading-5 text-slate-200 shadow-[0_16px_42px_-32px_rgba(0,0,0,0.95)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98] sm:text-sm",
+          isActive
+            ? "bg-white/[0.13] text-white"
+            : isRelated
+              ? "bg-white/[0.075] text-slate-100"
+              : "border-white/10 bg-black/24 text-slate-300",
+        ].join(" ")}
+        style={{
+          borderColor: isActive || isRelated ? category.accent : undefined,
+          boxShadow: isActive
+            ? `0 0 0 1px ${category.accent}, 0 18px 48px -30px ${category.accent}`
+            : undefined,
+        }}
+      >
+        <span className="flex min-w-0 items-center gap-2">
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 shrink-0 rounded-full shadow-[0_0_16px_currentColor]"
+            style={{ backgroundColor: category.accent, color: category.accent }}
+          />
+          <span className="min-w-0 break-words">{skill.name}</span>
+        </span>
+      </button>
+    </li>
+  );
+}
+
+function MobileSkillCluster({
+  categoryId,
   activeSkillId,
+  activeRelatedIds,
+  onSelect,
+}: {
+  categoryId: SkillCategory;
+  activeSkillId: string;
+  activeRelatedIds: Set<string>;
+  onSelect: (skillId: string) => void;
+}) {
+  const category = skillCategories[categoryId];
+  const categorySkills = getMobileCategorySkills(categoryId);
+  const columns = splitMobileSkills(categorySkills);
+
+  return (
+    <section className="relative min-w-0 py-4 first:pt-0 last:pb-0 sm:py-5">
+      <div className="relative z-10 mb-4 flex justify-center">
+        <span
+          className="max-w-full rounded-full border border-white/10 bg-[#060a14] px-3 py-1.5 text-center font-mono text-[0.62rem] uppercase leading-4 tracking-[0.16em] text-slate-400 shadow-[0_0_26px_-18px_currentColor]"
+          style={{ color: category.accent }}
+        >
+          {category.label}
+        </span>
+      </div>
+
+      <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_1.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] sm:gap-x-3">
+        <ul className="min-w-0 space-y-2.5">
+          {columns.left.map((skill) => (
+            <MobileSkillNode
+              key={skill.id}
+              skill={skill}
+              side="left"
+              isActive={skill.id === activeSkillId}
+              isRelated={activeRelatedIds.has(skill.id)}
+              onSelect={onSelect}
+            />
+          ))}
+        </ul>
+
+        <div className="relative flex justify-center">
+          <span
+            aria-hidden="true"
+            className="mt-3 h-3 w-3 rounded-full border border-white/20 bg-[#060a14] shadow-[0_0_18px_currentColor]"
+            style={{ color: category.accent }}
+          />
+        </div>
+
+        <ul className="mt-8 min-w-0 space-y-2.5">
+          {columns.right.map((skill) => (
+            <MobileSkillNode
+              key={skill.id}
+              skill={skill}
+              side="right"
+              isActive={skill.id === activeSkillId}
+              isRelated={activeRelatedIds.has(skill.id)}
+              onSelect={onSelect}
+            />
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function MobileSkillDetails({ skill }: { skill: Skill }) {
+  const relatedSkills = getRelatedSkills(skill);
+  const category = skillCategories[skill.category];
+
+  return (
+    <aside
+      aria-live="polite"
+      className="relative z-10 mt-6 rounded-[1.35rem] border border-white/10 bg-black/28 p-4 backdrop-blur-md"
+    >
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
+            Détail actif
+          </p>
+          <h3 className="mt-2 break-words text-lg font-semibold tracking-[-0.045em] text-white">
+            {skill.name}
+          </h3>
+        </div>
+        <span
+          className="w-fit max-w-full break-words rounded-full border px-2.5 py-1 font-mono text-[0.58rem] uppercase leading-4 tracking-[0.16em]"
+          style={{
+            borderColor: category.accent,
+            backgroundColor: category.soft,
+            color: category.accent,
+          }}
+        >
+          {category.label}
+        </span>
+      </div>
+
+      <p className="mt-3 text-sm leading-6 text-slate-300">{skill.description}</p>
+
+      <div className="mt-4">
+        <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
+          Technologies liées
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {relatedSkills.map((relatedSkill) => (
+            <span
+              key={relatedSkill.id}
+              className="max-w-full break-words rounded-full border border-white/10 bg-white/[0.045] px-2.5 py-1.5 text-xs leading-5 text-slate-200"
+            >
+              {relatedSkill.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function MobileSkillStack({
+  activeSkillId,
+  activeSkill,
   onSelect,
 }: {
   activeSkillId: string;
+  activeSkill: Skill;
   onSelect: (skillId: string) => void;
 }) {
+  const activeRelatedIds = new Set(activeSkill.related);
+
   return (
-    <div className="grid gap-4 lg:hidden">
-      {skillCategoryOrder.map((categoryId) => {
-        const category = skillCategories[categoryId];
-        const categorySkills = constellationSkills.filter(
-          (skill) => skill.category === categoryId,
-        );
+    <div className="min-w-0 lg:hidden">
+      <div className={frame("min-w-0 overflow-hidden")}>
+        <div className={panel("relative min-w-0 overflow-hidden px-3 py-5 sm:px-5 sm:py-6")}>
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-[12%] top-6 h-40 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.12),transparent_68%)] blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute bottom-0 left-[8%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.12),transparent_70%)] blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-8 bottom-36 w-px -translate-x-1/2 bg-[linear-gradient(180deg,transparent,rgba(148,190,255,0.34),rgba(255,255,255,0.12),transparent)]"
+          />
 
-        return (
-          <article key={categoryId} className={frame()}>
-            <div className={panel("p-5")}>
-              <div className="flex items-center gap-3">
-                <span
-                  aria-hidden="true"
-                  className="h-2.5 w-2.5 rounded-full shadow-[0_0_18px_currentColor]"
-                  style={{ backgroundColor: category.accent, color: category.accent }}
-                />
-                <h3 className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
-                  {category.label}
-                </h3>
-              </div>
+          <div className="relative z-10 min-w-0">
+            {mobileCategoryOrder.map((categoryId) => (
+              <MobileSkillCluster
+                key={categoryId}
+                categoryId={categoryId}
+                activeSkillId={activeSkillId}
+                activeRelatedIds={activeRelatedIds}
+                onSelect={onSelect}
+              />
+            ))}
+          </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {categorySkills.map((skill) => {
-                  const isActive = skill.id === activeSkillId;
-
-                  return (
-                    <button
-                      key={skill.id}
-                      type="button"
-                      aria-label={`Afficher le détail de ${skill.name}`}
-                      aria-pressed={isActive}
-                      onClick={() => onSelect(skill.id)}
-                      className={[
-                        "rounded-full border px-3 py-2 text-sm transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
-                        isActive
-                          ? "border-white/30 bg-white/[0.12] text-white"
-                          : "border-white/10 bg-white/[0.035] text-slate-300",
-                      ].join(" ")}
-                    >
-                      {skill.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </article>
-        );
-      })}
+          <MobileSkillDetails skill={activeSkill} />
+        </div>
+      </div>
     </div>
   );
 }
 
 export function StackConstellation() {
-  const [activeSkillId, setActiveSkillId] = useState("react");
-  const activeSkill = skillById.get(activeSkillId) ?? constellationSkills[0];
+  const [desktopActiveSkillId, setDesktopActiveSkillId] = useState("react");
+  const [mobileActiveSkillId, setMobileActiveSkillId] = useState("rails");
+  const activeSkill = skillById.get(desktopActiveSkillId) ?? constellationSkills[0];
+  const mobileActiveSkill =
+    skillById.get(mobileActiveSkillId) ??
+    skillById.get("rails") ??
+    constellationSkills[0];
   const activeRelatedIds = new Set(activeSkill.related);
 
   return (
@@ -502,7 +724,7 @@ export function StackConstellation() {
                   skill={skill}
                   isActive={skill.id === activeSkill.id}
                   isRelated={activeRelatedIds.has(skill.id)}
-                  onSelect={setActiveSkillId}
+                  onSelect={setDesktopActiveSkillId}
                 />
               ))}
 
@@ -531,13 +753,11 @@ export function StackConstellation() {
           <SkillDetailsPanel skill={activeSkill} />
         </div>
 
-        <div className="space-y-4 lg:hidden">
-          <MobileSkillGrid
-            activeSkillId={activeSkill.id}
-            onSelect={setActiveSkillId}
-          />
-          <SkillDetailsPanel skill={activeSkill} />
-        </div>
+        <MobileSkillStack
+          activeSkillId={mobileActiveSkill.id}
+          activeSkill={mobileActiveSkill}
+          onSelect={setMobileActiveSkillId}
+        />
       </SectionReveal>
     </section>
   );

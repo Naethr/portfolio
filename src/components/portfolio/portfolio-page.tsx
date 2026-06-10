@@ -352,10 +352,10 @@ function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
   const accent = timelineAccentStyles[item.accent];
 
   return (
-    <li className="relative grid grid-cols-[5rem_1rem_minmax(0,1fr)] py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2">
+    <li className="relative grid grid-cols-[2.75rem_0.75rem_minmax(0,1fr)] py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2">
       <span
         className={[
-          "relative z-20 col-start-1 min-w-[6.75rem] justify-self-center rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.58rem] uppercase leading-none tracking-[0.12em] shadow-[0_0_24px_-16px_rgba(45,212,191,0.9)] lg:col-start-2",
+          "relative z-20 col-span-3 col-start-1 w-fit max-w-full justify-self-start rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.52rem] uppercase leading-tight tracking-[0.08em] shadow-[0_0_24px_-16px_rgba(45,212,191,0.9)] lg:col-span-1 lg:col-start-2 lg:min-w-[6.75rem] lg:justify-self-center lg:text-[0.58rem] lg:leading-none lg:tracking-[0.12em]",
           accent.date,
         ].join(" ")}
       >
@@ -430,7 +430,7 @@ function TimelineStep({
   const hasDetail = Boolean(item.detail);
   const hasLogos = Boolean(item.logos?.length);
   const cardClassName = [
-    "group/timeline-card h-auto w-full max-w-full rounded-[0.85rem] border px-3 py-2.5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-[21rem] lg:w-fit lg:min-w-[13rem] lg:max-w-[22rem]",
+    "group/timeline-card h-auto w-full max-w-full rounded-[0.85rem] border px-3 py-2.5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.045)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:w-fit lg:min-w-[13rem] lg:max-w-[22rem]",
     "cursor-default",
     toneStyles.button,
     hasDetail ? toneStyles.activeButton : "",
@@ -438,7 +438,7 @@ function TimelineStep({
   const cardContent = (
     <span className="flex items-start gap-2.5">
       {hasLogos ? (
-        <span className="flex max-w-[7.5rem] shrink-0 flex-wrap gap-1.5 pt-0.5">
+        <span className="flex max-w-[5.5rem] shrink-0 flex-wrap gap-1.5 pt-0.5 sm:max-w-[7.5rem]">
           {item.logos?.map((logo) => (
             <TechIcon
               key={`${item.id}-${logo.type === "simple" ? logo.id : logo.label}`}
@@ -477,7 +477,7 @@ function TimelineStep({
         delay: Math.min(index * 0.035, 0.14),
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="relative grid grid-cols-[5rem_1rem_minmax(0,1fr)] items-start py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2"
+      className="relative grid grid-cols-[2.75rem_0.75rem_minmax(0,1fr)] items-start py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2"
     >
       <span
         aria-hidden="true"
@@ -702,7 +702,7 @@ function ProfileSection() {
                 <div
                   aria-hidden="true"
                   className={[
-                    "absolute bottom-2 left-10 top-2 w-px lg:left-1/2 lg:-translate-x-1/2",
+                    "absolute bottom-2 left-[1.375rem] top-2 w-px lg:left-1/2 lg:-translate-x-1/2",
                     timelineLineStyles.line,
                   ].join(" ")}
                 />
