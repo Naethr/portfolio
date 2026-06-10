@@ -285,20 +285,20 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
   const category = skillCategories[skill.category];
 
   return (
-    <aside className={frame("h-full")}>
-      <div className={panel("flex h-full flex-col justify-between gap-8 p-6 sm:p-7")}>
+    <aside className={frame("h-full min-w-0")}>
+      <div className={panel("flex h-full min-w-0 flex-col justify-between gap-7 p-5 sm:gap-8 sm:p-7")}>
         <div className="space-y-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
+          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
                 Détail actif
               </p>
-              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.055em] text-white">
+              <h3 className="mt-4 text-xl font-semibold tracking-[-0.055em] text-white sm:text-2xl">
                 {skill.name}
               </h3>
             </div>
             <span
-              className="rounded-full border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.2em]"
+              className="inline-block w-fit max-w-full break-words rounded-full border px-3 py-1.5 font-mono text-[0.62rem] uppercase leading-4 tracking-[0.2em]"
               style={{
                 borderColor: category.accent,
                 backgroundColor: category.soft,
@@ -322,7 +322,7 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
             {relatedSkills.map((relatedSkill) => (
               <span
                 key={relatedSkill.id}
-                className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm text-slate-200"
+                className="inline-block max-w-full break-words rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm leading-5 text-slate-200"
               >
                 {relatedSkill.name}
               </span>
@@ -384,7 +384,7 @@ function MobileSkillGrid({
   onSelect: (skillId: string) => void;
 }) {
   return (
-    <div className="grid gap-4 lg:hidden">
+    <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
       {skillCategoryOrder.map((categoryId) => {
         const category = skillCategories[categoryId];
         const categorySkills = constellationSkills.filter(
@@ -392,20 +392,20 @@ function MobileSkillGrid({
         );
 
         return (
-          <article key={categoryId} className={frame()}>
+          <article key={categoryId} className={frame("min-w-0")}>
             <div className={panel("p-5")}>
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-3">
                 <span
                   aria-hidden="true"
-                  className="h-2.5 w-2.5 rounded-full shadow-[0_0_18px_currentColor]"
+                  className="h-2.5 w-2.5 shrink-0 rounded-full shadow-[0_0_18px_currentColor]"
                   style={{ backgroundColor: category.accent, color: category.accent }}
                 />
-                <h3 className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
+                <h3 className="min-w-0 break-words font-mono text-[0.68rem] uppercase leading-5 tracking-[0.2em] text-slate-400">
                   {category.label}
                 </h3>
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-5 flex min-w-0 flex-wrap gap-2">
                 {categorySkills.map((skill) => {
                   const isActive = skill.id === activeSkillId;
 
@@ -417,7 +417,7 @@ function MobileSkillGrid({
                       aria-pressed={isActive}
                       onClick={() => onSelect(skill.id)}
                       className={[
-                        "rounded-full border px-3 py-2 text-sm transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
+                        "max-w-full break-words rounded-full border px-3 py-2 text-left text-sm leading-5 transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
                         isActive
                           ? "border-white/30 bg-white/[0.12] text-white"
                           : "border-white/10 bg-white/[0.035] text-slate-300",
@@ -531,7 +531,7 @@ export function StackConstellation() {
           <SkillDetailsPanel skill={activeSkill} />
         </div>
 
-        <div className="space-y-4 lg:hidden">
+        <div className="min-w-0 space-y-4 lg:hidden">
           <MobileSkillGrid
             activeSkillId={activeSkill.id}
             onSelect={setActiveSkillId}
