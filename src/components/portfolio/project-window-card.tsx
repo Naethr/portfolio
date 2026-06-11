@@ -2,23 +2,23 @@ import Image from "next/image";
 import { ArrowUpRight, GitBranch } from "@phosphor-icons/react";
 
 import type { Project } from "@/data/portfolio";
+import type { PortfolioTranslations } from "@/data/translations";
 
 type ProjectWindowCardProps = {
   project: Project;
+  copy: PortfolioTranslations["projectCard"];
 };
 
 const projectScreenshots: Partial<
-  Record<string, { src: string; alt: string; width: number; height: number }>
+  Record<string, { src: string; width: number; height: number }>
 > = {
   "sokwak.com": {
     src: "/images/sokwak.png",
-    alt: "Capture d’écran du projet Sokwak",
     width: 1004,
     height: 679,
   },
   questonaut: {
     src: "/images/questonaut.png",
-    alt: "Capture d’écran du projet Questonaut",
     width: 1345,
     height: 940,
   },
@@ -28,7 +28,7 @@ function browserPath(slug: string) {
   return `theovillalba.dev/projects/${slug}`;
 }
 
-export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
+export function ProjectWindowCard({ project, copy }: ProjectWindowCardProps) {
   const screenshot = projectScreenshots[project.slug];
 
   return (
@@ -67,7 +67,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full border border-[rgba(67,137,255,0.2)] bg-[rgba(67,137,255,0.1)] px-2.5 py-0.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-slate-300 md:px-3 md:py-1 md:text-[0.66rem] md:tracking-[0.22em]">
-                Projet
+                {copy.projectLabel}
               </span>
             </div>
 
@@ -84,7 +84,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
               <div className="mx-auto mt-4 flex w-fit max-w-[14rem] justify-center overflow-hidden rounded-[1rem] border border-white/8 bg-white/[0.025] md:mt-6 md:max-w-[18rem] md:rounded-[1.2rem]">
                 <Image
                   src={screenshot.src}
-                  alt={screenshot.alt}
+                  alt={copy.screenshots[project.slug] ?? project.name}
                   width={screenshot.width}
                   height={screenshot.height}
                   sizes="(min-width: 1024px) 50vw, 100vw"
@@ -94,7 +94,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
             ) : project.slug !== "portfolio" ? (
               <div className="mt-4 flex min-h-20 items-center justify-center rounded-[1rem] border border-dashed border-white/10 bg-black/22 p-4 md:mt-6 md:min-h-28 md:rounded-[1.2rem] md:p-5">
                 <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-slate-500 md:text-[0.66rem] md:tracking-[0.22em]">
-                  Illustration à venir
+                  {copy.illustrationPending}
                 </p>
               </div>
             ) : null}
@@ -116,7 +116,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.12)] px-3 py-2 text-[0.82rem] font-medium text-white transition-colors duration-300 hover:bg-[rgba(67,137,255,0.18)] md:gap-2 md:px-4 md:py-2.5 md:text-sm"
                 >
-                  Voir le contexte
+                  {copy.liveContext}
                   <ArrowUpRight size={16} weight="regular" />
                 </a>
               ) : null}
@@ -127,7 +127,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
             <div className="flex items-start justify-between gap-2 md:gap-4">
               <div>
                 <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-slate-500 md:text-[0.68rem] md:tracking-[0.24em]">
-                  Stack utilisée
+                  {copy.stackUsed}
                 </p>
 
               </div>
@@ -154,11 +154,10 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
 
             <div className="mt-3 rounded-[0.85rem] border border-white/8 bg-[rgba(67,137,255,0.08)] px-3 py-3 md:mt-5 md:rounded-[1rem] md:px-4 md:py-4">
               <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-slate-500 md:text-[0.66rem] md:tracking-[0.22em]">
-                Intention
+                {copy.intention}
               </p>
               <p className="mt-1.5 text-[0.82rem] leading-5 text-slate-200 md:mt-2 md:text-sm md:leading-6">
-                {project.intention ??
-                  "Une fenêtre claire, lisible et extensible pour ajouter d'autres projets sans revoir la structure."}
+                {project.intention ?? copy.defaultIntention}
               </p>
             </div>
           </div>
