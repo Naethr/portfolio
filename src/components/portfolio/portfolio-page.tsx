@@ -28,10 +28,8 @@ import {
   type SimpleIcon,
 } from "simple-icons";
 
-import {
-  projects,
-  rotatingTechnologies,
-} from "@/data/portfolio";
+import { rotatingTechnologies } from "@/data/portfolio";
+import type { PortfolioTranslations } from "@/data/translations";
 
 import { GradientDots } from "../ui/gradient-dots";
 import MagicRings from "../ui/magic-rings";
@@ -156,20 +154,18 @@ const timelineLineStyles = {
     "border-[rgba(45,212,191,0.84)] bg-[#0b1220] shadow-[0_0_0_6px_rgba(45,212,191,0.1),0_0_22px_rgba(45,212,191,0.42)]",
 };
 
-const timelineItems: TimelineItem[] = [
+const timelineItemMeta: Record<
+  string,
   {
-    id: "ai-project",
-    type: "event",
-    title: "Projet IA",
-    detail: "Projet Sokwak AI · intégration d’API moderne OpenAI",
+    accent: TimelineAccent;
+    logos?: TimelineLogo[];
+  }
+> = {
+  "ai-project": {
     logos: [{ type: "simple", id: "openaigym" }],
     accent: "stack",
   },
-  {
-    id: "node-js",
-    type: "event",
-    title: "Node.js",
-    detail: "Express.js · NestJS · backend JavaScript",
+  "node-js": {
     logos: [
       { type: "simple", id: "node" },
       { type: "simple", id: "express" },
@@ -177,134 +173,65 @@ const timelineItems: TimelineItem[] = [
     ],
     accent: "stack",
   },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Certification backend",
-    detail: "Obtenue à mi-parcours THP",
+  "backend-certification": {
     logos: [{ type: "fallback", label: "Certification", icon: CertificateIcon }],
     accent: "stack",
   },
-  {
-    id: "date-april-2026",
-    type: "date",
-    label: "Avril 2026",
-    accent: "stack",
-  },
-  {
-    id: "react-next",
-    type: "event",
-    title: "React / Next.js",
-    detail: "Composants · JavaScript · TypeScript",
+  "date-april-2026": { accent: "stack" },
+  "react-next": {
     logos: [
       { type: "simple", id: "react" },
       { type: "simple", id: "next" },
     ],
     accent: "stack",
   },
-  {
-    id: "rails-sql",
-    type: "event",
-    title: "Ruby on Rails / SQL",
-    detail: "MVC · CRUD · base de données · Hotwire",
+  "rails-sql": {
     logos: [{ type: "simple", id: "rails" }],
     accent: "stack",
   },
-  {
-    id: "tools-mastery",
-    type: "event",
-    title: "Maîtrise d’outils",
-    detail: "GitHub · Vercel · VS Code",
+  "tools-mastery": {
     logos: [
       { type: "simple", id: "github" },
       { type: "simple", id: "vercel" },
     ],
     accent: "foundation",
   },
-  {
-    id: "ruby",
-    type: "event",
-    title: "Ruby",
-    detail: "Niveau : maîtrise · scripts · POO",
+  ruby: {
     logos: [{ type: "simple", id: "ruby" }],
     accent: "foundation",
   },
-  {
-    id: "thp-start",
-    type: "event",
-    title: "Début de formation THP",
-    detail: "Formation intensive de Dev Web",
+  "thp-start": {
     logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
-  {
-    id: "date-january-2026",
-    type: "date",
-    label: "Janvier 2026",
-    accent: "foundation",
-  },
-  {
-    id: "ruby-fundamentals",
-    type: "event",
-    title: "Fondamentaux Ruby",
+  "date-january-2026": { accent: "foundation" },
+  "ruby-fundamentals": {
     logos: [{ type: "simple", id: "ruby" }],
     accent: "foundation",
   },
-  {
-    id: "end-responsive-web-design",
-    type: "event",
-    title: "Fin du parcours Responsive Web Design",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
+  "end-responsive-web-design": {
     logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
-  {
-    id: "date-november-2025",
-    type: "date",
-    label: "Novembre 2025",
-    accent: "foundation",
-  },
-  {
-    id: "html-css-fundamentals",
-    type: "event",
-    title: "Fondamentaux HTML/CSS",
-    detail: "Mise en page, fondamentaux du web, responsive design",
+  "date-november-2025": { accent: "foundation" },
+  "html-css-fundamentals": {
     logos: [
       { type: "simple", id: "html" },
       { type: "simple", id: "css" },
     ],
     accent: "foundation",
   },
-  {
-    id: "freecodecamp-responsive-web-design",
-    type: "event",
-    title: "Parcours Responsive Web Design",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
+  "freecodecamp-responsive-web-design": {
     logos: [{ type: "fallback", label: "Apprentissage", icon: BookOpenIcon }],
     accent: "foundation",
   },
-  {
-    id: "date-september-2025",
-    type: "date",
-    label: "Septembre 2025",
-    accent: "foundation",
-  },
-  {
-    id: "career-shift",
-    type: "event",
-    title: "Reconversion vers le dev web",
+  "date-september-2025": { accent: "foundation" },
+  "career-shift": {
     logos: [{ type: "fallback", label: "</>" }],
     accent: "foundation",
   },
-  {
-    id: "date-august-2025",
-    type: "date",
-    label: "Août 2025",
-    accent: "foundation",
-  },
-];
+  "date-august-2025": { accent: "foundation" },
+};
 
 function frame(className?: string) {
   return [
@@ -332,21 +259,52 @@ type TimelineRenderItem =
   | { item: TimelineDateItem; eventIndex: null }
   | { item: TimelineEventItem; eventIndex: number };
 
-const timelineRenderItems = timelineItems.reduce<TimelineRenderItem[]>(
-  (items, item) => {
-    if (!isTimelineEvent(item)) {
-      return [...items, { item, eventIndex: null }];
+function buildTimelineItems(
+  items: PortfolioTranslations["timeline"]["items"],
+): TimelineItem[] {
+  return items.map((item) => {
+    const meta = timelineItemMeta[item.id];
+    const accent = meta?.accent ?? "foundation";
+
+    if (item.type === "date") {
+      return {
+        id: item.id,
+        type: item.type,
+        label: item.label,
+        accent,
+      };
     }
 
-    const eventIndex = items.reduce(
+    return {
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      emphasizedText: item.emphasizedText,
+      detail: item.detail,
+      logos: meta?.logos?.map((logo) =>
+        logo.type === "fallback" && item.fallbackLabel
+          ? { ...logo, label: item.fallbackLabel }
+          : logo,
+      ),
+      accent,
+    };
+  });
+}
+
+function buildTimelineRenderItems(items: TimelineItem[]) {
+  return items.reduce<TimelineRenderItem[]>((renderItems, item) => {
+    if (!isTimelineEvent(item)) {
+      return [...renderItems, { item, eventIndex: null }];
+    }
+
+    const eventIndex = renderItems.reduce(
       (count, entry) => count + (isTimelineEvent(entry.item) ? 1 : 0),
       0,
     );
 
-    return [...items, { item, eventIndex }];
-  },
-  [],
-);
+    return [...renderItems, { item, eventIndex }];
+  }, []);
+}
 
 function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
   const accent = timelineAccentStyles[item.accent];
@@ -529,32 +487,21 @@ function TimelineStep({
   );
 }
 
-function AboutIntro() {
+function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
   return (
     <div className="mb-14 grid gap-6 p-5 sm:mb-16 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
       <div className="max-w-3xl space-y-5">
         <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
-          À propos
+          {copy.eyebrow}
         </span>
         <h2 className="text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-white text-balance">
-          Derrière l'écran
+          {copy.title}
         </h2>
 
         <div className="max-w-[62ch] space-y-3 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
-          <p>
-            Je suis Théo, développeur full-stack junior passionné par le
-            développement web et les nouvelles technologies.
-          </p>
-          <p>
-            Après une reconversion récente, je construis des applications web
-            modernes, maintenables et orientées produit, avec une attention
-            portée à la clarté du code, à l&apos;expérience utilisateur et à la
-            simplicité des solutions.
-          </p>
-          <p>
-            J&apos;aime transformer une idée en produit concret, apprendre vite,
-            itérer proprement et créer des projets utiles.
-          </p>
+          {copy.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </div>
 
@@ -582,7 +529,7 @@ function AboutIntro() {
   );
 }
 
-function HeroSection() {
+function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
   return (
     <section
       id="top"
@@ -627,7 +574,7 @@ function HeroSection() {
             <div className="space-y-8">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-slate-300/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(67,137,255,0.85)]" />
-                Portfolio
+                {copy.eyebrow}
               </span>
 
               <div className="space-y-4">
@@ -635,7 +582,7 @@ function HeroSection() {
                   Théo VILLALBA
                 </h1>
                 <p className="max-w-2xl font-display text-[clamp(1.1rem,2.1vw,1.4rem)] font-medium leading-[1.08] tracking-[-0.04em] text-slate-300">
-                  Développeur Web Fullstack
+                  {copy.role}
                 </p>
               </div>
 
@@ -650,7 +597,7 @@ function HeroSection() {
                   href="#projets"
                   className="group inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3.5 text-sm font-medium text-white shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300 hover:bg-[rgba(67,137,255,0.2)]"
                 >
-                  Voir les projets
+                  {copy.projectsCta}
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 transition-colors duration-300 group-hover:bg-white/10">
                     <ArrowRight size={16} weight="regular" />
                   </span>
@@ -659,7 +606,7 @@ function HeroSection() {
                   href="#contact"
                   className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-3.5 text-sm font-medium text-slate-100 transition-colors duration-300 hover:border-white/18 hover:bg-white/8"
                 >
-                  Me contacter
+                  {copy.contactCta}
                 </a>
               </div>
             </div>
@@ -670,7 +617,16 @@ function HeroSection() {
   );
 }
 
-function ProfileSection() {
+function ProfileSection({
+  aboutCopy,
+  timelineCopy,
+}: {
+  aboutCopy: PortfolioTranslations["about"];
+  timelineCopy: PortfolioTranslations["timeline"];
+}) {
+  const timelineItems = buildTimelineItems(timelineCopy.items);
+  const timelineRenderItems = buildTimelineRenderItems(timelineItems);
+
   return (
     <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
       <div
@@ -680,16 +636,16 @@ function ProfileSection() {
       <SectionReveal>
         <div className="relative p-4 sm:p-5 lg:p-6">
           <div className="relative space-y-5">
-            <AboutIntro />
+            <AboutIntro copy={aboutCopy} />
 
             <div id="parcours" className="scroll-mt-28 p-5 sm:p-7 lg:p-8">
               <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
                 <div>
                   <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
-                    Parcours
+                    {timelineCopy.eyebrow}
                   </span>
                   <h3 className="mt-2 text-2xl font-semibold tracking-[-0.055em] text-white sm:text-3xl">
-                    Mon parcours de développeur
+                    {timelineCopy.title}
                   </h3>
                 </div>
               </div>
@@ -725,11 +681,19 @@ function ProfileSection() {
   );
 }
 
-function StackSection() {
-  return <StackConstellation />;
+function StackSection({ copy }: { copy: PortfolioTranslations["stack"] }) {
+  return <StackConstellation copy={copy} />;
 }
 
-function ProjectsSection() {
+function ProjectsSection({
+  copy,
+  projectCardCopy,
+  projects,
+}: {
+  copy: PortfolioTranslations["projectsSection"];
+  projectCardCopy: PortfolioTranslations["projectCard"];
+  projects: PortfolioTranslations["projects"];
+}) {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const canNavigate = projects.length > 1;
   const previousProjectIndex =
@@ -748,9 +712,9 @@ function ProjectsSection() {
     <section id="projets" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
         <SectionHeading
-          eyebrow="Projets"
-          title="Quelques projets réalisés seul ou en équipe."
-          description="Chacun m’a permis de travailler un aspect concret du développement web : interface, logique métier, architecture ou performance."
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          description={copy.description}
         />
 
         <div className="group/project-carousel relative mx-auto max-w-6xl overflow-hidden py-3 sm:py-6">
@@ -774,7 +738,10 @@ function ProjectsSection() {
                   transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
                   className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
                 >
-                  <ProjectWindowCard project={projects[previousProjectIndex]} />
+                  <ProjectWindowCard
+                    project={projects[previousProjectIndex]}
+                    copy={projectCardCopy}
+                  />
                 </motion.div>
 
                 <motion.div
@@ -785,7 +752,10 @@ function ProjectsSection() {
                   transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
                   className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
                 >
-                  <ProjectWindowCard project={projects[nextProjectIndex]} />
+                  <ProjectWindowCard
+                    project={projects[nextProjectIndex]}
+                    copy={projectCardCopy}
+                  />
                 </motion.div>
               </>
             ) : null}
@@ -797,7 +767,10 @@ function ProjectsSection() {
               transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
               className="relative z-20 w-full max-w-[58rem]"
             >
-              <ProjectWindowCard project={projects[activeProjectIndex]} />
+              <ProjectWindowCard
+                project={projects[activeProjectIndex]}
+                copy={projectCardCopy}
+              />
             </motion.div>
           </div>
 
@@ -805,7 +778,7 @@ function ProjectsSection() {
             <div className="pointer-events-none absolute inset-x-2 top-1/2 z-30 flex -translate-y-1/2 items-center justify-between sm:inset-x-4">
               <button
                 type="button"
-                aria-label="Projet précédent"
+                aria-label={copy.previousAriaLabel}
                 onClick={showPreviousProject}
                 className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
               >
@@ -813,7 +786,7 @@ function ProjectsSection() {
               </button>
               <button
                 type="button"
-                aria-label="Projet suivant"
+                aria-label={copy.nextAriaLabel}
                 onClick={showNextProject}
                 className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
               >
@@ -827,7 +800,7 @@ function ProjectsSection() {
   );
 }
 
-function ContactSection() {
+function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
   return (
     <section id="contact" className="py-20 sm:py-24">
       <SectionReveal className={frame()}>
@@ -839,12 +812,11 @@ function ContactSection() {
 
           <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
             <h2 className="max-w-3xl text-balance text-center text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-              Une idée, une question, ou simplement envie d&apos;échanger ?
+              {copy.title}
             </h2>
 
             <p className="max-w-2xl text-center text-base leading-8 text-slate-300 sm:text-lg">
-              Je suis disponible pour tous vos projets, ainsi que vos
-              opportunités et discussions autour du développement web.
+              {copy.description}
             </p>
 
             <a
@@ -863,7 +835,7 @@ function ContactSection() {
   );
 }
 
-export function PortfolioPage() {
+export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
   return (
     <main id="content" className="relative flex-1 overflow-hidden">
       <div
@@ -883,11 +855,18 @@ export function PortfolioPage() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        <HeroSection />
-        <ProjectsSection />
-        <StackSection />
-        <ProfileSection />
-        <ContactSection />
+        <HeroSection copy={copy.hero} />
+        <ProjectsSection
+          copy={copy.projectsSection}
+          projectCardCopy={copy.projectCard}
+          projects={copy.projects}
+        />
+        <StackSection copy={copy.stack} />
+        <ProfileSection
+          aboutCopy={copy.about}
+          timelineCopy={copy.timeline}
+        />
+        <ContactSection copy={copy.contact} />
       </div>
     </main>
   );

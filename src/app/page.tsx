@@ -1,13 +1,5 @@
-import { PortfolioPage } from "@/components/portfolio/portfolio-page";
-import { SiteFooter } from "@/components/portfolio/site-footer";
-import { SiteHeader } from "@/components/portfolio/site-header";
+import { PortfolioShell } from "@/components/portfolio/portfolio-shell";
 
 export default function Home() {
-  return (
-    <>
-      <SiteHeader />
-      <PortfolioPage />
-      <SiteFooter />
-    </>
-  );
+  return <PortfolioShell />;
 }

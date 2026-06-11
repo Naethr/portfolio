@@ -6,12 +6,23 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import type { ProjectLink } from "@/data/portfolio";
+import type { PortfolioTranslations } from "@/data/translations";
 
 type MobileNavProps = {
+  copy: PortfolioTranslations["mobileNav"];
   links: ProjectLink[];
+  languageSwitchAriaLabel: string;
+  languageSwitchText: string;
+  onToggleLanguage: () => void;
 };
 
-export function MobileNav({ links }: MobileNavProps) {
+export function MobileNav({
+  copy,
+  links,
+  languageSwitchAriaLabel,
+  languageSwitchText,
+  onToggleLanguage,
+}: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +85,7 @@ export function MobileNav({ links }: MobileNavProps) {
         type="button"
         aria-expanded={open}
         aria-controls="mobile-navigation"
-        aria-label={open ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
+        aria-label={open ? copy.closeLabel : copy.openLabel}
         onClick={() => setOpen((value) => !value)}
         className="relative z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white shadow-[0_18px_48px_-30px_rgba(0,0,0,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
       >
@@ -96,14 +107,14 @@ export function MobileNav({ links }: MobileNavProps) {
                   <button
                     ref={closeButtonRef}
                     type="button"
-                    aria-label="Fermer le menu de navigation"
+                    aria-label={copy.closeLabel}
                     onClick={() => closeMenu(true)}
                     className="fixed right-4 top-4 z-30 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[rgba(8,12,20,0.92)] text-white shadow-[0_18px_48px_-30px_rgba(0,0,0,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
                   >
                     <X size={20} weight="regular" />
                   </button>
                   <nav
-                    aria-label="Navigation mobile"
+                    aria-label={copy.navigationLabel}
                     onClick={(event) => event.stopPropagation()}
                     className="mx-auto flex h-full max-w-md flex-col"
                   >
@@ -128,13 +139,23 @@ export function MobileNav({ links }: MobileNavProps) {
                         </motion.a>
                       ))}
                     </div>
-                    <a
-                      href="#contact"
-                      onClick={() => closeMenu()}
-                      className="inline-flex items-center justify-center rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3 text-sm font-medium text-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
-                    >
-                      Prendre contact
-                    </a>
+                    <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
+                      <button
+                        type="button"
+                        aria-label={languageSwitchAriaLabel}
+                        onClick={onToggleLanguage}
+                        className="inline-flex h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-slate-100 transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
+                      >
+                        {languageSwitchText}
+                      </button>
+                      <a
+                        href="#contact"
+                        onClick={() => closeMenu()}
+                        className="inline-flex min-w-0 items-center justify-center rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3 text-sm font-medium text-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
+                      >
+                        {copy.contactLabel}
+                      </a>
+                    </div>
                   </nav>
                 </motion.div>
               ) : null}
