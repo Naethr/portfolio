@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import type { PortfolioTranslations } from "@/data/translations";
+
 import { SectionReveal } from "../ui/section-reveal";
 import { SectionHeading } from "./section-heading";
 
@@ -33,36 +35,8 @@ type Skill = {
   related: string[];
 };
 
-const skillCategories: Record<
-  SkillCategory,
-  { label: string; accent: string; soft: string }
-> = {
-  frontend: {
-    label: "Frontend",
-    accent: "rgba(96,165,250,0.92)",
-    soft: "rgba(96,165,250,0.12)",
-  },
-  backend: {
-    label: "Backend",
-    accent: "rgba(52,211,153,0.9)",
-    soft: "rgba(52,211,153,0.1)",
-  },
-  database: {
-    label: "Base de données",
-    accent: "rgba(251,191,36,0.92)",
-    soft: "rgba(251,191,36,0.1)",
-  },
-  tools: {
-    label: "Outils & déploiement",
-    accent: "rgba(148,163,184,0.95)",
-    soft: "rgba(148,163,184,0.1)",
-  },
-  ai: {
-    label: "Workflow IA",
-    accent: "rgba(167,139,250,0.92)",
-    soft: "rgba(167,139,250,0.1)",
-  },
-};
+type StackCopy = PortfolioTranslations["stack"];
+type SkillById = Map<string, Skill>;
 
 const skillCategoryOrder: SkillCategory[] = [
   "frontend",
@@ -70,176 +44,6 @@ const skillCategoryOrder: SkillCategory[] = [
   "database",
   "tools",
   "ai",
-];
-
-const constellationSkills: Skill[] = [
-  {
-    id: "react",
-    name: "React",
-    category: "frontend",
-    description:
-      "Utilisé pour construire des interfaces interactives, pilotées par composants et avec des frontières UI claires.",
-    related: [
-      "typescript",
-      "javascript",
-      "vite",
-      "tailwind",
-      "bootstrap",
-      "nextjs",
-    ],
-  },
-  {
-    id: "nextjs",
-    name: "Next.js",
-    category: "frontend",
-    description:
-      "React framework used to build production-ready web applications with routing, rendering and deployment workflows.",
-    related: ["react", "javascript", "typescript", "vercel", "bootstrap", "tailwind"],
-  },
-  {
-    id: "vite",
-    name: "Vite",
-    category: "frontend",
-    description:
-      "Outillage rapide pour développer des frontends modernes et produire des builds optimisés.",
-    related: ["react", "typescript", "javascript"],
-  },
-  {
-    id: "typescript",
-    name: "TypeScript",
-    category: "frontend",
-    description:
-      "Ajoute de la sûreté de typage et améliore la maintenabilité du code frontend comme backend.",
-    related: ["react", "vite", "node", "nextjs"],
-  },
-  {
-    id: "javascript",
-    name: "JavaScript",
-    category: "frontend",
-    description:
-      "Langage central des interfaces web dynamiques, de la logique applicative et de l’écosystème Node.js.",
-    related: ["react", "node", "vite", "nextjs"],
-  },
-  {
-    id: "tailwind",
-    name: "Tailwind CSS",
-    category: "frontend",
-    description:
-      "Styling utility-first pour concevoir rapidement des interfaces responsive, cohérentes et faciles à ajuster.",
-    related: ["react", "rails", "nextjs"],
-  },
-  {
-    id: "bootstrap",
-    name: "Bootstrap",
-    category: "frontend",
-    description:
-      "Pratique pour assembler vite des layouts responsive et des patterns UI standards.",
-    related: ["react", "rails", "nextjs"],
-  },
-  {
-    id: "hotwire",
-    name: "Hotwire",
-    category: "frontend",
-    description:
-      "Frontend framework for building reactive Rails interfaces with minimal JavaScript.",
-    related: ["rails"],
-  },
-  {
-    id: "rails",
-    name: "Ruby on Rails",
-    category: "backend",
-    description:
-      "Framework backend productif pour créer des applications web structurées et livrer rapidement un MVP solide.",
-    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
-  },
-  {
-    id: "node",
-    name: "Node.js",
-    category: "backend",
-    description:
-      "Runtime JavaScript utilisé pour les API, les services backend et l’outillage de développement.",
-    related: ["express", "nestjs", "javascript", "typescript"],
-  },
-  {
-    id: "express",
-    name: "Express.js",
-    category: "backend",
-    description:
-      "Framework minimal pour construire des API REST et de la logique serveur simple à maintenir.",
-    related: ["node", "prisma"],
-  },
-  {
-    id: "nestjs",
-    name: "NestJS",
-    category: "backend",
-    description:
-      "Framework Node.js structuré pour des architectures backend scalables avec TypeScript.",
-    related: ["node", "prisma"],
-  },
-  {
-    id: "sqlite",
-    name: "SQLite",
-    category: "database",
-    description:
-      "Base relationnelle légère, utile pour le développement local, les prototypes et les petits projets.",
-    related: ["prisma", "rails"],
-  },
-  {
-    id: "postgresql",
-    name: "PostgreSQL",
-    category: "database",
-    description:
-      "Base relationnelle fiable, adaptée aux applications de production et aux données structurées.",
-    related: ["prisma", "rails"],
-  },
-  {
-    id: "prisma",
-    name: "Prisma",
-    category: "database",
-    description:
-      "ORM type-safe pour modéliser, interroger et maintenir des données relationnelles.",
-    related: ["postgresql", "sqlite", "nestjs", "express"],
-  },
-  {
-    id: "github",
-    name: "GitHub",
-    category: "tools",
-    description:
-      "Versioning, collaboration, suivi de projet et base du workflow de livraison.",
-    related: ["vercel", "vscode"],
-  },
-  {
-    id: "vscode",
-    name: "VS Code",
-    category: "tools",
-    description:
-      "Environnement principal pour écrire, déboguer et naviguer efficacement dans le code.",
-    related: ["codex", "ai-workflow", "github"],
-  },
-  {
-    id: "vercel",
-    name: "Vercel",
-    category: "tools",
-    description:
-      "Plateforme de déploiement pour livrer rapidement le frontend et valider des previews propres.",
-    related: ["github", "nextjs"],
-  },
-  {
-    id: "codex",
-    name: "Codex",
-    category: "ai",
-    description:
-      "Workflow de développement assisté par IA pour accélérer l’implémentation, l’itération et la revue de code.",
-    related: ["vscode", "ai-workflow"],
-  },
-  {
-    id: "ai-workflow",
-    name: "Workflow assisté par IA",
-    category: "ai",
-    description:
-      "Méthode de travail moderne où l’IA aide à cadrer, produire, relire et améliorer le code sans remplacer le jugement technique.",
-    related: ["codex", "vscode"],
-  },
 ];
 
 const skillPositions: Record<string, { x: number; y: number }> = {
@@ -265,24 +69,26 @@ const skillPositions: Record<string, { x: number; y: number }> = {
   "ai-workflow": { x: 19, y: 86 },
 };
 
-const skillById = new Map(constellationSkills.map((skill) => [skill.id, skill]));
-
-const constellationEdges = constellationSkills.flatMap((skill) =>
-  skill.related
-    .filter((relatedId) => skillPositions[relatedId])
-    .filter((relatedId) => skill.id < relatedId)
-    .map((relatedId) => ({ from: skill.id, to: relatedId })),
-);
-
-function getRelatedSkills(skill: Skill) {
+function getRelatedSkills(skill: Skill, skillById: SkillById) {
   return skill.related
     .map((skillId) => skillById.get(skillId))
     .filter((relatedSkill): relatedSkill is Skill => Boolean(relatedSkill));
 }
 
-function SkillDetailsPanel({ skill }: { skill: Skill }) {
-  const relatedSkills = getRelatedSkills(skill);
-  const category = skillCategories[skill.category];
+function SkillDetailsPanel({
+  skill,
+  skillById,
+  copy,
+}: {
+  skill: Skill;
+  skillById: SkillById;
+  copy: Pick<
+    StackCopy,
+    "categories" | "detailsLabel" | "relatedTechnologiesLabel"
+  >;
+}) {
+  const relatedSkills = getRelatedSkills(skill, skillById);
+  const category = copy.categories[skill.category];
 
   return (
     <aside className={frame("h-full min-w-0")}>
@@ -291,7 +97,7 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-                Détail actif
+                {copy.detailsLabel}
               </p>
               <h3 className="mt-4 text-xl font-semibold tracking-[-0.055em] text-white sm:text-2xl">
                 {skill.name}
@@ -316,7 +122,7 @@ function SkillDetailsPanel({ skill }: { skill: Skill }) {
 
         <div>
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
-            Technologies liées
+            {copy.relatedTechnologiesLabel}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {relatedSkills.map((relatedSkill) => (
@@ -338,20 +144,23 @@ function SkillNode({
   skill,
   isActive,
   isRelated,
+  category,
+  showDetailAriaLabel,
   onSelect,
 }: {
   skill: Skill;
   isActive: boolean;
   isRelated: boolean;
+  category: StackCopy["categories"][SkillCategory];
+  showDetailAriaLabel: string;
   onSelect: (skillId: string) => void;
 }) {
   const position = skillPositions[skill.id];
-  const category = skillCategories[skill.category];
 
   return (
     <button
       type="button"
-      aria-label={`Afficher le détail de ${skill.name}`}
+      aria-label={`${showDetailAriaLabel} ${skill.name}`}
       aria-pressed={isActive}
       onClick={() => onSelect(skill.id)}
       onFocus={() => onSelect(skill.id)}
@@ -401,13 +210,17 @@ const mobileCategoryOrder: SkillCategory[] = [
   "ai",
 ];
 
-function getMobileCategorySkills(categoryId: SkillCategory) {
+function getMobileCategorySkills(
+  categoryId: SkillCategory,
+  skills: Skill[],
+  skillById: SkillById,
+) {
   const orderedSkillIds = new Set(mobileSkillOrder[categoryId]);
   const orderedSkills = mobileSkillOrder[categoryId]
     .map((skillId) => skillById.get(skillId))
     .filter((skill): skill is Skill => Boolean(skill));
 
-  const remainingSkills = constellationSkills.filter(
+  const remainingSkills = skills.filter(
     (skill) => skill.category === categoryId && !orderedSkillIds.has(skill.id),
   );
 
@@ -429,15 +242,18 @@ function MobileSkillNode({
   side,
   isActive,
   isRelated,
+  category,
+  showDetailAriaLabel,
   onSelect,
 }: {
   skill: Skill;
   side: "left" | "right";
   isActive: boolean;
   isRelated: boolean;
+  category: StackCopy["categories"][SkillCategory];
+  showDetailAriaLabel: string;
   onSelect: (skillId: string) => void;
 }) {
-  const category = skillCategories[skill.category];
   const connectorTone =
     isActive || isRelated ? category.accent : "rgba(255,255,255,0.13)";
 
@@ -458,7 +274,7 @@ function MobileSkillNode({
       />
       <button
         type="button"
-        aria-label={`Afficher le détail de ${skill.name}`}
+        aria-label={`${showDetailAriaLabel} ${skill.name}`}
         aria-pressed={isActive}
         onClick={() => onSelect(skill.id)}
         onFocus={() => onSelect(skill.id)}
@@ -494,15 +310,21 @@ function MobileSkillCluster({
   categoryId,
   activeSkillId,
   activeRelatedIds,
+  skills,
+  skillById,
+  copy,
   onSelect,
 }: {
   categoryId: SkillCategory;
   activeSkillId: string;
   activeRelatedIds: Set<string>;
+  skills: Skill[];
+  skillById: SkillById;
+  copy: Pick<StackCopy, "categories" | "showDetailAriaLabel">;
   onSelect: (skillId: string) => void;
 }) {
-  const category = skillCategories[categoryId];
-  const categorySkills = getMobileCategorySkills(categoryId);
+  const category = copy.categories[categoryId];
+  const categorySkills = getMobileCategorySkills(categoryId, skills, skillById);
   const columns = splitMobileSkills(categorySkills);
 
   return (
@@ -525,6 +347,8 @@ function MobileSkillCluster({
               side="left"
               isActive={skill.id === activeSkillId}
               isRelated={activeRelatedIds.has(skill.id)}
+              category={copy.categories[skill.category]}
+              showDetailAriaLabel={copy.showDetailAriaLabel}
               onSelect={onSelect}
             />
           ))}
@@ -546,6 +370,8 @@ function MobileSkillCluster({
               side="right"
               isActive={skill.id === activeSkillId}
               isRelated={activeRelatedIds.has(skill.id)}
+              category={copy.categories[skill.category]}
+              showDetailAriaLabel={copy.showDetailAriaLabel}
               onSelect={onSelect}
             />
           ))}
@@ -555,9 +381,20 @@ function MobileSkillCluster({
   );
 }
 
-function MobileSkillDetails({ skill }: { skill: Skill }) {
-  const relatedSkills = getRelatedSkills(skill);
-  const category = skillCategories[skill.category];
+function MobileSkillDetails({
+  skill,
+  skillById,
+  copy,
+}: {
+  skill: Skill;
+  skillById: SkillById;
+  copy: Pick<
+    StackCopy,
+    "categories" | "detailsLabel" | "relatedTechnologiesLabel"
+  >;
+}) {
+  const relatedSkills = getRelatedSkills(skill, skillById);
+  const category = copy.categories[skill.category];
 
   return (
     <aside
@@ -567,7 +404,7 @@ function MobileSkillDetails({ skill }: { skill: Skill }) {
       <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
-            Détail actif
+            {copy.detailsLabel}
           </p>
           <h3 className="mt-2 break-words text-lg font-semibold tracking-[-0.045em] text-white">
             {skill.name}
@@ -589,7 +426,7 @@ function MobileSkillDetails({ skill }: { skill: Skill }) {
 
       <div className="mt-4">
         <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
-          Technologies liées
+          {copy.relatedTechnologiesLabel}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {relatedSkills.map((relatedSkill) => (
@@ -609,10 +446,16 @@ function MobileSkillDetails({ skill }: { skill: Skill }) {
 function MobileSkillStack({
   activeSkillId,
   activeSkill,
+  skills,
+  skillById,
+  copy,
   onSelect,
 }: {
   activeSkillId: string;
   activeSkill: Skill;
+  skills: Skill[];
+  skillById: SkillById;
+  copy: StackCopy;
   onSelect: (skillId: string) => void;
 }) {
   const activeRelatedIds = new Set(activeSkill.related);
@@ -641,35 +484,50 @@ function MobileSkillStack({
                 categoryId={categoryId}
                 activeSkillId={activeSkillId}
                 activeRelatedIds={activeRelatedIds}
+                skills={skills}
+                skillById={skillById}
+                copy={copy}
                 onSelect={onSelect}
               />
             ))}
           </div>
 
-          <MobileSkillDetails skill={activeSkill} />
+          <MobileSkillDetails
+            skill={activeSkill}
+            skillById={skillById}
+            copy={copy}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-export function StackConstellation() {
+export function StackConstellation({ copy }: { copy: StackCopy }) {
   const [desktopActiveSkillId, setDesktopActiveSkillId] = useState("react");
   const [mobileActiveSkillId, setMobileActiveSkillId] = useState("rails");
-  const activeSkill = skillById.get(desktopActiveSkillId) ?? constellationSkills[0];
+  const skills = copy.skills;
+  const skillById = new Map(skills.map((skill) => [skill.id, skill]));
+  const constellationEdges = skills.flatMap((skill) =>
+    skill.related
+      .filter((relatedId) => skillPositions[relatedId])
+      .filter((relatedId) => skill.id < relatedId)
+      .map((relatedId) => ({ from: skill.id, to: relatedId })),
+  );
+  const activeSkill = skillById.get(desktopActiveSkillId) ?? skills[0];
   const mobileActiveSkill =
     skillById.get(mobileActiveSkillId) ??
     skillById.get("rails") ??
-    constellationSkills[0];
+    skills[0];
   const activeRelatedIds = new Set(activeSkill.related);
 
   return (
     <section id="stack" className="py-20 sm:py-24">
       <SectionReveal className="space-y-10">
         <SectionHeading
-          eyebrow="Stack"
-          title="Compétences & Stack"
-          description="Une vue connectée des technologies que j’utilise pour concevoir, construire et livrer des applications web modernes."
+          eyebrow={copy.section.eyebrow}
+          title={copy.section.title}
+          description={copy.section.description}
         />
 
         <div className="hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.38fr)] lg:items-stretch">
@@ -718,19 +576,21 @@ export function StackConstellation() {
                 })}
               </svg>
 
-              {constellationSkills.map((skill) => (
+              {skills.map((skill) => (
                 <SkillNode
                   key={skill.id}
                   skill={skill}
                   isActive={skill.id === activeSkill.id}
                   isRelated={activeRelatedIds.has(skill.id)}
+                  category={copy.categories[skill.category]}
+                  showDetailAriaLabel={copy.showDetailAriaLabel}
                   onSelect={setDesktopActiveSkillId}
                 />
               ))}
 
               <div className="absolute bottom-8 left-6 right-6 z-20 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-3 sm:px-4">
                 {skillCategoryOrder.map((categoryId) => {
-                  const category = skillCategories[categoryId];
+                  const category = copy.categories[categoryId];
 
                   return (
                     <span
@@ -750,12 +610,19 @@ export function StackConstellation() {
             </div>
           </div>
 
-          <SkillDetailsPanel skill={activeSkill} />
+          <SkillDetailsPanel
+            skill={activeSkill}
+            skillById={skillById}
+            copy={copy}
+          />
         </div>
 
         <MobileSkillStack
           activeSkillId={mobileActiveSkill.id}
           activeSkill={mobileActiveSkill}
+          skills={skills}
+          skillById={skillById}
+          copy={copy}
           onSelect={setMobileActiveSkillId}
         />
       </SectionReveal>

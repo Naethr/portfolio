@@ -10,13 +10,7 @@ export type Project = {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  status:
-    | "En ligne"
-    | "En cours"
-    | "Privé"
-    | "MVP"
-    | "En cours (MVP terminé)"
-    | "Déployé";
+  status: string;
   year: string;
   metric: string;
   intention?: string;
