@@ -659,7 +659,7 @@ export const translations = {
       eyebrow: "À propos",
       title: "Derrière l’écran",
       paragraphs: [
-        "Je suis Théo, développeur full-stack junior passionné par le développement web et les nouvelles technologies.",
+        "Je suis Théo, développeur full-stack passionné par le développement web et les nouvelles technologies.",
         "Après une reconversion récente, je construis des applications web modernes, maintenables et orientées produit, avec une attention portée à la clarté du code, à l’expérience utilisateur et à la simplicité des solutions.",
         "J’aime transformer une idée en produit concret, apprendre vite, itérer proprement et créer des projets utiles.",
       ],
@@ -751,7 +751,7 @@ export const translations = {
       eyebrow: "About",
       title: "Behind the screen",
       paragraphs: [
-        "I’m Théo, a junior full-stack developer passionate about web development and new technologies.",
+        "I’m Théo, a full-stack developer passionate about web development and new technologies.",
         "After a recent career change, I build modern, maintainable and product-minded web applications, with attention to code clarity, user experience and simple solutions.",
         "I enjoy turning an idea into a concrete product, learning quickly, iterating cleanly and creating useful projects.",
       ],
@@ -773,7 +773,7 @@ export const translations = {
       projectLabel: "Project",
       illustrationPending: "Illustration coming soon",
       liveContext: "View context",
-      stackUsed: "Stack used",
+      stackUsed: "Stack",
       intention: "Intention",
       defaultIntention:
         "A clear, readable and extensible window for adding other projects without reworking the structure.",
