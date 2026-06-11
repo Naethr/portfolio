@@ -117,7 +117,7 @@ const constellationSkills: Skill[] = [
     name: "JavaScript",
     category: "frontend",
     description:
-      "Langage central des interfaces web dynamiques, de la logique applicative et de l'écosystème Node.js.",
+      "Langage central des interfaces web dynamiques, de la logique applicative et de l’écosystème Node.js.",
     related: ["react", "node", "vite", "nextjs"],
   },
   {
@@ -157,7 +157,7 @@ const constellationSkills: Skill[] = [
     name: "Node.js",
     category: "backend",
     description:
-      "Runtime JavaScript utilisé pour les APIs, les services backend et l'outillage de développement.",
+      "Runtime JavaScript utilisé pour les API, les services backend et l’outillage de développement.",
     related: ["express", "nestjs", "javascript", "typescript"],
   },
   {
@@ -165,7 +165,7 @@ const constellationSkills: Skill[] = [
     name: "Express.js",
     category: "backend",
     description:
-      "Framework minimal pour construire des APIs REST et de la logique serveur simple à maintenir.",
+      "Framework minimal pour construire des API REST et de la logique serveur simple à maintenir.",
     related: ["node", "prisma"],
   },
   {
@@ -229,7 +229,7 @@ const constellationSkills: Skill[] = [
     name: "Codex",
     category: "ai",
     description:
-      "Workflow de développement assisté par IA pour accélérer l'implémentation, l'itération et la revue de code.",
+      "Workflow de développement assisté par IA pour accélérer l’implémentation, l’itération et la revue de code.",
     related: ["vscode", "ai-workflow"],
   },
   {
@@ -237,7 +237,7 @@ const constellationSkills: Skill[] = [
     name: "Workflow assisté par IA",
     category: "ai",
     description:
-      "Méthode de travail moderne où l'IA aide à cadrer, produire, relire et améliorer le code sans remplacer le jugement technique.",
+      "Méthode de travail moderne où l’IA aide à cadrer, produire, relire et améliorer le code sans remplacer le jugement technique.",
     related: ["codex", "vscode"],
   },
 ];
@@ -669,7 +669,7 @@ export function StackConstellation() {
         <SectionHeading
           eyebrow="Stack"
           title="Compétences & Stack"
-          description="Une vue connectée des technologies que j'utilise pour concevoir, construire et livrer des applications web modernes."
+          description="Une vue connectée des technologies que j’utilise pour concevoir, construire et livrer des applications web modernes."
         />
 
         <div className="hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.38fr)] lg:items-stretch">

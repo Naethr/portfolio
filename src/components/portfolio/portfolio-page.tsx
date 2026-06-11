@@ -161,7 +161,7 @@ const timelineItems: TimelineItem[] = [
     id: "ai-project",
     type: "event",
     title: "Projet IA",
-    detail: "Projet Sokwak AI · intégration d’API moderne OpenAI",
+    detail: "Projet Sokwak AI · intégration d’une API OpenAI moderne",
     logos: [{ type: "simple", id: "openaigym" }],
     accent: "stack",
   },
@@ -537,7 +537,7 @@ function AboutIntro() {
           À propos
         </span>
         <h2 className="text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-white text-balance">
-          Derrière l'écran
+          Derrière l’écran
         </h2>
 
         <div className="max-w-[62ch] space-y-3 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
@@ -548,11 +548,11 @@ function AboutIntro() {
           <p>
             Après une reconversion récente, je construis des applications web
             modernes, maintenables et orientées produit, avec une attention
-            portée à la clarté du code, à l&apos;expérience utilisateur et à la
+            portée à la clarté du code, à l’expérience utilisateur et à la
             simplicité des solutions.
           </p>
           <p>
-            J&apos;aime transformer une idée en produit concret, apprendre vite,
+            J’aime transformer une idée en produit concret, apprendre vite,
             itérer proprement et créer des projets utiles.
           </p>
         </div>
@@ -839,7 +839,7 @@ function ContactSection() {
 
           <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
             <h2 className="max-w-3xl text-balance text-center text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-              Une idée, une question, ou simplement envie d&apos;échanger ?
+              Une idée, une question, ou simplement envie d’échanger ?
             </h2>
 
             <p className="max-w-2xl text-center text-base leading-8 text-slate-300 sm:text-lg">

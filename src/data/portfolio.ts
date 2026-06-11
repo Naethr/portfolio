@@ -47,7 +47,7 @@ export const skillGroups = [
   },
   {
     title: "Back",
-    description: "Architecture pragmatique, APIs propres et logique métier claire.",
+    description: "Architecture pragmatique, API propres et logique métier claire.",
     items: ["Ruby on Rails", "Node.js", "Express.js", "PostgreSQL", "REST API"],
   },
   {
@@ -67,22 +67,22 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Naethr/Rubberduck_AI",
     status: "MVP",
     year: "2026",
-    metric: "Une appli IA destinée à aider à l'apprentissage avant tout.",
+    metric: "Une appli IA destinée à aider à l’apprentissage avant tout.",
     intention:
-      "Créer une app IA qui agit comme un mentor: il questionne, reformule et guide le raisonnement jusqu'au déclic.",
+      "Créer une app IA qui agit comme un mentor : il questionne, reformule et guide le raisonnement jusqu’au déclic.",
   },
   {
     slug: "questonaut",
-    name: "Questonaut - Tracker d'habitudes gamifié",
+    name: "Questonaut - Tracker d’habitudes gamifié",
     description:
-      "Un tracker d'habitude gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidien.",
+      "Un tracker d’habitudes gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidiens.",
     technologies: ["Ruby on Rails", "Hotwire", "Stimulus", "JavaScript"],
     githubUrl: "https://github.com/Naethr/questonaut_habit_tracker_app",
     status: "En cours (MVP terminé)",
     year: "2026",
     metric: "UI gamifiée avec système de niveau et badges de récompenses pour aider à se tenir à ses habitudes.",
     intention:
-      "Proposer une UI gamifiée, avec système de niveau et badges de récompenses, pour aider l'utilisateur à se tenir à ses habitudes.",
+      "Proposer une UI gamifiée, avec système de niveau et badges de récompenses, pour aider l’utilisateur à se tenir à ses habitudes.",
   },
   {
     slug: "portfolio",
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     status: "Déployé",
     year: "2026",
     metric: "Une interface propre et claire.",
-    intention: "Créer une interface propre, claire avec des composants modernes",
+    intention: "Créer une interface propre, claire, avec des composants modernes.",
   },
 ];
 

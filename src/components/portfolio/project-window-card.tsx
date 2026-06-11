@@ -158,7 +158,7 @@ export function ProjectWindowCard({ project }: ProjectWindowCardProps) {
               </p>
               <p className="mt-1.5 text-[0.82rem] leading-5 text-slate-200 md:mt-2 md:text-sm md:leading-6">
                 {project.intention ??
-                  "Une fenêtre claire, lisible et extensible pour ajouter d'autres projets sans revoir la structure."}
+                  "Une fenêtre claire, lisible et extensible pour ajouter d’autres projets sans revoir la structure."}
               </p>
             </div>
           </div>
