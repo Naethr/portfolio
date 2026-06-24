@@ -1,6 +1,6 @@
 'use client';
 
-import { List, X } from "@phosphor-icons/react";
+import { List, MoonIcon, SunIcon, X } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -14,6 +14,9 @@ type MobileNavProps = {
   languageSwitchAriaLabel: string;
   languageSwitchText: string;
   onToggleLanguage: () => void;
+  onToggleTheme: () => void;
+  theme: "dark" | "light";
+  themeSwitchAriaLabel: string;
 };
 
 export function MobileNav({
@@ -22,6 +25,9 @@ export function MobileNav({
   languageSwitchAriaLabel,
   languageSwitchText,
   onToggleLanguage,
+  onToggleTheme,
+  theme,
+  themeSwitchAriaLabel,
 }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
@@ -78,6 +84,8 @@ export function MobileNav({
     setOpen(false);
   }
 
+  const ThemeIcon = theme === "dark" ? SunIcon : MoonIcon;
+
   return (
     <div className="relative md:hidden">
       <button
@@ -87,7 +95,7 @@ export function MobileNav({
         aria-controls="mobile-navigation"
         aria-label={open ? copy.closeLabel : copy.openLabel}
         onClick={() => setOpen((value) => !value)}
-        className="relative z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white shadow-[0_18px_48px_-30px_rgba(0,0,0,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
+        className="theme-control-strong relative z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
       >
         {open ? <X size={20} weight="regular" /> : <List size={20} weight="regular" />}
       </button>
@@ -102,14 +110,14 @@ export function MobileNav({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.25 }}
                   onClick={() => closeMenu(true)}
-                  className="fixed inset-0 z-20 bg-[#050816] px-6 pb-10 pt-28 backdrop-blur-xl"
+                  className="theme-mobile-overlay fixed inset-0 z-20 px-6 pb-10 pt-28 backdrop-blur-xl"
                 >
                   <button
                     ref={closeButtonRef}
                     type="button"
                     aria-label={copy.closeLabel}
                     onClick={() => closeMenu(true)}
-                    className="fixed right-4 top-4 z-30 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[rgba(8,12,20,0.92)] text-white shadow-[0_18px_48px_-30px_rgba(0,0,0,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
+                    className="theme-mobile-close fixed right-4 top-4 z-30 inline-flex h-12 w-12 items-center justify-center rounded-full border transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
                   >
                     <X size={20} weight="regular" />
                   </button>
@@ -133,25 +141,33 @@ export function MobileNav({
                             delay: index * 0.06,
                             ease: [0.22, 1, 0.36, 1],
                           }}
-                          className="border-b border-white/8 pb-4 text-3xl font-medium tracking-[-0.05em] text-white"
+                          className="theme-text-primary border-b border-[var(--border-soft)] pb-4 text-3xl font-medium tracking-[-0.05em]"
                         >
                           {link.label}
                         </motion.a>
                       ))}
                     </div>
-                    <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
+                    <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] gap-3">
                       <button
                         type="button"
                         aria-label={languageSwitchAriaLabel}
                         onClick={onToggleLanguage}
-                        className="inline-flex h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-slate-100 transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
+                        className="theme-control inline-flex h-12 min-w-12 items-center justify-center rounded-full border px-3 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
                       >
                         {languageSwitchText}
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={themeSwitchAriaLabel}
+                        onClick={onToggleTheme}
+                        className="theme-control inline-flex h-12 w-12 items-center justify-center rounded-full border transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
+                      >
+                        <ThemeIcon size={18} weight="regular" />
                       </button>
                       <a
                         href="#contact"
                         onClick={() => closeMenu()}
-                        className="inline-flex min-w-0 items-center justify-center rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3 text-sm font-medium text-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
+                        className="theme-accent-control inline-flex min-w-0 items-center justify-center rounded-full border px-5 py-3 text-sm font-medium transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
                       >
                         {copy.contactLabel}
                       </a>
