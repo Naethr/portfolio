@@ -113,11 +113,11 @@ const timelineAccentStyles: Record<
 > = {
   foundation: {
     date:
-      "border-[rgba(45,212,191,0.46)] bg-[#061816] text-[#99f6e4]",
+      "border-[var(--timeline-date-border)] bg-[var(--timeline-date-background)] text-[var(--timeline-date-text)]",
   },
   stack: {
     date:
-      "border-[rgba(45,212,191,0.46)] bg-[#061816] text-[#99f6e4]",
+      "border-[var(--timeline-date-border)] bg-[var(--timeline-date-background)] text-[var(--timeline-date-text)]",
   },
 };
 
@@ -151,7 +151,7 @@ const timelineToneStyles: Record<
 const timelineLineStyles = {
   line: "bg-[rgba(45,212,191,0.58)]",
   point:
-    "border-[rgba(45,212,191,0.84)] bg-[#0b1220] shadow-[0_0_0_6px_rgba(45,212,191,0.1),0_0_22px_rgba(45,212,191,0.42)]",
+    "border-[rgba(45,212,191,0.84)] bg-[var(--timeline-point-background)] shadow-[0_0_0_6px_rgba(45,212,191,0.1),0_0_22px_rgba(45,212,191,0.42)]",
 };
 
 const timelineItemMeta: Record<
@@ -235,16 +235,7 @@ const timelineItemMeta: Record<
 
 function frame(className?: string) {
   return [
-    "rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-2 shadow-[0_28px_90px_-56px_rgba(0,0,0,0.96)]",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-}
-
-function panel(className?: string) {
-  return [
-    "rounded-[1.55rem] border border-white/7 bg-[linear-gradient(180deg,rgba(7,10,18,0.96),rgba(5,7,14,0.98))]",
+    "theme-frame rounded-[2rem] border p-2",
     className,
   ]
     .filter(Boolean)
@@ -337,7 +328,7 @@ function TechIcon({
   return (
     <span
       className={[
-        "inline-flex h-7 min-w-7 items-center justify-center rounded-[0.55rem] border px-1.5 font-mono text-[0.56rem] font-semibold uppercase tracking-[-0.02em] text-slate-100 transition duration-300",
+        "inline-flex h-7 min-w-7 items-center justify-center rounded-[0.55rem] border px-1.5 font-mono text-[0.56rem] font-semibold uppercase tracking-[-0.02em] text-[var(--text-primary)] transition duration-300",
         styles.detail,
       ].join(" ")}
       title={label}
@@ -407,7 +398,7 @@ function TimelineStep({
         </span>
       ) : null}
       <span className="min-w-0 flex-1">
-        <span className="block text-sm font-semibold leading-5 tracking-[-0.025em] text-white text-balance">
+        <span className="block text-sm font-semibold leading-5 tracking-[-0.025em] text-[var(--text-primary)] text-balance">
           <TimelineTitle item={item} />
         </span>
         {item.detail ? (
@@ -415,7 +406,7 @@ function TimelineStep({
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-2 block border-t border-white/8 pt-2 text-xs leading-5 text-slate-300"
+            className="mt-2 block border-t border-[var(--border-soft)] pt-2 text-xs leading-5 text-[var(--text-secondary)]"
           >
             {item.detail}
           </motion.span>
@@ -491,14 +482,14 @@ function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
   return (
     <div className="mb-14 grid gap-6 p-5 sm:mb-16 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
       <div className="max-w-3xl space-y-5">
-        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
+        <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
           {copy.eyebrow}
         </span>
-        <h2 className="text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-white text-balance">
+        <h2 className="theme-text-primary text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-balance">
           {copy.title}
         </h2>
 
-        <div className="max-w-[62ch] space-y-3 text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+        <div className="theme-text-secondary max-w-[62ch] space-y-3 text-sm leading-7 sm:text-base sm:leading-8">
           {copy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -511,11 +502,11 @@ function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
         whileHover={{ y: -3, scale: 1.006 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border border-white/10 bg-black/24 shadow-[0_22px_62px_-46px_rgba(67,137,255,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(67,137,255,0.68)] sm:max-w-[17rem] lg:mr-0"
+        className="theme-photo-shell group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border shadow-[0_22px_62px_-46px_rgba(67,137,255,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(67,137,255,0.68)] sm:max-w-[17rem] lg:mr-0"
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-10 rounded-[999px] bg-[linear-gradient(180deg,rgba(5,7,14,0),rgba(5,7,14,0.26))] transition-opacity duration-500 group-hover:opacity-80"
+          className="theme-photo-overlay absolute inset-0 z-10 rounded-[999px] transition-opacity duration-500 group-hover:opacity-80"
         />
         <Image
           src={aboutPhoto.src}
@@ -572,16 +563,16 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
 
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 text-center">
             <div className="space-y-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-slate-300/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
+              <span className="theme-pill inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(67,137,255,0.85)]" />
                 {copy.eyebrow}
               </span>
 
               <div className="space-y-4">
-                <h1 className="max-w-3xl font-tech text-[clamp(3rem,6vw,5.2rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-white">
+                <h1 className="theme-text-primary max-w-3xl font-tech text-[clamp(3rem,6vw,5.2rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
                   Théo VILLALBA
                 </h1>
-                <p className="max-w-2xl font-display text-[clamp(1.1rem,2.1vw,1.4rem)] font-medium leading-[1.08] tracking-[-0.04em] text-slate-300">
+                <p className="theme-text-secondary max-w-2xl font-display text-[clamp(1.1rem,2.1vw,1.4rem)] font-medium leading-[1.08] tracking-[-0.04em]">
                   {copy.role}
                 </p>
               </div>
@@ -595,16 +586,16 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a
                   href="#projets"
-                  className="group inline-flex items-center justify-center gap-3 rounded-full border border-[rgba(67,137,255,0.28)] bg-[rgba(67,137,255,0.14)] px-5 py-3.5 text-sm font-medium text-white shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300 hover:bg-[rgba(67,137,255,0.2)]"
+                  className="theme-accent-control group inline-flex items-center justify-center gap-3 rounded-full border px-5 py-3.5 text-sm font-medium shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300"
                 >
                   {copy.projectsCta}
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 transition-colors duration-300 group-hover:bg-white/10">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-control-strong)] transition-colors duration-300 group-hover:bg-[var(--surface-control-hover)]">
                     <ArrowRight size={16} weight="regular" />
                   </span>
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-3.5 text-sm font-medium text-slate-100 transition-colors duration-300 hover:border-white/18 hover:bg-white/8"
+                  className="theme-control inline-flex items-center justify-center rounded-full border px-5 py-3.5 text-sm font-medium transition-colors duration-300"
                 >
                   {copy.contactCta}
                 </a>
@@ -631,7 +622,7 @@ function ProfileSection({
     <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 bg-[#050816]/80 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
+        className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
       />
       <SectionReveal>
         <div className="relative p-4 sm:p-5 lg:p-6">
@@ -641,10 +632,10 @@ function ProfileSection({
             <div id="parcours" className="scroll-mt-28 p-5 sm:p-7 lg:p-8">
               <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
                 <div>
-                  <span className="inline-flex rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-300">
+                  <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
                     {timelineCopy.eyebrow}
                   </span>
-                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.055em] text-white sm:text-3xl">
+                  <h3 className="theme-text-primary mt-2 text-2xl font-semibold tracking-[-0.055em] sm:text-3xl">
                     {timelineCopy.title}
                   </h3>
                 </div>
@@ -720,11 +711,11 @@ function ProjectsSection({
         <div className="group/project-carousel relative mx-auto max-w-6xl overflow-hidden py-3 sm:py-6">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-8 left-0 z-10 w-16 bg-gradient-to-r from-[#050816] to-transparent sm:w-24"
+            className="theme-carousel-fade-left pointer-events-none absolute inset-y-8 left-0 z-10 w-16 sm:w-24"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-8 right-0 z-10 w-16 bg-gradient-to-l from-[#050816] to-transparent sm:w-24"
+            className="theme-carousel-fade-right pointer-events-none absolute inset-y-8 right-0 z-10 w-16 sm:w-24"
           />
 
           <div className="relative mx-auto flex min-h-[42rem] items-center justify-center sm:min-h-[38rem] lg:min-h-[34rem]">
@@ -780,7 +771,7 @@ function ProjectsSection({
                 type="button"
                 aria-label={copy.previousAriaLabel}
                 onClick={showPreviousProject}
-                className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
+                className="theme-control pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
               >
                 <CaretLeft size={18} weight="regular" />
               </button>
@@ -788,7 +779,7 @@ function ProjectsSection({
                 type="button"
                 aria-label={copy.nextAriaLabel}
                 onClick={showNextProject}
-                className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/35 text-slate-200 opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 hover:border-white/18 hover:bg-white/10 hover:text-white active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
+                className="theme-control pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
               >
                 <CaretRight size={18} weight="regular" />
               </button>
@@ -804,18 +795,18 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
   return (
     <section id="contact" className="py-20 sm:py-24">
       <SectionReveal className={frame()}>
-        <div className="relative overflow-hidden rounded-[1.55rem] border border-[rgba(139,92,246,0.42)] bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.22),transparent_42%),linear-gradient(180deg,rgba(12,10,24,0.94),rgba(5,7,14,0.98))] px-6 py-12 text-center shadow-[0_0_70px_-36px_rgba(139,92,246,0.95),inset_0_1px_0_rgba(255,255,255,0.06)] sm:px-10 sm:py-16 lg:px-16">
+        <div className="theme-contact-panel relative overflow-hidden rounded-[1.55rem] border px-6 py-12 text-center sm:px-10 sm:py-16 lg:px-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(167,139,250,0.82),transparent)]"
           />
 
           <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
-            <h2 className="max-w-3xl text-balance text-center text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="theme-text-primary max-w-3xl text-balance text-center text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
               {copy.title}
             </h2>
 
-            <p className="max-w-2xl text-center text-base leading-8 text-slate-300 sm:text-lg">
+            <p className="theme-text-secondary max-w-2xl text-center text-base leading-8 sm:text-lg">
               {copy.description}
             </p>
 
@@ -823,7 +814,7 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
               href="mailto:theovbpro@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border border-[rgba(167,139,250,0.52)] bg-[rgba(139,92,246,0.18)] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[0_0_34px_-16px_rgba(139,92,246,0.92)] transition duration-300 hover:border-[rgba(196,181,253,0.72)] hover:bg-[rgba(139,92,246,0.26)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 active:scale-[0.98] sm:w-auto"
+              className="theme-contact-cta inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border px-6 py-3.5 text-center text-sm font-semibold transition duration-300 hover:border-[rgba(196,181,253,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 active:scale-[0.98] sm:w-auto"
             >
               <EnvelopeSimple size={18} weight="regular" />
               theovbpro@gmail.com
@@ -842,7 +833,7 @@ export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
-        <div className="absolute left-1/2 top-0 h-full min-h-[60rem] w-[min(92vw,72rem)] -translate-x-1/2 bg-[rgba(7,11,22,0.52)] opacity-70 blur-3xl" />
+        <div className="theme-main-glow absolute left-1/2 top-0 h-full min-h-[60rem] w-[min(92vw,72rem)] -translate-x-1/2 opacity-70 blur-3xl" />
         <div className="absolute inset-x-[-12%] inset-y-0 sm:inset-x-[-4%]">
           <GradientDots
             dotSize={10}

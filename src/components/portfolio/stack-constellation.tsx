@@ -9,7 +9,7 @@ import { SectionHeading } from "./section-heading";
 
 function frame(className?: string) {
   return [
-    "rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.04)] p-2 shadow-[0_28px_90px_-56px_rgba(0,0,0,0.96)]",
+    "theme-frame rounded-[2rem] border p-2",
     className,
   ]
     .filter(Boolean)
@@ -18,7 +18,7 @@ function frame(className?: string) {
 
 function panel(className?: string) {
   return [
-    "rounded-[1.55rem] border border-white/7 bg-[linear-gradient(180deg,rgba(7,10,18,0.96),rgba(5,7,14,0.98))]",
+    "theme-panel rounded-[1.55rem] border",
     className,
   ]
     .filter(Boolean)
@@ -96,10 +96,10 @@ function SkillDetailsPanel({
         <div className="space-y-5">
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
+              <p className="theme-text-subtle font-mono text-[0.68rem] uppercase tracking-[0.24em]">
                 {copy.detailsLabel}
               </p>
-              <h3 className="mt-4 text-xl font-semibold tracking-[-0.055em] text-white sm:text-2xl">
+              <h3 className="theme-text-primary mt-4 text-xl font-semibold tracking-[-0.055em] sm:text-2xl">
                 {skill.name}
               </h3>
             </div>
@@ -115,20 +115,20 @@ function SkillDetailsPanel({
             </span>
           </div>
 
-          <p className="text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+          <p className="theme-text-secondary text-sm leading-7 sm:text-base sm:leading-8">
             {skill.description}
           </p>
         </div>
 
         <div>
-          <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-slate-500">
+          <p className="theme-text-subtle font-mono text-[0.68rem] uppercase tracking-[0.24em]">
             {copy.relatedTechnologiesLabel}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {relatedSkills.map((relatedSkill) => (
               <span
                 key={relatedSkill.id}
-                className="inline-block max-w-full break-words rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm leading-5 text-slate-200"
+                className="inline-block max-w-full break-words rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-2 text-sm leading-5 text-[var(--text-secondary)]"
               >
                 {relatedSkill.name}
               </span>
@@ -166,12 +166,12 @@ function SkillNode({
       onFocus={() => onSelect(skill.id)}
       onMouseEnter={() => onSelect(skill.id)}
       className={[
-        "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-2 text-left font-mono text-[0.72rem] text-slate-200 shadow-[0_18px_46px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
+        "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-2 text-left font-mono text-[0.72rem] shadow-[0_18px_46px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
         isActive
-          ? "scale-105 border-white/30 bg-white/[0.12] text-white"
+          ? "scale-105 border-[var(--border-strong)] bg-[var(--surface-control-hover)] text-[var(--text-primary)]"
           : isRelated
-            ? "border-white/20 bg-white/[0.075] text-slate-100"
-            : "border-white/10 bg-black/24 text-slate-400 hover:border-white/18 hover:bg-white/[0.055]",
+            ? "border-[var(--border-strong)] bg-[var(--surface-control)] text-[var(--text-primary)]"
+            : "border-[var(--border)] bg-[var(--surface-inset)] text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-control)]",
       ].join(" ")}
       style={{ left: `${position.x}%`, top: `${position.y}%` }}
     >
@@ -255,7 +255,7 @@ function MobileSkillNode({
   onSelect: (skillId: string) => void;
 }) {
   const connectorTone =
-    isActive || isRelated ? category.accent : "rgba(255,255,255,0.13)";
+    isActive || isRelated ? category.accent : "var(--timeline-muted-connector)";
 
   return (
     <li
@@ -279,12 +279,12 @@ function MobileSkillNode({
         onClick={() => onSelect(skill.id)}
         onFocus={() => onSelect(skill.id)}
         className={[
-          "relative z-10 max-w-full rounded-full border px-3 py-2 text-left text-[0.8rem] leading-5 text-slate-200 shadow-[0_16px_42px_-32px_rgba(0,0,0,0.95)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98] sm:text-sm",
+          "relative z-10 max-w-full rounded-full border px-3 py-2 text-left text-[0.8rem] leading-5 shadow-[0_16px_42px_-32px_rgba(0,0,0,0.95)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98] sm:text-sm",
           isActive
-            ? "bg-white/[0.13] text-white"
+            ? "bg-[var(--surface-control-hover)] text-[var(--text-primary)]"
             : isRelated
-              ? "bg-white/[0.075] text-slate-100"
-              : "border-white/10 bg-black/24 text-slate-300",
+              ? "bg-[var(--surface-control)] text-[var(--text-primary)]"
+              : "border-[var(--border)] bg-[var(--surface-inset)] text-[var(--text-secondary)]",
         ].join(" ")}
         style={{
           borderColor: isActive || isRelated ? category.accent : undefined,
@@ -331,7 +331,7 @@ function MobileSkillCluster({
     <section className="relative min-w-0 py-4 first:pt-0 last:pb-0 sm:py-5">
       <div className="relative z-10 mb-4 flex justify-center">
         <span
-          className="max-w-full rounded-full border border-white/10 bg-[#060a14] px-3 py-1.5 text-center font-mono text-[0.62rem] uppercase leading-4 tracking-[0.16em] text-slate-400 shadow-[0_0_26px_-18px_currentColor]"
+          className="max-w-full rounded-full border border-[var(--border)] bg-[var(--stack-label-background)] px-3 py-1.5 text-center font-mono text-[0.62rem] uppercase leading-4 tracking-[0.16em] shadow-[0_0_26px_-18px_currentColor]"
           style={{ color: category.accent }}
         >
           {category.label}
@@ -357,7 +357,7 @@ function MobileSkillCluster({
         <div className="relative flex justify-center">
           <span
             aria-hidden="true"
-            className="mt-3 h-3 w-3 rounded-full border border-white/20 bg-[#060a14] shadow-[0_0_18px_currentColor]"
+            className="mt-3 h-3 w-3 rounded-full border border-[var(--border-strong)] bg-[var(--stack-label-background)] shadow-[0_0_18px_currentColor]"
             style={{ color: category.accent }}
           />
         </div>
@@ -399,14 +399,14 @@ function MobileSkillDetails({
   return (
     <aside
       aria-live="polite"
-      className="relative z-10 mt-6 rounded-[1.35rem] border border-white/10 bg-black/28 p-4 backdrop-blur-md"
+      className="relative z-10 mt-6 rounded-[1.35rem] border border-[var(--border)] bg-[var(--surface-inset-strong)] p-4 backdrop-blur-md"
     >
       <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
-          <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
+          <p className="theme-text-subtle font-mono text-[0.62rem] uppercase tracking-[0.2em]">
             {copy.detailsLabel}
           </p>
-          <h3 className="mt-2 break-words text-lg font-semibold tracking-[-0.045em] text-white">
+          <h3 className="theme-text-primary mt-2 break-words text-lg font-semibold tracking-[-0.045em]">
             {skill.name}
           </h3>
         </div>
@@ -422,17 +422,17 @@ function MobileSkillDetails({
         </span>
       </div>
 
-      <p className="mt-3 text-sm leading-6 text-slate-300">{skill.description}</p>
+      <p className="theme-text-secondary mt-3 text-sm leading-6">{skill.description}</p>
 
       <div className="mt-4">
-        <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-slate-500">
+        <p className="theme-text-subtle font-mono text-[0.62rem] uppercase tracking-[0.2em]">
           {copy.relatedTechnologiesLabel}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {relatedSkills.map((relatedSkill) => (
             <span
               key={relatedSkill.id}
-              className="max-w-full break-words rounded-full border border-white/10 bg-white/[0.045] px-2.5 py-1.5 text-xs leading-5 text-slate-200"
+              className="max-w-full break-words rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-2.5 py-1.5 text-xs leading-5 text-[var(--text-secondary)]"
             >
               {relatedSkill.name}
             </span>
@@ -539,7 +539,7 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-6 rounded-[1.3rem] border border-white/8 bg-[linear-gradient(135deg,rgba(255,255,255,0.035),transparent_34%),radial-gradient(circle_at_72%_38%,rgba(52,211,153,0.08),transparent_28%),radial-gradient(circle_at_32%_82%,rgba(167,139,250,0.1),transparent_26%)]"
+                className="absolute inset-6 rounded-[1.3rem] border border-[var(--border-soft)] bg-[linear-gradient(135deg,var(--surface-muted),transparent_34%),radial-gradient(circle_at_72%_38%,rgba(52,211,153,0.08),transparent_28%),radial-gradient(circle_at_32%_82%,rgba(167,139,250,0.1),transparent_26%)]"
               />
 
               <svg
@@ -566,8 +566,8 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
                       className="transition duration-300"
                       stroke={
                         isActiveEdge || isRelatedEdge
-                          ? "rgba(148,190,255,0.72)"
-                          : "rgba(255,255,255,0.11)"
+                          ? "var(--stack-edge-active)"
+                          : "var(--stack-edge)"
                       }
                       strokeWidth={isActiveEdge ? 0.42 : 0.2}
                       strokeLinecap="round"
@@ -595,7 +595,7 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
                   return (
                     <span
                       key={categoryId}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/22 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-slate-400"
+                      className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-inset)] px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--text-muted)]"
                     >
                       <span
                         aria-hidden="true"

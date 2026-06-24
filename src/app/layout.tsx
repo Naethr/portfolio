@@ -70,6 +70,20 @@ export const viewport: Viewport = {
   themeColor: "#050816",
 };
 
+const themeInitScript = `
+(() => {
+  try {
+    const storedTheme = window.localStorage.getItem("portfolio-theme");
+    const theme = storedTheme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+    document.documentElement.dataset.theme = "dark";
+    document.documentElement.style.colorScheme = "dark";
+  }
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -78,8 +92,13 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-theme="dark"
+      suppressHydrationWarning
       className={`${manrope.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${oxanium.variable} h-full scroll-smooth antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full font-sans">
         <a href="#content" className="skip-link">
           Aller au contenu

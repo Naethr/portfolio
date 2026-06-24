@@ -45,6 +45,8 @@ export type PortfolioTranslations = {
     contactLabel: string;
     languageSwitchAriaLabel: string;
     languageSwitchText: string;
+    themeSwitchToLightAriaLabel: string;
+    themeSwitchToDarkAriaLabel: string;
   };
   mobileNav: {
     openLabel: string;
@@ -641,6 +643,8 @@ export const translations = {
       contactLabel: "Contact",
       languageSwitchAriaLabel: "Passer le site en anglais",
       languageSwitchText: "EN",
+      themeSwitchToLightAriaLabel: "Passer au thème clair",
+      themeSwitchToDarkAriaLabel: "Passer au thème sombre",
     },
     mobileNav: {
       openLabel: "Ouvrir le menu de navigation",
@@ -728,6 +732,8 @@ export const translations = {
       contactLabel: "Contact",
       languageSwitchAriaLabel: "Switch website to French",
       languageSwitchText: "FR",
+      themeSwitchToLightAriaLabel: "Switch to light theme",
+      themeSwitchToDarkAriaLabel: "Switch to dark theme",
     },
     mobileNav: {
       openLabel: "Open navigation menu",
