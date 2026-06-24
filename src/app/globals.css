@@ -9,6 +9,132 @@
   --border: rgba(255, 255, 255, 0.1);
   --muted: #94a3b8;
   --accent: #4389ff;
+  --accent-soft: rgba(67, 137, 255, 0.12);
+  --accent-softer: rgba(67, 137, 255, 0.08);
+  --accent-border: rgba(67, 137, 255, 0.28);
+  --accent-hover: rgba(67, 137, 255, 0.18);
+  --accent-text: #eaf2ff;
+  --violet-accent: #a78bfa;
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --border-soft: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --surface-subtle: rgba(255, 255, 255, 0.04);
+  --surface-muted: rgba(255, 255, 255, 0.045);
+  --surface-inset: rgba(0, 0, 0, 0.22);
+  --surface-inset-strong: rgba(0, 0, 0, 0.28);
+  --surface-control: rgba(255, 255, 255, 0.05);
+  --surface-control-strong: rgba(255, 255, 255, 0.06);
+  --surface-control-hover: rgba(255, 255, 255, 0.1);
+  --panel-background: linear-gradient(180deg, rgba(7, 10, 18, 0.96), rgba(5, 7, 14, 0.98));
+  --panel-elevated: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
+  --nav-background: rgba(8, 12, 20, 0.82);
+  --nav-popover-background: #050816;
+  --nav-popover-control: rgba(8, 12, 20, 0.92);
+  --page-gradient: radial-gradient(circle at 20% 15%, rgba(67, 137, 255, 0.16), transparent 24%),
+    radial-gradient(circle at 85% 0%, rgba(100, 116, 139, 0.12), transparent 26%),
+    linear-gradient(180deg, #09101f 0%, #050816 50%, #040611 100%);
+  --shell-grid-line: rgba(255, 255, 255, 0.035);
+  --shell-grid-opacity: 0.22;
+  --shell-ambient: radial-gradient(circle at 18% 18%, rgba(67, 137, 255, 0.16), transparent 20%),
+    radial-gradient(circle at 80% 10%, rgba(67, 137, 255, 0.08), transparent 18%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.03), transparent 35%);
+  --main-center-glow: rgba(7, 11, 22, 0.52);
+  --section-band-background: rgba(5, 8, 22, 0.8);
+  --carousel-fade: #050816;
+  --contact-panel-background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(12, 10, 24, 0.94), rgba(5, 7, 14, 0.98));
+  --contact-panel-border: rgba(139, 92, 246, 0.42);
+  --contact-panel-shadow: 0 0 70px -36px rgba(139, 92, 246, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --contact-cta-border: rgba(167, 139, 250, 0.52);
+  --contact-cta-background: rgba(139, 92, 246, 0.18);
+  --contact-cta-hover: rgba(139, 92, 246, 0.26);
+  --contact-cta-text: #ffffff;
+  --contact-cta-shadow: 0 0 34px -16px rgba(139, 92, 246, 0.92);
+  --photo-overlay: linear-gradient(180deg, rgba(5, 7, 14, 0), rgba(5, 7, 14, 0.26));
+  --timeline-date-background: #061816;
+  --timeline-date-border: rgba(45, 212, 191, 0.46);
+  --timeline-date-text: #99f6e4;
+  --timeline-point-background: #0b1220;
+  --timeline-muted-connector: rgba(255, 255, 255, 0.13);
+  --stack-label-background: #060a14;
+  --stack-edge: rgba(255, 255, 255, 0.11);
+  --stack-edge-active: rgba(148, 190, 255, 0.72);
+  --window-sheen: radial-gradient(circle at top, rgba(67, 137, 255, 0.18), transparent 62%);
+  --hero-gooey-gradient: linear-gradient(180deg, #7cb0ff 0%, #4389ff 46%, #b7d2ff 100%);
+  --shadow-xl: 0 28px 90px -56px rgba(0, 0, 0, 0.96);
+  --shadow-control: 0 18px 48px -30px rgba(0, 0, 0, 0.9);
+}
+
+:root[data-theme="light"] {
+  --background: #eef5ff;
+  --background-soft: #dfeeff;
+  --foreground: #111827;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --border: rgba(30, 41, 59, 0.12);
+  --muted: #52627a;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --accent-softer: rgba(37, 99, 235, 0.07);
+  --accent-border: rgba(37, 99, 235, 0.24);
+  --accent-hover: rgba(37, 99, 235, 0.15);
+  --accent-text: #0f327d;
+  --violet-accent: #7c3aed;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #52627a;
+  --text-subtle: #64748b;
+  --border-soft: rgba(30, 41, 59, 0.09);
+  --border-strong: rgba(30, 41, 59, 0.18);
+  --surface-subtle: rgba(255, 255, 255, 0.68);
+  --surface-muted: rgba(255, 255, 255, 0.64);
+  --surface-inset: rgba(219, 234, 254, 0.62);
+  --surface-inset-strong: rgba(214, 226, 244, 0.78);
+  --surface-control: rgba(255, 255, 255, 0.74);
+  --surface-control-strong: rgba(255, 255, 255, 0.82);
+  --surface-control-hover: rgba(219, 234, 254, 0.92);
+  --panel-background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(232, 241, 255, 0.91));
+  --panel-elevated: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(226, 239, 255, 0.7));
+  --nav-background: rgba(247, 251, 255, 0.82);
+  --nav-popover-background: #eef5ff;
+  --nav-popover-control: rgba(247, 251, 255, 0.94);
+  --page-gradient: radial-gradient(circle at 18% 14%, rgba(37, 99, 235, 0.16), transparent 28%),
+    radial-gradient(circle at 83% 0%, rgba(124, 58, 237, 0.11), transparent 28%),
+    radial-gradient(circle at 50% 95%, rgba(6, 182, 212, 0.09), transparent 38%),
+    linear-gradient(180deg, #f8fbff 0%, #eef5ff 48%, #e8f0ff 100%);
+  --shell-grid-line: rgba(37, 99, 235, 0.07);
+  --shell-grid-opacity: 0.42;
+  --shell-ambient: radial-gradient(circle at 18% 18%, rgba(37, 99, 235, 0.15), transparent 22%),
+    radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.09), transparent 20%),
+    radial-gradient(circle at 52% 100%, rgba(6, 182, 212, 0.1), transparent 36%);
+  --main-center-glow: rgba(191, 219, 254, 0.58);
+  --section-band-background: rgba(238, 245, 255, 0.72);
+  --carousel-fade: #eef5ff;
+  --contact-panel-background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(231, 240, 255, 0.92));
+  --contact-panel-border: rgba(124, 58, 237, 0.28);
+  --contact-panel-shadow: 0 30px 80px -54px rgba(79, 70, 229, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --contact-cta-border: rgba(109, 40, 217, 0.26);
+  --contact-cta-background: rgba(124, 58, 237, 0.1);
+  --contact-cta-hover: rgba(124, 58, 237, 0.16);
+  --contact-cta-text: #4c1d95;
+  --contact-cta-shadow: 0 22px 48px -36px rgba(79, 70, 229, 0.58);
+  --photo-overlay: linear-gradient(180deg, rgba(238, 245, 255, 0), rgba(15, 23, 42, 0.08));
+  --timeline-date-background: rgba(240, 253, 250, 0.9);
+  --timeline-date-border: rgba(13, 148, 136, 0.34);
+  --timeline-date-text: #0f766e;
+  --timeline-point-background: #f8fbff;
+  --timeline-muted-connector: rgba(37, 99, 235, 0.18);
+  --stack-label-background: rgba(255, 255, 255, 0.84);
+  --stack-edge: rgba(37, 99, 235, 0.16);
+  --stack-edge-active: rgba(37, 99, 235, 0.62);
+  --window-sheen: radial-gradient(circle at top, rgba(37, 99, 235, 0.14), transparent 62%);
+  --hero-gooey-gradient: linear-gradient(180deg, #1d4ed8 0%, #2563eb 48%, #06b6d4 100%);
+  --shadow-xl: 0 28px 90px -64px rgba(37, 99, 235, 0.38);
+  --shadow-control: 0 18px 48px -34px rgba(37, 99, 235, 0.36);
 }
 
 @theme inline {
@@ -31,10 +157,11 @@
 
 html {
   color-scheme: dark;
-  background:
-    radial-gradient(circle at 20% 15%, rgba(67, 137, 255, 0.16), transparent 24%),
-    radial-gradient(circle at 85% 0%, rgba(100, 116, 139, 0.12), transparent 26%),
-    linear-gradient(180deg, #09101f 0%, #050816 50%, #040611 100%);
+  background: var(--page-gradient);
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
 }
 
 html,
@@ -48,6 +175,9 @@ body {
   font-family: var(--font-manrope), sans-serif;
   letter-spacing: -0.01em;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color 260ms ease,
+    color 260ms ease;
 }
 
 a,
@@ -76,19 +206,16 @@ button {
 
 .site-shell::before {
   background:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(var(--shell-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--shell-grid-line) 1px, transparent 1px);
   background-position: center center;
   background-size: 84px 84px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 92%);
-  opacity: 0.22;
+  opacity: var(--shell-grid-opacity);
 }
 
 .site-shell::after {
-  background:
-    radial-gradient(circle at 18% 18%, rgba(67, 137, 255, 0.16), transparent 20%),
-    radial-gradient(circle at 80% 10%, rgba(67, 137, 255, 0.08), transparent 18%),
-    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.03), transparent 35%);
+  background: var(--shell-ambient);
   filter: blur(18px);
   opacity: 0.9;
   animation: ambientShift 16s ease-in-out infinite alternate;
@@ -108,8 +235,8 @@ footer {
   z-index: 60;
   border-radius: 999px;
   border: 1px solid rgba(67, 137, 255, 0.32);
-  background: #0b1020;
-  color: white;
+  background: var(--background-soft);
+  color: var(--text-primary);
   padding: 0.75rem 1rem;
   transform: translateY(-140%);
   transition: transform 240ms cubic-bezier(0.32, 0.72, 0, 1);
@@ -184,8 +311,8 @@ p {
   .project-window-card:hover,
   .project-window-card:focus-within {
     transform: translate3d(0, -6px, 0) scale(1.01);
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 40px 120px -64px rgba(0, 0, 0, 0.98);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-xl);
   }
 
   .project-window-card:hover .project-window-sheen,
@@ -193,6 +320,174 @@ p {
     opacity: 1;
     transform: scale(1.04);
   }
+}
+
+.theme-frame {
+  border-color: var(--border);
+  background: var(--surface-subtle);
+  box-shadow: var(--shadow-xl);
+}
+
+.theme-frame,
+.theme-panel,
+.theme-panel-elevated,
+.theme-nav,
+.theme-control,
+.theme-control-strong,
+.theme-accent-control,
+.theme-pill,
+.theme-inset,
+.theme-mobile-overlay,
+.theme-mobile-close,
+.theme-main-glow,
+.theme-section-band,
+.theme-photo-shell,
+.theme-photo-overlay,
+.theme-contact-panel,
+.theme-contact-cta {
+  transition:
+    background 260ms ease,
+    background-color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    color 260ms ease;
+}
+
+.theme-panel {
+  border-color: var(--border-soft);
+  background: var(--panel-background);
+}
+
+.theme-panel-elevated {
+  border-color: var(--border-soft);
+  background: var(--panel-elevated);
+}
+
+.theme-nav {
+  border-color: var(--border);
+  background: var(--nav-background);
+  box-shadow: 0 22px 60px -40px rgba(0, 0, 0, 0.95);
+}
+
+:root[data-theme="light"] .theme-nav {
+  box-shadow: 0 22px 60px -46px rgba(37, 99, 235, 0.35);
+}
+
+.theme-control {
+  border-color: var(--border);
+  background: var(--surface-control);
+  color: var(--text-secondary);
+}
+
+.theme-control:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-control-hover);
+  color: var(--text-primary);
+}
+
+.theme-control-strong {
+  border-color: var(--border);
+  background: var(--surface-control-strong);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-control);
+}
+
+.theme-accent-control {
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.theme-accent-control:hover {
+  background: var(--accent-hover);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-text-subtle {
+  color: var(--text-subtle);
+}
+
+.theme-pill {
+  border-color: var(--border);
+  background: var(--surface-control);
+  color: var(--text-muted);
+}
+
+.theme-inset {
+  border-color: var(--border);
+  background: var(--surface-inset);
+}
+
+.theme-mobile-overlay {
+  background: var(--nav-popover-background);
+}
+
+.theme-mobile-close {
+  border-color: var(--border);
+  background: var(--nav-popover-control);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-control);
+}
+
+.theme-main-glow {
+  background: var(--main-center-glow);
+}
+
+.theme-section-band {
+  background: var(--section-band-background);
+}
+
+.theme-carousel-fade-left {
+  background-image: linear-gradient(to right, var(--carousel-fade), transparent);
+}
+
+.theme-carousel-fade-right {
+  background-image: linear-gradient(to left, var(--carousel-fade), transparent);
+}
+
+.theme-photo-shell {
+  border-color: var(--border);
+  background: var(--surface-inset);
+}
+
+.theme-photo-overlay {
+  background: var(--photo-overlay);
+}
+
+.theme-contact-panel {
+  border-color: var(--contact-panel-border);
+  background: var(--contact-panel-background);
+  box-shadow: var(--contact-panel-shadow);
+}
+
+.theme-contact-cta {
+  border-color: var(--contact-cta-border);
+  background: var(--contact-cta-background);
+  color: var(--contact-cta-text);
+  box-shadow: var(--contact-cta-shadow);
+}
+
+.theme-contact-cta:hover {
+  background: var(--contact-cta-hover);
+}
+
+.theme-window-sheen {
+  background: var(--window-sheen);
+}
+
+.theme-gooey-gradient {
+  background-image: var(--hero-gooey-gradient);
 }
 
 @keyframes ambientShift {
