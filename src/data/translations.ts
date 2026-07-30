@@ -168,16 +168,6 @@ const frTimelineItems: TimelineTextItem[] = [
     fallbackLabel: "Apprentissage",
   },
   { id: "date-january-2026", type: "date", label: "Janvier 2026" },
-  { id: "ruby-fundamentals", type: "event", title: "Fondamentaux Ruby" },
-  {
-    id: "end-responsive-web-design",
-    type: "event",
-    title: "Fin du parcours Responsive Web Design",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Apprentissage",
-  },
-  { id: "date-november-2025", type: "date", label: "Novembre 2025" },
   {
     id: "html-css-fundamentals",
     type: "event",
@@ -254,16 +244,6 @@ const enTimelineItems: TimelineTextItem[] = [
     fallbackLabel: "Learning",
   },
   { id: "date-january-2026", type: "date", label: "January 2026" },
-  { id: "ruby-fundamentals", type: "event", title: "Ruby fundamentals" },
-  {
-    id: "end-responsive-web-design",
-    type: "event",
-    title: "Completed the Responsive Web Design path",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Learning",
-  },
-  { id: "date-november-2025", type: "date", label: "November 2025" },
   {
     id: "html-css-fundamentals",
     type: "event",
