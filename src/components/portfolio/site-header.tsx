@@ -31,7 +31,7 @@ export function SiteHeader({
       : copy.themeSwitchToDarkAriaLabel;
 
   return (
-    <header className="sticky top-0 z-30">
+    <header className="sticky top-0 z-30 bg-transparent backdrop-blur-none">
       <div className="mx-auto flex max-w-[1380px] items-center justify-between px-4 pt-4 sm:px-6 lg:px-8">
         <div className="theme-nav flex w-full items-center justify-between rounded-full border px-4 py-3 backdrop-blur-xl">
           <a

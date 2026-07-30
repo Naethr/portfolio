@@ -31,7 +31,6 @@ import {
 import { rotatingTechnologies } from "@/data/portfolio";
 import type { PortfolioTranslations } from "@/data/translations";
 
-import { GradientDots } from "../ui/gradient-dots";
 import MagicRings from "../ui/magic-rings";
 import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
@@ -829,22 +828,6 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
 export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
   return (
     <main id="content" className="relative flex-1 overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-      >
-        <div className="theme-main-glow absolute left-1/2 top-0 h-full min-h-[60rem] w-[min(92vw,72rem)] -translate-x-1/2 opacity-70 blur-3xl" />
-        <div className="absolute inset-x-[-12%] inset-y-0 sm:inset-x-[-4%]">
-          <GradientDots
-            dotSize={10}
-            spacing={12}
-            duration={22}
-            colorCycleDuration={10}
-            className="opacity-28 [mask-image:linear-gradient(180deg,black_0%,black_82%,transparent_100%)]"
-          />
-        </div>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <HeroSection copy={copy.hero} />
         <ProjectsSection
