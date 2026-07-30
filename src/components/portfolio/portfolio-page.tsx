@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   ArrowRight,
   BookOpenIcon,
+  CaretDown,
   CaretLeft,
   CaretRight,
   CertificateIcon,
@@ -31,7 +32,6 @@ import {
 import { rotatingTechnologies } from "@/data/portfolio";
 import type { PortfolioTranslations } from "@/data/translations";
 
-import { GradientDots } from "../ui/gradient-dots";
 import MagicRings from "../ui/magic-rings";
 import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
@@ -104,6 +104,8 @@ type TimelineEventItem = {
 };
 
 type TimelineItem = TimelineDateItem | TimelineEventItem;
+
+const TIMELINE_PREVIEW_ITEM_COUNT = 4;
 
 const timelineAccentStyles: Record<
   TimelineAccent,
@@ -295,6 +297,22 @@ function buildTimelineRenderItems(items: TimelineItem[]) {
 
     return [...renderItems, { item, eventIndex }];
   }, []);
+}
+
+function renderTimelineItem(
+  { item, eventIndex }: TimelineRenderItem,
+  index: number,
+) {
+  return isTimelineEvent(item) ? (
+    <TimelineStep
+      key={item.id}
+      item={item}
+      index={index}
+      eventIndex={eventIndex ?? 0}
+    />
+  ) : (
+    <TimelineDateMarker key={item.id} item={item} />
+  );
 }
 
 function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
@@ -520,6 +538,95 @@ function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
   );
 }
 
+function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const timelineItems = buildTimelineRenderItems(
+    buildTimelineItems(copy.items),
+  );
+  const previewItems = timelineItems.slice(0, TIMELINE_PREVIEW_ITEM_COUNT);
+  const remainingItems = timelineItems.slice(TIMELINE_PREVIEW_ITEM_COUNT);
+  const toggleLabel = isExpanded ? copy.collapseLabel : copy.expandLabel;
+
+  return (
+    <div id="parcours" className="scroll-mt-28 p-5 sm:p-7 lg:p-8">
+      <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
+        <div>
+          <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
+            {copy.eyebrow}
+          </span>
+          <h3 className="theme-text-primary mt-2 text-2xl font-semibold tracking-[-0.055em] sm:text-3xl">
+            {copy.title}
+          </h3>
+        </div>
+      </div>
+
+      <div className="relative min-w-0 overflow-x-clip py-1">
+        <div
+          aria-hidden="true"
+          className={[
+            "absolute bottom-2 left-[1.375rem] top-2 w-px lg:left-1/2 lg:-translate-x-1/2",
+            timelineLineStyles.line,
+          ].join(" ")}
+        />
+        <ol className="relative space-y-6 lg:space-y-9">
+          {previewItems.map(renderTimelineItem)}
+        </ol>
+        <div
+          id="timeline-full-journey"
+          aria-hidden={!isExpanded}
+          className={[
+            "grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            isExpanded
+              ? "grid-rows-[1fr]"
+              : "pointer-events-none grid-rows-[0fr]",
+          ].join(" ")}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <ol
+              start={TIMELINE_PREVIEW_ITEM_COUNT + 1}
+              className={[
+                "relative space-y-6 pt-6 transition-opacity duration-300 lg:space-y-9 lg:pt-9 motion-reduce:transition-none",
+                isExpanded ? "opacity-100" : "opacity-0",
+              ].join(" ")}
+            >
+              {remainingItems.map((item, index) =>
+                renderTimelineItem(
+                  item,
+                  index + TIMELINE_PREVIEW_ITEM_COUNT,
+                ),
+              )}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-20 mt-7 flex justify-center sm:mt-8">
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          aria-controls="timeline-full-journey"
+          aria-label={toggleLabel}
+          onClick={() => setIsExpanded((current) => !current)}
+          className="theme-control group inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-center text-sm font-medium transition duration-300 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100"
+        >
+          <span className={isExpanded ? "sr-only" : undefined}>
+            {toggleLabel}
+          </span>
+          <CaretDown
+            aria-hidden="true"
+            size={16}
+            weight="bold"
+            className={[
+              "shrink-0 transition-transform duration-300 motion-reduce:transition-none",
+              isExpanded ? "rotate-180" : "rotate-0",
+            ].join(" ")}
+          />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
   return (
     <section
@@ -615,11 +722,11 @@ function ProfileSection({
   aboutCopy: PortfolioTranslations["about"];
   timelineCopy: PortfolioTranslations["timeline"];
 }) {
-  const timelineItems = buildTimelineItems(timelineCopy.items);
-  const timelineRenderItems = buildTimelineRenderItems(timelineItems);
-
   return (
-    <section id="profil" className="relative py-20 sm:py-24 lg:py-28">
+    <section
+      id="profil"
+      className="relative pb-12 pt-20 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-28"
+    >
       <div
         aria-hidden="true"
         className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
@@ -628,43 +735,7 @@ function ProfileSection({
         <div className="relative p-4 sm:p-5 lg:p-6">
           <div className="relative space-y-5">
             <AboutIntro copy={aboutCopy} />
-
-            <div id="parcours" className="scroll-mt-28 p-5 sm:p-7 lg:p-8">
-              <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
-                <div>
-                  <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
-                    {timelineCopy.eyebrow}
-                  </span>
-                  <h3 className="theme-text-primary mt-2 text-2xl font-semibold tracking-[-0.055em] sm:text-3xl">
-                    {timelineCopy.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="relative min-w-0 overflow-x-clip py-1">
-                <div
-                  aria-hidden="true"
-                  className={[
-                    "absolute bottom-2 left-[1.375rem] top-2 w-px lg:left-1/2 lg:-translate-x-1/2",
-                    timelineLineStyles.line,
-                  ].join(" ")}
-                />
-                <ol className="relative space-y-6 lg:space-y-9">
-                  {timelineRenderItems.map(({ item, eventIndex }, index) =>
-                    isTimelineEvent(item) ? (
-                      <TimelineStep
-                        key={item.id}
-                        item={item}
-                        index={index}
-                        eventIndex={eventIndex ?? 0}
-                      />
-                    ) : (
-                      <TimelineDateMarker key={item.id} item={item} />
-                    ),
-                  )}
-                </ol>
-              </div>
-            </div>
+            <Timeline copy={timelineCopy} />
           </div>
         </div>
       </SectionReveal>
@@ -829,22 +900,6 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
 export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
   return (
     <main id="content" className="relative flex-1 overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-      >
-        <div className="theme-main-glow absolute left-1/2 top-0 h-full min-h-[60rem] w-[min(92vw,72rem)] -translate-x-1/2 opacity-70 blur-3xl" />
-        <div className="absolute inset-x-[-12%] inset-y-0 sm:inset-x-[-4%]">
-          <GradientDots
-            dotSize={10}
-            spacing={12}
-            duration={22}
-            colorCycleDuration={10}
-            className="opacity-28 [mask-image:linear-gradient(180deg,black_0%,black_82%,transparent_100%)]"
-          />
-        </div>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <HeroSection copy={copy.hero} />
         <ProjectsSection
