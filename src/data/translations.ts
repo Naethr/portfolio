@@ -69,6 +69,8 @@ export type PortfolioTranslations = {
   timeline: {
     eyebrow: string;
     title: string;
+    expandLabel: string;
+    collapseLabel: string;
     items: TimelineTextItem[];
   };
   projectsSection: {
@@ -651,6 +653,8 @@ export const translations = {
     timeline: {
       eyebrow: "Parcours",
       title: "Mon parcours de développeur",
+      expandLabel: "Découvrir mon parcours",
+      collapseLabel: "Replier le parcours",
       items: frTimelineItems,
     },
     projectsSection: {
@@ -745,6 +749,8 @@ export const translations = {
     timeline: {
       eyebrow: "Journey",
       title: "My developer journey",
+      expandLabel: "View my journey",
+      collapseLabel: "Collapse journey",
       items: enTimelineItems,
     },
     projectsSection: {
