@@ -32,7 +32,6 @@ import {
 import { rotatingTechnologies } from "@/data/portfolio";
 import type { PortfolioTranslations } from "@/data/translations";
 
-import MagicRings from "../ui/magic-rings";
 import { SectionReveal } from "../ui/section-reveal";
 import { HeroGooeyText } from "./hero-gooey-text";
 import { ProjectWindowCard } from "./project-window-card";
@@ -575,7 +574,7 @@ function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
           id="timeline-full-journey"
           aria-hidden={!isExpanded}
           className={[
-            "grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            "grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
             isExpanded
               ? "grid-rows-[1fr]"
               : "pointer-events-none grid-rows-[0fr]",
@@ -585,7 +584,7 @@ function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
             <ol
               start={TIMELINE_PREVIEW_ITEM_COUNT + 1}
               className={[
-                "relative space-y-6 pt-6 transition-opacity duration-300 lg:space-y-9 lg:pt-9 motion-reduce:transition-none",
+                "relative space-y-6 pt-6 transition-opacity duration-300 lg:space-y-9 lg:pt-9",
                 isExpanded ? "opacity-100" : "opacity-0",
               ].join(" ")}
             >
@@ -607,7 +606,7 @@ function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
           aria-controls="timeline-full-journey"
           aria-label={toggleLabel}
           onClick={() => setIsExpanded((current) => !current)}
-          className="theme-control group inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-center text-sm font-medium transition duration-300 active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100"
+          className="theme-control group inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-center text-sm font-medium transition duration-300 active:scale-[0.98]"
         >
           <span className={isExpanded ? "sr-only" : undefined}>
             {toggleLabel}
@@ -617,7 +616,7 @@ function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
             size={16}
             weight="bold"
             className={[
-              "shrink-0 transition-transform duration-300 motion-reduce:transition-none",
+              "shrink-0 transition-transform duration-300",
               isExpanded ? "rotate-180" : "rotate-0",
             ].join(" ")}
           />
@@ -635,39 +634,6 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
     >
       <div className="w-full">
         <div className="relative px-2 py-12 sm:px-4 sm:py-14 lg:px-8 lg:py-16">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[calc(100dvh+18rem)] min-h-[56rem] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden opacity-85"
-          >
-            <div className="absolute inset-y-0 left-0 w-full [mask-image:linear-gradient(90deg,black_0%,black_22%,rgba(0,0,0,0.8)_31%,transparent_44%,transparent_56%,rgba(0,0,0,0.8)_69%,black_78%,black_100%)]">
-              <MagicRings
-                color="#7cb0ff"
-                colorTwo="#4389ff"
-                ringCount={6}
-                speed={1.2}
-                attenuation={7.25}
-                lineThickness={1.5}
-                baseRadius={0.62}
-                radiusStep={0.085}
-                scaleRate={0.07}
-                opacity={0.9}
-                blur={0.2}
-                noiseAmount={0.03}
-                rotation={0}
-                ringGap={1.45}
-                stretchX={1.9}
-                edgeCoverage={0.94}
-                fadeIn={0.72}
-                fadeOut={1.28}
-                followMouse={false}
-                mouseInfluence={0.1}
-                hoverScale={1.12}
-                parallax={0.035}
-                clickBurst={false}
-              />
-            </div>
-          </div>
-
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 text-center">
             <div className="space-y-8">
               <span className="theme-pill inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
@@ -803,6 +769,7 @@ function ProjectsSection({
                   <ProjectWindowCard
                     project={projects[previousProjectIndex]}
                     copy={projectCardCopy}
+                    isActive={false}
                   />
                 </motion.div>
 
@@ -817,6 +784,7 @@ function ProjectsSection({
                   <ProjectWindowCard
                     project={projects[nextProjectIndex]}
                     copy={projectCardCopy}
+                    isActive={false}
                   />
                 </motion.div>
               </>

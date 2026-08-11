@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from "motion/react";
-import type { ComponentProps } from "react";
+import { motion } from "motion/react";
+import { useEffect, useState, type ComponentProps } from "react";
 
 type GradientDotsProps = ComponentProps<typeof motion.div> & {
   dotSize?: number;
@@ -20,8 +20,34 @@ export function GradientDots({
   className,
   ...props
 }: GradientDotsProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const [isPageVisible, setIsPageVisible] = useState(true);
   const hexSpacing = spacing * 1.732;
+  const restingBackgroundPosition = `
+    0px 0px, ${spacing / 2}px ${hexSpacing / 2}px,
+    0% 0%,
+    0% 0%,
+    0% 0%,
+    0% 0px
+  `;
+  const shouldAnimate = isPageVisible;
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const syncPageVisibility = () => {
+      const pageIsVisible = document.visibilityState === "visible";
+      setIsPageVisible(pageIsVisible);
+      root.dataset.pageHidden = pageIsVisible ? "false" : "true";
+    };
+
+    syncPageVisibility();
+    document.addEventListener("visibilitychange", syncPageVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", syncPageVisibility);
+      delete root.dataset.pageHidden;
+    };
+  }, []);
 
   return (
     <motion.div
@@ -44,29 +70,25 @@ export function GradientDots({
           200% 200%,
           200% ${hexSpacing}px
         `,
-        backgroundPosition: `
-          0px 0px, ${spacing / 2}px ${hexSpacing / 2}px,
-          0% 0%,
-          0% 0%,
-          0% 0%,
-          0% 0px
-        `,
+        backgroundPosition: restingBackgroundPosition,
       }}
       animate={
-        shouldReduceMotion
-          ? undefined
-          : {
+        shouldAnimate
+          ? {
               backgroundPosition: [
                 `0px 0px, ${spacing / 2}px ${hexSpacing / 2}px, 800% 400%, 1000% -400%, -1200% -600%, 400% ${hexSpacing}px`,
                 `0px 0px, ${spacing / 2}px ${hexSpacing / 2}px, 0% 0%, 0% 0%, 0% 0%, 0% 0%`,
               ],
               filter: ["hue-rotate(0deg)", "hue-rotate(360deg)"],
             }
+          : {
+              backgroundPosition: restingBackgroundPosition,
+              filter: "hue-rotate(0deg)",
+            }
       }
       transition={
-        shouldReduceMotion
-          ? undefined
-          : {
+        shouldAnimate
+          ? {
               backgroundPosition: {
                 duration,
                 ease: "linear",
@@ -78,6 +100,7 @@ export function GradientDots({
                 repeat: Number.POSITIVE_INFINITY,
               },
             }
+          : { duration: 0 }
       }
       {...props}
     />

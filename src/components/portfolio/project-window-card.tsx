@@ -7,6 +7,7 @@ import type { PortfolioTranslations } from "@/data/translations";
 type ProjectWindowCardProps = {
   project: Project;
   copy: PortfolioTranslations["projectCard"];
+  isActive?: boolean;
 };
 
 const projectScreenshots: Partial<
@@ -28,12 +29,18 @@ function browserPath(slug: string) {
   return `theovillalba.dev/projects/${slug}`;
 }
 
-export function ProjectWindowCard({ project, copy }: ProjectWindowCardProps) {
+export function ProjectWindowCard({
+  project,
+  copy,
+  isActive = true,
+}: ProjectWindowCardProps) {
   const screenshot = projectScreenshots[project.slug];
 
   return (
     <article className="theme-frame project-window-card rounded-[1.55rem] border p-1.5 md:rounded-[1.9rem] md:p-2">
-      <div className="theme-panel project-window relative overflow-hidden rounded-[1.2rem] border md:rounded-[1.45rem]">
+      <div
+        className={`theme-panel project-window relative overflow-hidden rounded-[1.2rem] border md:rounded-[1.45rem]${isActive ? "" : " project-window-inactive"}`}
+      >
         <div
           aria-hidden="true"
           className="theme-window-sheen project-window-sheen absolute inset-x-[20%] top-0 h-full opacity-75"
@@ -87,7 +94,7 @@ export function ProjectWindowCard({ project, copy }: ProjectWindowCardProps) {
                   alt={copy.screenshots[project.slug] ?? project.name}
                   width={screenshot.width}
                   height={screenshot.height}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  sizes="(min-width: 768px) 288px, 224px"
                   className="block h-auto max-h-[130px] w-auto max-w-full object-contain md:max-h-[180px]"
                 />
               </div>
