@@ -737,7 +737,11 @@ function ProjectsSection({
   }
 
   return (
-    <section id="projets" className="py-20 sm:py-24">
+    <section id="projets" className="relative py-20 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
+      />
       <SectionReveal className="space-y-10">
         <SectionHeading
           eyebrow={copy.eyebrow}
