@@ -26,6 +26,8 @@ function easeInOutCubic(value: number) {
     : 1 - Math.pow(-2 * value + 2, 3) / 2;
 }
 
+const MAX_FRAME_DELTA_SECONDS = 0.1;
+
 export function GooeyText({
   texts,
   morphTime = 1,
@@ -152,7 +154,13 @@ export function GooeyText({
     };
 
     const animate = (currentTime: number) => {
-      const delta = (currentTime - previousTime) / 1000;
+      frameRef.current = null;
+
+      const delta = clamp(
+        (currentTime - previousTime) / 1000,
+        0,
+        MAX_FRAME_DELTA_SECONDS,
+      );
       previousTime = currentTime;
 
       if (cooldown > 0) {
@@ -174,14 +182,28 @@ export function GooeyText({
       frameRef.current = window.requestAnimationFrame(animate);
     };
 
-    frameRef.current = window.requestAnimationFrame(animate);
-
-    return () => {
+    const stopAnimation = () => {
       if (frameRef.current !== null) {
         window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
       }
     };
-  }, [cooldownTime, morphTime, safeTexts]);
+
+    const startAnimation = () => {
+      if (frameRef.current !== null) {
+        return;
+      }
+
+      previousTime = performance.now();
+      frameRef.current = window.requestAnimationFrame(animate);
+    };
+
+    startAnimation();
+
+    return () => {
+      stopAnimation();
+    };
+  }, [cooldownTime, morphTime, safeTexts, textLayers]);
 
   return (
     <div className={cn("relative inline-grid place-items-center overflow-visible isolate", className)}>
