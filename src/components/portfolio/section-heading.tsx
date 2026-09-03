@@ -10,7 +10,7 @@ export function SectionHeading({
   description,
 }: SectionHeadingProps) {
   return (
-    <div className="max-w-2xl space-y-5">
+    <div className="relative z-10 max-w-2xl space-y-5">
       <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
         {eyebrow}
       </span>

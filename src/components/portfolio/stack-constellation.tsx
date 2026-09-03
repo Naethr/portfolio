@@ -91,7 +91,7 @@ function SkillDetailsPanel({
   const category = copy.categories[skill.category];
 
   return (
-    <aside className={frame("h-full min-w-0")}>
+    <aside className={frame("relative z-10 h-full min-w-0")}>
       <div className={panel("flex h-full min-w-0 flex-col justify-between gap-7 p-5 sm:gap-8 sm:p-7")}>
         <div className="space-y-5">
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -522,7 +522,11 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
   const activeRelatedIds = new Set(activeSkill.related);
 
   return (
-    <section id="stack" className="py-20 sm:py-24">
+    <section id="stack" className="relative py-20 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
+      />
       <SectionReveal className="space-y-10">
         <SectionHeading
           eyebrow={copy.section.eyebrow}
