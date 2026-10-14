@@ -418,6 +418,27 @@ p {
   padding-top: clamp(4rem, 7vw, 7rem);
 }
 
+.hero-cartography {
+  position: absolute;
+  top: -1rem;
+  left: -1%;
+  width: min(50vw, 700px);
+  height: auto;
+  opacity: 0.1;
+  mix-blend-mode: screen;
+}
+
+.hero-astral-corner {
+  position: absolute;
+  top: -2rem;
+  right: -2%;
+  width: min(32vw, 440px);
+  height: auto;
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse 95% 115% at 83% 10%, #000 8%, rgba(0, 0, 0, 0.7) 48%, transparent 100%);
+}
+
 .hero-planet {
   position: absolute;
   width: auto;
@@ -431,6 +452,7 @@ p {
   left: 53%;
   width: clamp(90px, 11vw, 170px);
   opacity: 0.26;
+  mask-image: radial-gradient(circle at 50% 52%, #000 27%, transparent 39%);
 }
 
 .hero-planet-lower {
@@ -438,6 +460,17 @@ p {
   bottom: 15%;
   width: clamp(70px, 7vw, 110px);
   opacity: 0.3;
+  mask-image: radial-gradient(circle at 43% 45%, #000 24%, transparent 42%);
+}
+
+:root[data-theme="light"] .hero-cartography {
+  mix-blend-mode: multiply;
+  opacity: 0.08;
+}
+
+:root[data-theme="light"] .hero-astral-corner {
+  mix-blend-mode: multiply;
+  opacity: 0.06;
 }
 
 :root[data-theme="light"] .hero-planet {
@@ -451,6 +484,11 @@ p {
     padding-top: clamp(3.5rem, 8vw, 5.5rem);
   }
 
+  .hero-cartography {
+    top: 0;
+    width: min(58vw, 620px);
+  }
+
   .hero-planet-upper {
     top: 20%;
     right: 3%;
@@ -459,6 +497,24 @@ p {
 }
 
 @media (max-width: 639px) {
+  .hero-cartography {
+    top: 10rem;
+    left: -4%;
+    width: 86vw;
+    opacity: 0.06;
+  }
+
+  :root[data-theme="light"] .hero-cartography {
+    opacity: 0.05;
+  }
+
+  .hero-astral-corner {
+    top: -1rem;
+    right: -6%;
+    width: 48vw;
+    opacity: 0.045;
+  }
+
   .hero-planet-upper {
     top: 49%;
     right: -2rem;
@@ -538,13 +594,10 @@ p {
 
 .hero-orbit-dotted,
 .hero-orbit-fine,
-.hero-orbit-cardinals,
 .hero-orbit-track,
 .hero-orbit-connection,
 .hero-orbit-connection-soft,
-.hero-orbit-core-rim,
 .hero-orbit-core-disc,
-.hero-orbit-core-axis,
 .hero-orbit-node-rim,
 .hero-orbit-node-disc {
   stroke-width: 1;
@@ -556,16 +609,13 @@ p {
   opacity: 0.7;
 }
 
-.hero-orbit-cardinals,
-.hero-orbit-connection,
-.hero-orbit-core-axis {
+.hero-orbit-connection {
   stroke: var(--hero-orbit-line);
 }
 
 .hero-orbit-fine,
 .hero-orbit-track,
 .hero-orbit-connection-soft,
-.hero-orbit-core-rim,
 .hero-orbit-node-rim {
   stroke: var(--hero-orbit-line-soft);
 }
@@ -575,17 +625,12 @@ p {
   opacity: 0.48;
 }
 
-.hero-orbit-core-rim {
-  stroke-dasharray: 3 8;
-}
-
 .hero-orbit-core-disc {
   fill: var(--hero-orbit-center);
   stroke: var(--hero-orbit-line);
 }
 
-.hero-orbit-core-center,
-.hero-orbit-signal {
+.hero-orbit-core-center {
   fill: var(--hero-kicker);
 }
 
@@ -645,15 +690,6 @@ p {
   .hero-planet-lower {
     animation: hero-planet-float 22s ease-in-out -7s infinite alternate-reverse;
   }
-
-  .hero-orbit-signal-one,
-  .hero-orbit-signal-two {
-    animation: hero-signal-breathe 6s ease-in-out infinite;
-  }
-
-  .hero-orbit-signal-two {
-    animation-delay: -3s;
-  }
 }
 
 @keyframes hero-dial-turn {
@@ -662,10 +698,6 @@ p {
 
 @keyframes hero-planet-float {
   to { transform: translate3d(0, -5px, 0); }
-}
-
-@keyframes hero-signal-breathe {
-  50% { opacity: 0.38; }
 }
 
 .hero-waypoints a {

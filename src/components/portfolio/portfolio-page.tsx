@@ -637,6 +637,8 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
   return (
     <section id="top" className="hero-section relative isolate left-1/2 w-screen -translate-x-1/2 overflow-hidden">
       <div aria-hidden="true" className="hero-backdrop pointer-events-none absolute inset-0 -z-10">
+        <Image src="/images/hero/jade-cartography-organic.webp" alt="" width={700} height={810} className="hero-cartography" />
+        <Image src="/images/hero/astral-corner.webp" alt="" width={470} height={360} className="hero-astral-corner" />
         <Image src="/images/hero/planet-jade.webp" alt="" width={220} height={220} className="hero-planet hero-planet-upper" priority />
         <Image src="/images/hero/planet-small.webp" alt="" width={132} height={132} className="hero-planet hero-planet-lower" priority />
       </div>

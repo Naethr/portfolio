@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
+
 /node_modules
 /.pnp
 .pnp.*
@@ -50,3 +50,5 @@ next-env.d.ts
 /AETHER_*.tar.gz
 /AETHER_*.7z
 /AETHER_DIRECTION_V2/
+
+/public/images/hero

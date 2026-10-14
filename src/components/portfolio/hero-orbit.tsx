@@ -7,11 +7,11 @@ import {
 } from "simple-icons";
 
 const stackNodes = [
-  { name: "React", x: 167, y: 225, path: siReact.path },
-  { name: "Next.js", x: 390, y: 127, path: siNextdotjs.path },
-  { name: "Rails", x: 501, y: 325, path: siRubyonrails.path },
-  { name: "TypeScript", x: 208, y: 493, path: siTypescript.path },
-  { name: "SQL", x: 426, y: 495, path: siPostgresql.path },
+  { name: "React", x: 167, y: 225, path: siReact.path, outer: 41, inner: 35 },
+  { name: "Next.js", x: 390, y: 127, path: siNextdotjs.path, outer: 41, inner: 35 },
+  { name: "Rails", x: 501, y: 325, path: siRubyonrails.path, outer: 41, inner: 35 },
+  { name: "TypeScript", x: 208, y: 493, path: siTypescript.path, outer: 49, inner: 43 },
+  { name: "SQL", x: 426, y: 495, path: siPostgresql.path, outer: 41, inner: 35 },
 ];
 
 export function HeroOrbit() {
@@ -25,7 +25,6 @@ export function HeroOrbit() {
     >
       <g className="hero-orbit-turn">
         <circle cx="320" cy="320" r="289" className="hero-orbit-dotted" />
-        <path d="M320 20v26m0 548v26M20 320h26m548 0h26" className="hero-orbit-cardinals" />
       </g>
 
       <circle cx="320" cy="320" r="244" className="hero-orbit-fine" />
@@ -37,26 +36,22 @@ export function HeroOrbit() {
       <path d="M178 256Q229 320 270 320M365 320Q417 326 462 324" className="hero-orbit-connection-soft" />
 
       <g className="hero-orbit-core">
-        <circle cx="320" cy="320" r="73" className="hero-orbit-core-rim" />
-        <circle cx="320" cy="320" r="57" className="hero-orbit-core-disc" />
-        <path d="M320 280v80m-40-40h80" className="hero-orbit-core-axis" />
-        <circle cx="320" cy="320" r="10" className="hero-orbit-core-center" />
+        <circle cx="320" cy="320" r="33" className="hero-orbit-core-disc" />
+        <circle cx="320" cy="320" r="6" className="hero-orbit-core-center" />
       </g>
 
-      {stackNodes.map(({ name, x, y, path }) => (
-        <g key={name} className="hero-orbit-node" transform={`translate(${x} ${y})`}>
-          <circle r="41" className="hero-orbit-node-rim" />
-          <circle r="35" className="hero-orbit-node-disc" />
-          <svg x="-13" y="-20" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="hero-orbit-node-icon">
-            <path d={path} />
-          </svg>
-          <text y="21" textAnchor="middle">{name}</text>
+      {stackNodes.map(({ name, x, y, path, outer, inner }) => (
+        <g key={name} transform={`translate(${x} ${y})`}>
+          <g className="hero-orbit-node">
+            <circle r={outer} className="hero-orbit-node-rim" />
+            <circle r={inner} className="hero-orbit-node-disc" />
+            <svg x="-13" y="-21" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="hero-orbit-node-icon">
+              <path d={path} />
+            </svg>
+            <text y="22" textAnchor="middle">{name}</text>
+          </g>
         </g>
       ))}
-
-      <circle cx="90" cy="334" r="3" className="hero-orbit-signal hero-orbit-signal-one" />
-      <circle cx="551" cy="225" r="2.5" className="hero-orbit-signal hero-orbit-signal-two" />
-      <circle cx="279" cy="91" r="2" className="hero-orbit-signal" />
     </svg>
   );
 }
