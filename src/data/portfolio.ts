@@ -8,7 +8,7 @@ export type Project = {
   name: string;
   description: string;
   technologies: string[];
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
   status: string;
   year: string;
@@ -56,9 +56,8 @@ export const projects: Project[] = [
     slug: "sokwak.com",
     name: "Sokwak AI",
     description:
-      "Une IA qui n’écrit pas la solution à ta place, mais t’aide à apprendre à la trouver.",
+      "Prototype d’interface pour un assistant pédagogique visant à guider le raisonnement plutôt qu’à fournir la solution.",
     technologies: ["Express.js", "TypeScript", "React", "Next.js"],
-    githubUrl: "https://github.com/Naethr/Rubberduck_AI",
     status: "MVP",
     year: "2026",
     metric: "Une appli IA destinée à aider à l’apprentissage avant tout.",

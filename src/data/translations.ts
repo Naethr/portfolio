@@ -56,10 +56,17 @@ export type PortfolioTranslations = {
   };
   navigationLinks: ProjectLink[];
   hero: {
-    eyebrow: string;
+    headline: { lead: string; ending: string };
     role: string;
+    introduction: string;
     projectsCta: string;
     contactCta: string;
+    waypointsLabel: string;
+    waypoints: {
+      projects: string;
+      skills: string;
+      journey: string;
+    };
   };
   about: {
     eyebrow: string;
@@ -77,16 +84,14 @@ export type PortfolioTranslations = {
     eyebrow: string;
     title: string;
     description: string;
-    previousAriaLabel: string;
-    nextAriaLabel: string;
   };
-  projectCard: {
+  projectShowcase: {
     projectLabel: string;
-    illustrationPending: string;
-    liveContext: string;
-    stackUsed: string;
-    intention: string;
-    defaultIntention: string;
+    caseStudyLabel: string;
+    technologyLabel: string;
+    codeLinkLabel: string;
+    openScreenshotLabel: string;
+    noScreenshotLabel: string;
     screenshots: Record<string, string>;
   };
   projects: Project[];
@@ -597,24 +602,24 @@ const enSkills: SkillCopy[] = [
 
 const categoryColors: Record<SkillCategory, Pick<StackCategoryCopy, "accent" | "soft">> = {
   frontend: {
-    accent: "rgba(96,165,250,0.92)",
-    soft: "rgba(96,165,250,0.12)",
+    accent: "var(--skill-frontend)",
+    soft: "var(--skill-frontend-soft)",
   },
   backend: {
-    accent: "rgba(52,211,153,0.9)",
-    soft: "rgba(52,211,153,0.1)",
+    accent: "var(--skill-backend)",
+    soft: "var(--skill-backend-soft)",
   },
   database: {
-    accent: "rgba(251,191,36,0.92)",
-    soft: "rgba(251,191,36,0.1)",
+    accent: "var(--skill-database)",
+    soft: "var(--skill-database-soft)",
   },
   tools: {
-    accent: "rgba(148,163,184,0.95)",
-    soft: "rgba(148,163,184,0.1)",
+    accent: "var(--skill-tools)",
+    soft: "var(--skill-tools-soft)",
   },
   ai: {
-    accent: "rgba(167,139,250,0.92)",
-    soft: "rgba(167,139,250,0.1)",
+    accent: "var(--skill-ai)",
+    soft: "var(--skill-ai-soft)",
   },
 };
 
@@ -636,10 +641,18 @@ export const translations = {
     },
     navigationLinks,
     hero: {
-      eyebrow: "Portfolio",
+      headline: { lead: "Créer des mondes", ending: "numériques." },
       role: "Développeur Web Fullstack",
+      introduction:
+        "Je conçois des applications web claires et durables, de l’interface à la logique métier.",
       projectsCta: "Voir les projets",
       contactCta: "Me contacter",
+      waypointsLabel: "Accès aux sections",
+      waypoints: {
+        projects: "Projets sélectionnés",
+        skills: "Compétences",
+        journey: "Parcours",
+      },
     },
     about: {
       eyebrow: "À propos",
@@ -659,23 +672,20 @@ export const translations = {
     },
     projectsSection: {
       eyebrow: "Projets",
-      title: "Quelques projets réalisés seul ou en équipe.",
+      title: "Des projets, des choix concrets.",
       description:
-        "Chacun m’a permis de travailler un aspect concret du développement web : interface, logique métier, architecture ou performance.",
-      previousAriaLabel: "Projet précédent",
-      nextAriaLabel: "Projet suivant",
+        "Trois réalisations pour explorer différentes facettes du développement web, de l’interface à la logique métier.",
     },
-    projectCard: {
+    projectShowcase: {
       projectLabel: "Projet",
-      illustrationPending: "Illustration à venir",
-      liveContext: "Voir le contexte",
-      stackUsed: "Stack utilisée",
-      intention: "Intention",
-      defaultIntention:
-        "Une fenêtre claire, lisible et extensible pour ajouter d’autres projets sans revoir la structure.",
+      caseStudyLabel: "Étude de cas",
+      technologyLabel: "Technologies",
+      codeLinkLabel: "Voir le code sur GitHub",
+      openScreenshotLabel: "Ouvrir la capture",
+      noScreenshotLabel: "Capture dédiée à ajouter",
       screenshots: {
-        "sokwak.com": "Capture d’écran du projet Sokwak",
-        questonaut: "Capture d’écran du projet Questonaut",
+        "sokwak.com": "Interface de saisie du prototype Sokwak AI, avec indication qu’un modèle sera disponible ultérieurement",
+        questonaut: "Tableau de bord de Questonaut avec missions, progression et badges",
       },
     },
     projects,
@@ -732,10 +742,18 @@ export const translations = {
       { label: "My journey", href: "#parcours" },
     ],
     hero: {
-      eyebrow: "Portfolio",
+      headline: { lead: "Building digital", ending: "worlds." },
       role: "Full-Stack Web Developer",
+      introduction:
+        "I build clear, lasting web applications, from interface to business logic.",
       projectsCta: "View projects",
       contactCta: "Contact me",
+      waypointsLabel: "Section shortcuts",
+      waypoints: {
+        projects: "Selected projects",
+        skills: "Skills",
+        journey: "Journey",
+      },
     },
     about: {
       eyebrow: "About",
@@ -755,30 +773,27 @@ export const translations = {
     },
     projectsSection: {
       eyebrow: "Projects",
-      title: "A few projects built solo or as part of a team.",
+      title: "Projects shaped by real choices.",
       description:
-        "Each one helped me work on a concrete aspect of web development: interface, business logic, architecture or performance.",
-      previousAriaLabel: "Previous project",
-      nextAriaLabel: "Next project",
+        "Three projects exploring different sides of web development, from interface to business logic.",
     },
-    projectCard: {
+    projectShowcase: {
       projectLabel: "Project",
-      illustrationPending: "Illustration coming soon",
-      liveContext: "View context",
-      stackUsed: "Stack",
-      intention: "Intention",
-      defaultIntention:
-        "A clear, readable and extensible window for adding other projects without reworking the structure.",
+      caseStudyLabel: "Case study",
+      technologyLabel: "Technologies",
+      codeLinkLabel: "View code on GitHub",
+      openScreenshotLabel: "Open screenshot",
+      noScreenshotLabel: "Dedicated screenshot pending",
       screenshots: {
-        "sokwak.com": "Screenshot of the Sokwak project",
-        questonaut: "Screenshot of the Questonaut project",
+        "sokwak.com": "Sokwak AI prototype input screen, noting that a model will be available later",
+        questonaut: "Questonaut dashboard with missions, progress and badges",
       },
     },
     projects: [
       {
         ...projectBySlug["sokwak.com"],
         description:
-          "An AI that doesn’t write the solution for you, but helps you learn how to find it.",
+          "Prototype interface for a learning assistant intended to guide reasoning rather than provide answers.",
         metric: "An AI app designed to support learning first.",
         intention:
           "Create an AI app that acts like a mentor: it questions, reframes and guides the reasoning until things click.",

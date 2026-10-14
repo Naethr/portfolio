@@ -166,7 +166,7 @@ function SkillNode({
       onFocus={() => onSelect(skill.id)}
       onMouseEnter={() => onSelect(skill.id)}
       className={[
-        "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-2 text-left font-mono text-[0.72rem] shadow-[0_18px_46px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)]",
+        "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-2 text-left font-mono text-[0.72rem] shadow-[0_18px_46px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(127,169,155,0.72)]",
         isActive
           ? "scale-105 border-[var(--border-strong)] bg-[var(--surface-control-hover)] text-[var(--text-primary)]"
           : isRelated
@@ -279,7 +279,7 @@ function MobileSkillNode({
         onClick={() => onSelect(skill.id)}
         onFocus={() => onSelect(skill.id)}
         className={[
-          "relative z-10 max-w-full rounded-full border px-3 py-2 text-left text-[0.8rem] leading-5 shadow-[0_16px_42px_-32px_rgba(0,0,0,0.95)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98] sm:text-sm",
+          "relative z-10 max-w-full rounded-full border px-3 py-2 text-left text-[0.8rem] leading-5 shadow-[0_16px_42px_-32px_rgba(0,0,0,0.95)] backdrop-blur-md transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(127,169,155,0.72)] active:scale-[0.98] sm:text-sm",
           isActive
             ? "bg-[var(--surface-control-hover)] text-[var(--text-primary)]"
             : isRelated
@@ -466,15 +466,15 @@ function MobileSkillStack({
         <div className={panel("relative min-w-0 overflow-hidden px-3 py-5 sm:px-5 sm:py-6")}>
           <div
             aria-hidden="true"
-            className="absolute inset-x-[12%] top-6 h-40 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.12),transparent_68%)] blur-3xl"
+            className="absolute inset-x-[12%] top-6 h-40 rounded-full bg-[radial-gradient(circle,rgba(127,169,155,0.12),transparent_68%)] blur-3xl"
           />
           <div
             aria-hidden="true"
-            className="absolute bottom-0 left-[8%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.12),transparent_70%)] blur-3xl"
+            className="absolute bottom-0 left-[8%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(189,166,122,0.12),transparent_70%)] blur-3xl"
           />
           <div
             aria-hidden="true"
-            className="absolute left-1/2 top-8 bottom-36 w-px -translate-x-1/2 bg-[linear-gradient(180deg,transparent,rgba(148,190,255,0.34),rgba(255,255,255,0.12),transparent)]"
+            className="absolute left-1/2 top-8 bottom-36 w-px -translate-x-1/2 bg-[linear-gradient(180deg,transparent,rgba(127,169,155,0.34),rgba(255,255,255,0.12),transparent)]"
           />
 
           <div className="relative z-10 min-w-0">
@@ -539,11 +539,11 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
             <div className={panel("relative min-h-[42rem] overflow-hidden p-6")}>
               <div
                 aria-hidden="true"
-                className="absolute inset-x-[16%] top-[10%] h-48 rounded-full bg-[radial-gradient(circle,rgba(67,137,255,0.16),transparent_68%)] blur-3xl"
+                className="absolute inset-x-[16%] top-[10%] h-48 rounded-full bg-[radial-gradient(circle,rgba(127,169,155,0.16),transparent_68%)] blur-3xl"
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-6 rounded-[1.3rem] border border-[var(--border-soft)] bg-[linear-gradient(135deg,var(--surface-muted),transparent_34%),radial-gradient(circle_at_72%_38%,rgba(52,211,153,0.08),transparent_28%),radial-gradient(circle_at_32%_82%,rgba(167,139,250,0.1),transparent_26%)]"
+                className="absolute inset-6 rounded-[1.3rem] border border-[var(--border-soft)] bg-[linear-gradient(135deg,var(--surface-muted),transparent_34%),radial-gradient(circle_at_72%_38%,rgba(127,169,155,0.08),transparent_28%),radial-gradient(circle_at_32%_82%,rgba(189,166,122,0.1),transparent_26%)]"
               />
 
               <svg

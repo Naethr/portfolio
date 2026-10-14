@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Kit de refonte local (racine du dépôt uniquement)
+/AETHER_*.md
+/AETHER_RUNS/
+/AETHER_REFERENCES/
+/AETHER_*.png
+/AETHER_*.html
+/AETHER_*.zip
+/AETHER_*.tar.gz
+/AETHER_*.7z
+/AETHER_DIRECTION_V2/

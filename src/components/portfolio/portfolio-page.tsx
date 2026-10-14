@@ -7,8 +7,6 @@ import {
   ArrowRight,
   BookOpenIcon,
   CaretDown,
-  CaretLeft,
-  CaretRight,
   CertificateIcon,
   EnvelopeSimple,
 } from "@phosphor-icons/react";
@@ -29,13 +27,11 @@ import {
   type SimpleIcon,
 } from "simple-icons";
 
-import { rotatingTechnologies } from "@/data/portfolio";
 import type { PortfolioTranslations } from "@/data/translations";
 
 import { SectionReveal } from "../ui/section-reveal";
-import { HeroGooeyText } from "./hero-gooey-text";
-import { ProjectWindowCard } from "./project-window-card";
-import { SectionHeading } from "./section-heading";
+import { HeroOrbit } from "./hero-orbit";
+import { ProjectShowcase, ProjectSummary } from "./project-showcase";
 import { StackConstellation } from "./stack-constellation";
 
 const aboutPhoto = {
@@ -43,8 +39,19 @@ const aboutPhoto = {
   alt: "Portrait de Théo",
 };
 
+const projectRank: Record<string, number> = {
+  questonaut: 0,
+  "sokwak.com": 1,
+  portfolio: 2,
+};
+
+const projectScreenshots: Record<string, { src: string; width: number; height: number }> = {
+  questonaut: { src: "/images/questonaut.png", width: 1345, height: 940 },
+  "sokwak.com": { src: "/images/sokwak.png", width: 1004, height: 679 },
+};
+
 type TimelineAccent = "foundation" | "stack";
-type TimelineTone = "teal" | "blue";
+type TimelineTone = "brass" | "jade";
 type TimelineFallbackIcon = typeof CertificateIcon;
 type TimelineSimpleIconId =
   | "css"
@@ -131,28 +138,28 @@ const timelineToneStyles: Record<
     connector: string;
   }
 > = {
-  teal: {
+  brass: {
     button:
-      "border-[rgba(139,92,246,0.34)] bg-[rgba(139,92,246,0.085)] hover:border-[rgba(139,92,246,0.54)] hover:bg-[rgba(139,92,246,0.13)]",
+      "border-[rgba(189,166,122,0.34)] bg-[rgba(189,166,122,0.085)] hover:border-[rgba(189,166,122,0.54)] hover:bg-[rgba(189,166,122,0.13)]",
     activeButton:
-      "border-[rgba(139,92,246,0.64)] bg-[rgba(139,92,246,0.13)] shadow-[0_24px_60px_-44px_rgba(139,92,246,0.76)]",
-    detail: "border-[rgba(139,92,246,0.34)] bg-[rgba(139,92,246,0.075)]",
-    connector: "bg-[rgba(139,92,246,0.56)]",
+      "border-[rgba(189,166,122,0.64)] bg-[rgba(189,166,122,0.13)] shadow-[0_24px_60px_-44px_rgba(189,166,122,0.76)]",
+    detail: "border-[rgba(189,166,122,0.34)] bg-[rgba(189,166,122,0.075)]",
+    connector: "bg-[rgba(189,166,122,0.56)]",
   },
-  blue: {
+  jade: {
     button:
-      "border-[rgba(67,137,255,0.34)] bg-[rgba(67,137,255,0.095)] hover:border-[rgba(67,137,255,0.56)] hover:bg-[rgba(67,137,255,0.145)]",
+      "border-[rgba(127,169,155,0.34)] bg-[rgba(127,169,155,0.095)] hover:border-[rgba(127,169,155,0.56)] hover:bg-[rgba(127,169,155,0.145)]",
     activeButton:
-      "border-[rgba(67,137,255,0.68)] bg-[rgba(67,137,255,0.15)] shadow-[0_24px_60px_-44px_rgba(67,137,255,0.88)]",
-    detail: "border-[rgba(67,137,255,0.34)] bg-[rgba(67,137,255,0.085)]",
-    connector: "bg-[rgba(67,137,255,0.6)]",
+      "border-[rgba(127,169,155,0.68)] bg-[rgba(127,169,155,0.15)] shadow-[0_24px_60px_-44px_rgba(127,169,155,0.88)]",
+    detail: "border-[rgba(127,169,155,0.34)] bg-[rgba(127,169,155,0.085)]",
+    connector: "bg-[rgba(127,169,155,0.6)]",
   },
 };
 
 const timelineLineStyles = {
-  line: "bg-[rgba(45,212,191,0.58)]",
+  line: "bg-[rgba(127,169,155,0.58)]",
   point:
-    "border-[rgba(45,212,191,0.84)] bg-[var(--timeline-point-background)] shadow-[0_0_0_6px_rgba(45,212,191,0.1),0_0_22px_rgba(45,212,191,0.42)]",
+    "border-[rgba(127,169,155,0.84)] bg-[var(--timeline-point-background)] shadow-[0_0_0_6px_rgba(127,169,155,0.1),0_0_22px_rgba(127,169,155,0.42)]",
 };
 
 const timelineItemMeta: Record<
@@ -321,7 +328,7 @@ function TimelineDateMarker({ item }: { item: TimelineDateItem }) {
     <li className="relative grid grid-cols-[2.75rem_0.75rem_minmax(0,1fr)] py-1 lg:grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] lg:py-2">
       <span
         className={[
-          "relative z-20 col-span-3 col-start-1 w-fit max-w-full justify-self-start rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.52rem] uppercase leading-tight tracking-[0.08em] shadow-[0_0_24px_-16px_rgba(45,212,191,0.9)] lg:col-span-1 lg:col-start-2 lg:min-w-[6.75rem] lg:justify-self-center lg:text-[0.58rem] lg:leading-none lg:tracking-[0.12em]",
+          "relative z-20 col-span-3 col-start-1 w-fit max-w-full justify-self-start rounded-[0.65rem] border px-2.5 py-1.5 text-center font-mono text-[0.52rem] uppercase leading-tight tracking-[0.08em] shadow-[0_0_24px_-16px_rgba(127,169,155,0.9)] lg:col-span-1 lg:col-start-2 lg:min-w-[6.75rem] lg:justify-self-center lg:text-[0.58rem] lg:leading-none lg:tracking-[0.12em]",
           accent.date,
         ].join(" ")}
       >
@@ -390,7 +397,7 @@ function TimelineStep({
   index: number;
   eventIndex: number;
 }) {
-  const tone: TimelineTone = eventIndex % 2 === 0 ? "teal" : "blue";
+  const tone: TimelineTone = eventIndex % 2 === 0 ? "brass" : "jade";
   const toneStyles = timelineToneStyles[tone];
   const isLeft = eventIndex % 2 === 0;
   const hasDetail = Boolean(item.detail);
@@ -519,7 +526,7 @@ function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
         whileHover={{ y: -3, scale: 1.006 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="theme-photo-shell group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border shadow-[0_22px_62px_-46px_rgba(67,137,255,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(67,137,255,0.68)] sm:max-w-[17rem] lg:mr-0"
+        className="theme-photo-shell group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border shadow-[0_22px_62px_-46px_rgba(127,169,155,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(127,169,155,0.68)] sm:max-w-[17rem] lg:mr-0"
       >
         <div
           aria-hidden="true"
@@ -628,54 +635,57 @@ function Timeline({ copy }: { copy: PortfolioTranslations["timeline"] }) {
 
 function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[calc(100dvh-5rem)] items-center py-24 sm:py-28 lg:py-32"
-    >
-      <div className="w-full">
-        <div className="relative px-2 py-12 sm:px-4 sm:py-14 lg:px-8 lg:py-16">
-          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-10 text-center">
-            <div className="space-y-8">
-              <span className="theme-pill inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.24em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(67,137,255,0.85)]" />
-                {copy.eyebrow}
-              </span>
+    <section id="top" className="hero-section relative isolate left-1/2 w-screen -translate-x-1/2 overflow-hidden">
+      <div aria-hidden="true" className="hero-backdrop pointer-events-none absolute inset-0 -z-10">
+        <Image src="/images/hero/planet-jade.webp" alt="" width={220} height={220} className="hero-planet hero-planet-upper" priority />
+        <Image src="/images/hero/planet-small.webp" alt="" width={132} height={132} className="hero-planet hero-planet-lower" priority />
+      </div>
+      <div className="hero-inner">
+      <div className="hero-content relative grid items-center gap-8 pb-12 sm:gap-10 sm:pb-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-4 lg:pb-14">
+        <div className="relative z-10 max-w-[48rem]">
+          <p className="hero-enter hero-kicker flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] sm:text-xs">
+            <span>{copy.role}</span>
+            <span aria-hidden="true" className="hero-kicker-divider h-px w-7" />
+            <span>Théo Villalba</span>
+          </p>
 
-              <div className="space-y-4">
-                <h1 className="theme-text-primary max-w-3xl font-tech text-[clamp(3rem,6vw,5.2rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
-                  Théo VILLALBA
-                </h1>
-                <p className="theme-text-secondary max-w-2xl font-display text-[clamp(1.1rem,2.1vw,1.4rem)] font-medium leading-[1.08] tracking-[-0.04em]">
-                  {copy.role}
-                </p>
-              </div>
+          <h1 className="hero-enter hero-enter-title mt-8 max-w-[16ch] font-display text-[clamp(2.55rem,5.7vw,5.8rem)] font-normal leading-[1.03] tracking-[-0.04em] [overflow-wrap:anywhere] sm:mt-10 xl:max-w-none">
+            <span className="hero-title-lead">{copy.headline.lead} </span>
+            <span>{copy.headline.ending}</span>
+          </h1>
+          <div aria-hidden="true" className="hero-heading-rule mt-6 max-w-[27rem] sm:mt-8"><span /></div>
 
-              <div className="flex flex-col items-center gap-5">
-                <div className="rotating-shell max-w-full px-3 py-3 sm:px-4 sm:py-4">
-                  <HeroGooeyText texts={rotatingTechnologies} />
-                </div>
-              </div>
+          <p className="hero-enter hero-enter-description mt-7 max-w-[34rem] text-base leading-relaxed sm:mt-8 sm:text-lg">
+            <span className="mb-1 block font-medium text-[var(--hero-heading)]">Ruby on Rails · React · TypeScript</span>
+            {copy.introduction}
+          </p>
 
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <a
-                  href="#projets"
-                  className="theme-accent-control group inline-flex items-center justify-center gap-3 rounded-full border px-5 py-3.5 text-sm font-medium shadow-[0_18px_50px_-28px_rgba(67,137,255,0.55)] transition-colors duration-300"
-                >
-                  {copy.projectsCta}
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-control-strong)] transition-colors duration-300 group-hover:bg-[var(--surface-control-hover)]">
-                    <ArrowRight size={16} weight="regular" />
-                  </span>
-                </a>
-                <a
-                  href="#contact"
-                  className="theme-control inline-flex items-center justify-center rounded-full border px-5 py-3.5 text-sm font-medium transition-colors duration-300"
-                >
-                  {copy.contactCta}
-                </a>
-              </div>
-            </div>
+          <div className="hero-enter hero-enter-actions mt-9 flex flex-col gap-3 sm:mt-11 sm:flex-row sm:flex-wrap sm:gap-4">
+            <a
+              href="#projets"
+              className="hero-primary-link inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-[0.2rem] border px-6 py-3 text-sm font-semibold transition-colors duration-200 sm:w-auto"
+            >
+              {copy.projectsCta}
+              <ArrowRight aria-hidden="true" size={18} weight="regular" />
+            </a>
+            <a
+              href="#contact"
+              className="hero-secondary-link inline-flex min-h-12 w-full items-center justify-center rounded-[0.2rem] border px-6 py-3 text-sm font-medium transition-colors duration-200 sm:w-auto"
+            >
+              {copy.contactCta}
+            </a>
           </div>
         </div>
+
+        <div aria-hidden="true" className="hero-art relative mx-auto aspect-square w-full max-w-[22rem] lg:max-w-none">
+          <HeroOrbit />
+        </div>
+      </div>
+      <nav aria-label={copy.waypointsLabel} className="hero-waypoints grid gap-0 border-t border-[var(--hero-rule)] pt-1 sm:grid-cols-3">
+        <a href="#projets"><span>01 /</span>{copy.waypoints.projects}</a>
+        <a href="#stack"><span>02 /</span>{copy.waypoints.skills}</a>
+        <a href="#parcours"><span>03 /</span>{copy.waypoints.journey}</a>
+      </nav>
       </div>
     </section>
   );
@@ -715,121 +725,67 @@ function StackSection({ copy }: { copy: PortfolioTranslations["stack"] }) {
 
 function ProjectsSection({
   copy,
-  projectCardCopy,
+  projectShowcaseCopy,
   projects,
 }: {
   copy: PortfolioTranslations["projectsSection"];
-  projectCardCopy: PortfolioTranslations["projectCard"];
+  projectShowcaseCopy: PortfolioTranslations["projectShowcase"];
   projects: PortfolioTranslations["projects"];
 }) {
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const canNavigate = projects.length > 1;
-  const previousProjectIndex =
-    (activeProjectIndex - 1 + projects.length) % projects.length;
-  const nextProjectIndex = (activeProjectIndex + 1) % projects.length;
-
-  function showPreviousProject() {
-    setActiveProjectIndex(previousProjectIndex);
-  }
-
-  function showNextProject() {
-    setActiveProjectIndex(nextProjectIndex);
-  }
+  const orderedProjects = [...projects].sort(
+    (first, second) =>
+      (projectRank[first.slug] ?? Number.MAX_SAFE_INTEGER) -
+      (projectRank[second.slug] ?? Number.MAX_SAFE_INTEGER),
+  );
 
   return (
-    <section id="projets" className="relative py-20 sm:py-24">
-      <div
-        aria-hidden="true"
-        className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
-      />
-      <SectionReveal className="space-y-10">
-        <SectionHeading
-          eyebrow={copy.eyebrow}
-          title={copy.title}
-          description={copy.description}
-        />
+    <section id="projets" className="projects-section relative isolate py-20 sm:py-24 lg:py-28">
+      <div aria-hidden="true" className="projects-backdrop pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden">
+        <svg className="projects-contours absolute -left-48 top-40 h-[55rem] w-[30rem] sm:-left-36" viewBox="0 0 480 880" fill="none">
+          <path d="M-30 14C180 154 28 262 222 401s-98 266 111 480" />
+          <path d="M5-7c210 140 58 248 252 387S159 646 368 860" />
+          <path d="M40-28c210 140 58 248 252 387s-98 266 111 480" />
+          <path d="M75-49c210 140 58 248 252 387s-98 266 111 480" />
+          <path d="M110-70c210 140 58 248 252 387s-98 266 111 480" />
+        </svg>
+        <div className="projects-arc absolute -right-40 top-10 h-80 w-80 rounded-full sm:-right-32 sm:h-[27rem] sm:w-[27rem]" />
+      </div>
 
-        <div className="group/project-carousel relative mx-auto max-w-6xl overflow-hidden py-3 sm:py-6">
-          <div
-            aria-hidden="true"
-            className="theme-carousel-fade-left pointer-events-none absolute inset-y-8 left-0 z-10 w-16 sm:w-24"
-          />
-          <div
-            aria-hidden="true"
-            className="theme-carousel-fade-right pointer-events-none absolute inset-y-8 right-0 z-10 w-16 sm:w-24"
-          />
-
-          <div className="relative mx-auto flex min-h-[42rem] items-center justify-center sm:min-h-[38rem] lg:min-h-[34rem]">
-            {canNavigate ? (
-              <>
-                <motion.div
-                  key={`previous-${projects[previousProjectIndex].slug}`}
-                  aria-hidden="true"
-                  initial={{ opacity: 0, x: "-28%", scale: 0.82 }}
-                  animate={{ opacity: 0.38, x: "-68%", scale: 0.86 }}
-                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-                  className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
-                >
-                  <ProjectWindowCard
-                    project={projects[previousProjectIndex]}
-                    copy={projectCardCopy}
-                    isActive={false}
-                  />
-                </motion.div>
-
-                <motion.div
-                  key={`next-${projects[nextProjectIndex].slug}`}
-                  aria-hidden="true"
-                  initial={{ opacity: 0, x: "28%", scale: 0.82 }}
-                  animate={{ opacity: 0.38, x: "68%", scale: 0.86 }}
-                  transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-                  className="pointer-events-none absolute z-0 w-[82%] max-w-[52rem] blur-[1px] sm:w-[70%] lg:w-[58%]"
-                >
-                  <ProjectWindowCard
-                    project={projects[nextProjectIndex]}
-                    copy={projectCardCopy}
-                    isActive={false}
-                  />
-                </motion.div>
-              </>
-            ) : null}
-
-            <motion.div
-              key={projects[activeProjectIndex].slug}
-              initial={{ opacity: 0, x: 28, scale: 0.97 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-20 w-full max-w-[58rem]"
-            >
-              <ProjectWindowCard
-                project={projects[activeProjectIndex]}
-                copy={projectCardCopy}
-              />
-            </motion.div>
-          </div>
-
-          {canNavigate ? (
-            <div className="pointer-events-none absolute inset-x-2 top-1/2 z-30 flex -translate-y-1/2 items-center justify-between sm:inset-x-4">
-              <button
-                type="button"
-                aria-label={copy.previousAriaLabel}
-                onClick={showPreviousProject}
-                className="theme-control pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
-              >
-                <CaretLeft size={18} weight="regular" />
-              </button>
-              <button
-                type="button"
-                aria-label={copy.nextAriaLabel}
-                onClick={showNextProject}
-                className="theme-control pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full border opacity-100 shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition duration-300 active:scale-95 sm:h-11 sm:w-11 sm:opacity-0 sm:group-hover/project-carousel:opacity-100 sm:group-focus-within/project-carousel:opacity-100"
-              >
-                <CaretRight size={18} weight="regular" />
-              </button>
-            </div>
-          ) : null}
+      <div className="relative z-10">
+        <div className="max-w-3xl">
+          <p className="project-index text-xs font-semibold uppercase tracking-[0.2em]">02 / {copy.eyebrow}</p>
+          <h2 className="theme-text-primary mt-5 text-[clamp(2.5rem,5vw,4.6rem)] font-normal leading-[1.08] [overflow-wrap:anywhere]">
+            {copy.title}
+          </h2>
+          <p className="theme-text-secondary mt-5 max-w-[60ch] text-base leading-relaxed sm:text-lg">
+            {copy.description}
+          </p>
         </div>
-      </SectionReveal>
+
+        <div className="mt-12 space-y-7 sm:mt-16 sm:space-y-10">
+          {orderedProjects.map((project, index) => {
+            const screenshot = projectScreenshots[project.slug];
+
+            return screenshot ? (
+              <ProjectShowcase
+                key={project.slug}
+                project={project}
+                copy={projectShowcaseCopy}
+                number={index + 1}
+                screenshot={screenshot}
+                reverse={index === 1}
+              />
+            ) : (
+              <ProjectSummary
+                key={project.slug}
+                project={project}
+                copy={projectShowcaseCopy}
+                number={index + 1}
+              />
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }
@@ -841,7 +797,7 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
         <div className="theme-contact-panel relative overflow-hidden rounded-[1.55rem] border px-6 py-12 text-center sm:px-10 sm:py-16 lg:px-16">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(167,139,250,0.82),transparent)]"
+            className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(189,166,122,0.82),transparent)]"
           />
 
           <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
@@ -857,7 +813,7 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
               href="mailto:theovbpro@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="theme-contact-cta inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border px-6 py-3.5 text-center text-sm font-semibold transition duration-300 hover:border-[rgba(196,181,253,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 active:scale-[0.98] sm:w-auto"
+              className="theme-contact-cta inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border px-6 py-3.5 text-center text-sm font-semibold transition duration-300 hover:border-[rgba(189,166,122,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--focus-ring)] active:scale-[0.98] sm:w-auto"
             >
               <EnvelopeSimple size={18} weight="regular" />
               theovbpro@gmail.com
@@ -876,7 +832,7 @@ export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
         <HeroSection copy={copy.hero} />
         <ProjectsSection
           copy={copy.projectsSection}
-          projectCardCopy={copy.projectCard}
+          projectShowcaseCopy={copy.projectShowcase}
           projects={copy.projects}
         />
         <StackSection copy={copy.stack} />
