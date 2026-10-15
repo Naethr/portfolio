@@ -315,7 +315,7 @@ const frSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Styling utility-first pour concevoir rapidement des interfaces responsive, cohérentes et faciles à ajuster.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "bootstrap",
@@ -323,7 +323,7 @@ const frSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Pratique pour assembler vite des layouts responsive et des patterns UI standards.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "hotwire",
@@ -339,7 +339,7 @@ const frSkills: SkillCopy[] = [
     category: "backend",
     description:
       "Framework backend productif pour créer des applications web structurées et livrer rapidement un MVP solide.",
-    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
+    related: ["postgresql", "sqlite", "hotwire"],
   },
   {
     id: "node",
@@ -478,7 +478,7 @@ const enSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Utility-first styling for quickly designing responsive, consistent and easy-to-adjust interfaces.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "bootstrap",
@@ -486,7 +486,7 @@ const enSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Useful for quickly assembling responsive layouts and standard UI patterns.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "hotwire",
@@ -502,7 +502,7 @@ const enSkills: SkillCopy[] = [
     category: "backend",
     description:
       "Productive backend framework for building structured web applications and shipping a solid MVP quickly.",
-    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
+    related: ["postgresql", "sqlite", "hotwire"],
   },
   {
     id: "node",

@@ -1226,13 +1226,13 @@ p {
   position: absolute;
   top: 8%;
   left: 50%;
-  width: max(1520px, 100vw);
+  width: 100%;
   aspect-ratio: 16 / 9;
   transform: translateX(-50%);
   background: url("/images/stack/celestial-chart.webp") center / contain no-repeat;
   mask-image:
-    linear-gradient(90deg, transparent 0%, #000 17%, #000 83%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 12%, #000 72%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, transparent 8%, rgba(0, 0, 0, 0.22) 15%, #000 28%, #000 72%, rgba(0, 0, 0, 0.22) 85%, transparent 92%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 5%, #000 16%, #000 70%, rgba(0, 0, 0, 0.45) 85%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
   opacity: var(--constellation-chart-opacity);
@@ -1249,10 +1249,6 @@ p {
   position: relative;
   height: 790px;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 30% 36%, var(--constellation-glow), transparent 37%),
-    radial-gradient(ellipse at 72% 66%, var(--constellation-glow), transparent 32%),
-    linear-gradient(90deg, transparent 49.95%, var(--border-soft) 50%, transparent 50.05%);
 }
 
 .constellation-atlas::before {
@@ -1263,7 +1259,22 @@ p {
   opacity: 0.24;
   background-image: linear-gradient(var(--shell-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--shell-grid-line) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at center, #000 12%, transparent 75%);
+  mask-image: radial-gradient(ellipse closest-side at center, #000 12%, transparent 100%);
+}
+
+.constellation-atlas::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 36%, var(--constellation-glow), transparent 37%),
+    radial-gradient(ellipse at 72% 66%, var(--constellation-glow), transparent 32%);
+  mask-image: radial-gradient(ellipse closest-side at center, #000 48%, transparent 100%);
 }
 
 .constellation-group-label {
@@ -1342,7 +1353,7 @@ p {
 .constellation-mobile .constellation-node-icon { width: 2rem; height: 2rem; }
 
 @media (max-width: 679px) {
-  .constellation-chart { top: 12%; width: 38rem; opacity: calc(var(--constellation-chart-opacity) * 0.65); }
+  .constellation-chart { top: 12%; height: 22rem; aspect-ratio: auto; background-position: 70% center; background-size: auto 100%; opacity: calc(var(--constellation-chart-opacity) * 0.65); }
   .constellation-mobile-options { gap: 0.45rem; }
 }
 @media (prefers-reduced-motion: reduce) {
