@@ -101,9 +101,8 @@ export type PortfolioTranslations = {
       description: string;
     };
     categories: Record<SkillCategory, StackCategoryCopy>;
-    detailsLabel: string;
     relatedTechnologiesLabel: string;
-    showDetailAriaLabel: string;
+    selectTechnologyAriaLabel: string;
     skills: SkillCopy[];
   };
   contact: {
@@ -404,7 +403,7 @@ const frSkills: SkillCopy[] = [
     category: "tools",
     description:
       "Environnement principal pour écrire, déboguer et naviguer efficacement dans le code.",
-    related: ["codex", "ai-workflow", "github"],
+    related: ["codex", "claude", "github"],
   },
   {
     id: "vercel",
@@ -420,15 +419,15 @@ const frSkills: SkillCopy[] = [
     category: "ai",
     description:
       "Workflow de développement assisté par IA pour accélérer l’implémentation, l’itération et la revue de code.",
-    related: ["vscode", "ai-workflow"],
+    related: ["vscode"],
   },
   {
-    id: "ai-workflow",
-    name: "Workflow assisté par IA",
+    id: "claude",
+    name: "Claude",
     category: "ai",
     description:
-      "Méthode de travail moderne où l’IA aide à cadrer, produire, relire et améliorer le code sans remplacer le jugement technique.",
-    related: ["codex", "vscode"],
+      "Assistant IA d’Anthropic pour l’analyse et l’aide au développement.",
+    related: ["vscode"],
   },
 ];
 
@@ -567,7 +566,7 @@ const enSkills: SkillCopy[] = [
     category: "tools",
     description:
       "Main environment for writing, debugging and navigating code efficiently.",
-    related: ["codex", "ai-workflow", "github"],
+    related: ["codex", "claude", "github"],
   },
   {
     id: "vercel",
@@ -583,15 +582,15 @@ const enSkills: SkillCopy[] = [
     category: "ai",
     description:
       "AI-assisted development workflow for speeding up implementation, iteration and code review.",
-    related: ["vscode", "ai-workflow"],
+    related: ["vscode"],
   },
   {
-    id: "ai-workflow",
-    name: "AI-assisted workflow",
+    id: "claude",
+    name: "Claude",
     category: "ai",
     description:
-      "Modern working method where AI helps scope, produce, review and improve code without replacing technical judgment.",
-    related: ["codex", "vscode"],
+      "Anthropic’s AI assistant for analysis and development support.",
+    related: ["vscode"],
   },
 ];
 
@@ -683,7 +682,7 @@ export const translations = {
     stack: {
       section: {
         eyebrow: "Stack",
-        title: "Compétences & Stack",
+        title: "Un réseau de compétences",
         description:
           "Une vue connectée des technologies que j’utilise pour concevoir, construire et livrer des applications web modernes.",
       },
@@ -692,11 +691,10 @@ export const translations = {
         backend: { label: "Backend", ...categoryColors.backend },
         database: { label: "Base de données", ...categoryColors.database },
         tools: { label: "Outils & déploiement", ...categoryColors.tools },
-        ai: { label: "Workflow IA", ...categoryColors.ai },
+        ai: { label: "Assistants IA", ...categoryColors.ai },
       },
-      detailsLabel: "Détail actif",
       relatedTechnologiesLabel: "Technologies liées",
-      showDetailAriaLabel: "Afficher le détail de",
+      selectTechnologyAriaLabel: "Sélectionner",
       skills: frSkills,
     },
     contact: {
@@ -780,7 +778,7 @@ export const translations = {
     stack: {
       section: {
         eyebrow: "Stack",
-        title: "Skills & Stack",
+        title: "A network of skills",
         description:
           "A connected view of the technologies I use to design, build and ship modern web applications.",
       },
@@ -789,11 +787,10 @@ export const translations = {
         backend: { label: "Backend", ...categoryColors.backend },
         database: { label: "Database", ...categoryColors.database },
         tools: { label: "Tools & deployment", ...categoryColors.tools },
-        ai: { label: "AI workflow", ...categoryColors.ai },
+        ai: { label: "AI assistants", ...categoryColors.ai },
       },
-      detailsLabel: "Active detail",
       relatedTechnologiesLabel: "Related technologies",
-      showDetailAriaLabel: "Show details for",
+      selectTechnologyAriaLabel: "Select",
       skills: enSkills,
     },
     contact: {
