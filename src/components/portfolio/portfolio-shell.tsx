@@ -74,7 +74,7 @@ export function PortfolioShell() {
           onToggleTheme={toggleTheme}
           theme={theme}
         />
-        <PortfolioPage copy={copy} />
+        <PortfolioPage copy={copy} language={language} />
         <SiteFooter copy={copy.footer} />
       </div>
     </div>

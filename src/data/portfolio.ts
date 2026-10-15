@@ -6,14 +6,13 @@ export type ProjectLink = {
 export type Project = {
   slug: string;
   name: string;
-  description: string;
+  category: { fr: string; en: string };
+  description: { fr: string; en: string };
   technologies: string[];
+  screenshot?: { src: string; width: number; height: number; alt: { fr: string; en: string } };
+  placeholder?: "portfolio" | "code" | "editorial";
   githubUrl?: string;
   liveUrl?: string;
-  status: string;
-  year: string;
-  metric: string;
-  intention?: string;
 };
 
 export const navigationLinks: ProjectLink[] = [
@@ -53,41 +52,77 @@ export const skillGroups = [
 
 export const projects: Project[] = [
   {
-    slug: "sokwak.com",
-    name: "Sokwak AI",
-    description:
-      "Prototype d’interface pour un assistant pédagogique visant à guider le raisonnement plutôt qu’à fournir la solution.",
-    technologies: ["Express.js", "TypeScript", "React", "Next.js"],
-    status: "MVP",
-    year: "2026",
-    metric: "Une appli IA destinée à aider à l’apprentissage avant tout.",
-    intention:
-      "Créer une app IA qui agit comme un mentor : il questionne, reformule et guide le raisonnement jusqu’au déclic.",
+    slug: "questonaut",
+    name: "Questonaut",
+    category: { fr: "Suivi d’habitudes", en: "Habit tracker" },
+    description: {
+      fr: "Un tracker d’habitudes gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidiens.",
+      en: "A gamified habit tracker that makes sticking to daily goals more engaging.",
+    },
+    technologies: ["Ruby on Rails", "Hotwire", "Stimulus", "JavaScript"],
+    screenshot: {
+      src: "/images/questonaut.png",
+      width: 1345,
+      height: 940,
+      alt: {
+        fr: "Tableau de bord de Questonaut avec missions, progression et badges",
+        en: "Questonaut dashboard with missions, progress and badges",
+      },
+    },
+    githubUrl: "https://github.com/Naethr/questonaut_habit_tracker_app",
   },
   {
-    slug: "questonaut",
-    name: "Questonaut - Tracker d’habitudes gamifié",
-    description:
-      "Un tracker d’habitudes gamifié pour rendre ludique le fait de se tenir à ses objectifs quotidiens.",
-    technologies: ["Ruby on Rails", "Hotwire", "Stimulus", "JavaScript"],
-    githubUrl: "https://github.com/Naethr/questonaut_habit_tracker_app",
-    status: "En cours (MVP terminé)",
-    year: "2026",
-    metric: "UI gamifiée avec système de niveau et badges de récompenses pour aider à se tenir à ses habitudes.",
-    intention:
-      "Proposer une UI gamifiée, avec système de niveau et badges de récompenses, pour aider l’utilisateur à se tenir à ses habitudes.",
+    slug: "sokwak.com",
+    name: "Sokwak AI",
+    category: { fr: "Application pédagogique", en: "Learning application" },
+    description: {
+      fr: "Prototype d’interface pour un assistant pédagogique visant à guider le raisonnement plutôt qu’à fournir la solution.",
+      en: "Prototype interface for a learning assistant intended to guide reasoning rather than provide answers.",
+    },
+    technologies: ["Express.js", "React", "Next.js", "TypeScript"],
+    screenshot: {
+      src: "/images/sokwak.png",
+      width: 1004,
+      height: 679,
+      alt: {
+        fr: "Interface de saisie du prototype Sokwak AI, avec indication qu’un modèle sera disponible ultérieurement",
+        en: "Sokwak AI prototype input screen, noting that a model will be available later",
+      },
+    },
   },
   {
     slug: "portfolio",
     name: "Portfolio",
-    description:
-      "Le portfolio que vous consultez actuellement.",
-    technologies: ["Next.js", "React", "TypeScript"],
+    category: { fr: "Portfolio personnel", en: "Personal portfolio" },
+    description: {
+      fr: "Le portfolio que vous consultez actuellement.",
+      en: "The portfolio you are currently browsing.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    placeholder: "portfolio",
     githubUrl: "https://github.com/Naethr/portfolio",
-    status: "Déployé",
-    year: "2026",
-    metric: "Une interface propre et claire.",
-    intention: "Créer une interface propre, claire, avec des composants modernes.",
+  },
+  {
+    slug: "snipstack",
+    name: "SnipStack",
+    category: { fr: "Outil de développement", en: "Developer tool" },
+    description: {
+      fr: "Application de gestion de snippets permettant d’organiser et de retrouver des extraits de code.",
+      en: "Application for managing code snippets, designed to organize and retrieve reusable code.",
+    },
+    technologies: ["Ruby on Rails", "React", "TypeScript", "Vite"],
+    placeholder: "code",
+  },
+  {
+    slug: "portfolio-l-huguin",
+    name: "Portfolio L. Huguin",
+    category: { fr: "Site vitrine / Portfolio", en: "Showcase / Portfolio" },
+    description: {
+      fr: "Portfolio personnel destiné à présenter des projets de graphisme et de communication, avec une gestion des contenus via une interface d’administration.",
+      en: "Personal portfolio showcasing graphic design and communication projects, with content management through an administration interface.",
+    },
+    technologies: ["Ruby on Rails", "ActiveRecord", "PostgreSQL", "React"],
+    placeholder: "editorial",
   },
 ];
 

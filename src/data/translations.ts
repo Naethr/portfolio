@@ -87,12 +87,11 @@ export type PortfolioTranslations = {
   };
   projectShowcase: {
     projectLabel: string;
-    caseStudyLabel: string;
     technologyLabel: string;
     codeLinkLabel: string;
+    liveLinkLabel: string;
     openScreenshotLabel: string;
-    noScreenshotLabel: string;
-    screenshots: Record<string, string>;
+    visualPendingLabel: string;
   };
   projects: Project[];
   stack: {
@@ -117,10 +116,6 @@ export type PortfolioTranslations = {
     socialLinks: ProjectLink[];
   };
 };
-
-const projectBySlug = Object.fromEntries(
-  projects.map((project) => [project.slug, project]),
-) as Record<Project["slug"], Project>;
 
 const frTimelineItems: TimelineTextItem[] = [
   {
@@ -672,21 +667,17 @@ export const translations = {
     },
     projectsSection: {
       eyebrow: "Projets",
-      title: "Des projets, des choix concrets.",
+      title: "Mes projets",
       description:
-        "Trois réalisations pour explorer différentes facettes du développement web, de l’interface à la logique métier.",
+        "Des applications et des sites conçus avec attention, de l’interface à la logique métier.",
     },
     projectShowcase: {
       projectLabel: "Projet",
-      caseStudyLabel: "Étude de cas",
       technologyLabel: "Technologies",
       codeLinkLabel: "Voir le code sur GitHub",
+      liveLinkLabel: "Voir le site",
       openScreenshotLabel: "Ouvrir la capture",
-      noScreenshotLabel: "Capture dédiée à ajouter",
-      screenshots: {
-        "sokwak.com": "Interface de saisie du prototype Sokwak AI, avec indication qu’un modèle sera disponible ultérieurement",
-        questonaut: "Tableau de bord de Questonaut avec missions, progression et badges",
-      },
+      visualPendingLabel: "Visuel provisoire",
     },
     projects,
     stack: {
@@ -773,49 +764,19 @@ export const translations = {
     },
     projectsSection: {
       eyebrow: "Projects",
-      title: "Projects shaped by real choices.",
+      title: "My projects",
       description:
-        "Three projects exploring different sides of web development, from interface to business logic.",
+        "Applications and websites built with care, from interface to business logic.",
     },
     projectShowcase: {
       projectLabel: "Project",
-      caseStudyLabel: "Case study",
       technologyLabel: "Technologies",
       codeLinkLabel: "View code on GitHub",
+      liveLinkLabel: "View website",
       openScreenshotLabel: "Open screenshot",
-      noScreenshotLabel: "Dedicated screenshot pending",
-      screenshots: {
-        "sokwak.com": "Sokwak AI prototype input screen, noting that a model will be available later",
-        questonaut: "Questonaut dashboard with missions, progress and badges",
-      },
+      visualPendingLabel: "Visual placeholder",
     },
-    projects: [
-      {
-        ...projectBySlug["sokwak.com"],
-        description:
-          "Prototype interface for a learning assistant intended to guide reasoning rather than provide answers.",
-        metric: "An AI app designed to support learning first.",
-        intention:
-          "Create an AI app that acts like a mentor: it questions, reframes and guides the reasoning until things click.",
-      },
-      {
-        ...projectBySlug.questonaut,
-        description:
-          "A gamified habit tracker that makes sticking to daily goals more engaging.",
-        status: "In progress (MVP complete)",
-        metric:
-          "Gamified UI with a level system and reward badges to help users stick to their habits.",
-        intention:
-          "Offer a gamified UI, with a level system and reward badges, to help users keep up with their habits.",
-      },
-      {
-        ...projectBySlug.portfolio,
-        description: "The portfolio you are currently browsing.",
-        status: "Deployed",
-        metric: "A clean and clear interface.",
-        intention: "Create a clean, clear interface with modern components.",
-      },
-    ],
+    projects,
     stack: {
       section: {
         eyebrow: "Stack",

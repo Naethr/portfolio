@@ -27,27 +27,16 @@ import {
   type SimpleIcon,
 } from "simple-icons";
 
-import type { PortfolioTranslations } from "@/data/translations";
+import type { Language, PortfolioTranslations } from "@/data/translations";
 
 import { SectionReveal } from "../ui/section-reveal";
 import { HeroOrbit } from "./hero-orbit";
-import { ProjectShowcase, ProjectSummary } from "./project-showcase";
+import { ProjectCard } from "./project-showcase";
 import { StackConstellation } from "./stack-constellation";
 
 const aboutPhoto = {
   src: "/images/Portrait.png",
   alt: "Portrait de Théo",
-};
-
-const projectRank: Record<string, number> = {
-  questonaut: 0,
-  "sokwak.com": 1,
-  portfolio: 2,
-};
-
-const projectScreenshots: Record<string, { src: string; width: number; height: number }> = {
-  questonaut: { src: "/images/questonaut.png", width: 1345, height: 940 },
-  "sokwak.com": { src: "/images/sokwak.png", width: 1004, height: 679 },
 };
 
 type TimelineAccent = "foundation" | "stack";
@@ -683,11 +672,6 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
           <HeroOrbit />
         </div>
       </div>
-      <nav aria-label={copy.waypointsLabel} className="hero-waypoints grid gap-0 border-t border-[var(--hero-rule)] pt-1 sm:grid-cols-3">
-        <a href="#projets"><span>01 /</span>{copy.waypoints.projects}</a>
-        <a href="#stack"><span>02 /</span>{copy.waypoints.skills}</a>
-        <a href="#parcours"><span>03 /</span>{copy.waypoints.journey}</a>
-      </nav>
       </div>
     </section>
   );
@@ -729,28 +713,19 @@ function ProjectsSection({
   copy,
   projectShowcaseCopy,
   projects,
+  language,
 }: {
   copy: PortfolioTranslations["projectsSection"];
   projectShowcaseCopy: PortfolioTranslations["projectShowcase"];
   projects: PortfolioTranslations["projects"];
+  language: Language;
 }) {
-  const orderedProjects = [...projects].sort(
-    (first, second) =>
-      (projectRank[first.slug] ?? Number.MAX_SAFE_INTEGER) -
-      (projectRank[second.slug] ?? Number.MAX_SAFE_INTEGER),
-  );
-
   return (
     <section id="projets" className="projects-section relative isolate py-20 sm:py-24 lg:py-28">
       <div aria-hidden="true" className="projects-backdrop pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden">
-        <svg className="projects-contours absolute -left-48 top-40 h-[55rem] w-[30rem] sm:-left-36" viewBox="0 0 480 880" fill="none">
-          <path d="M-30 14C180 154 28 262 222 401s-98 266 111 480" />
-          <path d="M5-7c210 140 58 248 252 387S159 646 368 860" />
-          <path d="M40-28c210 140 58 248 252 387s-98 266 111 480" />
-          <path d="M75-49c210 140 58 248 252 387s-98 266 111 480" />
-          <path d="M110-70c210 140 58 248 252 387s-98 266 111 480" />
-        </svg>
-        <div className="projects-arc absolute -right-40 top-10 h-80 w-80 rounded-full sm:-right-32 sm:h-[27rem] sm:w-[27rem]" />
+        <div className="projects-mist" />
+        <div className="projects-haze" />
+        <div className="projects-lower-mist" />
       </div>
 
       <div className="relative z-10">
@@ -764,28 +739,16 @@ function ProjectsSection({
           </p>
         </div>
 
-        <div className="mt-12 space-y-7 sm:mt-16 sm:space-y-10">
-          {orderedProjects.map((project, index) => {
-            const screenshot = projectScreenshots[project.slug];
-
-            return screenshot ? (
-              <ProjectShowcase
-                key={project.slug}
-                project={project}
-                copy={projectShowcaseCopy}
-                number={index + 1}
-                screenshot={screenshot}
-                reverse={index === 1}
-              />
-            ) : (
-              <ProjectSummary
-                key={project.slug}
-                project={project}
-                copy={projectShowcaseCopy}
-                number={index + 1}
-              />
-            );
-          })}
+        <div className="project-grid mt-12 grid gap-5 sm:mt-14 sm:gap-6">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              copy={projectShowcaseCopy}
+              language={language}
+              number={index + 1}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -827,7 +790,7 @@ function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
   );
 }
 
-export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
+export function PortfolioPage({ copy, language }: { copy: PortfolioTranslations; language: Language }) {
   return (
     <main id="content" className="relative flex-1 overflow-hidden">
       <div className="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -836,6 +799,7 @@ export function PortfolioPage({ copy }: { copy: PortfolioTranslations }) {
           copy={copy.projectsSection}
           projectShowcaseCopy={copy.projectShowcase}
           projects={copy.projects}
+          language={language}
         />
         <StackSection copy={copy.stack} />
         <ProfileSection
