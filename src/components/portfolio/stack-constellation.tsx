@@ -48,7 +48,7 @@ const positions: Record<string, Position> = {
   express: { x: 84, y: 42 },
   nestjs: { x: 70, y: 36 },
   sqlite: { x: 64, y: 63 },
-  prisma: { x: 84, y: 77 },
+  prisma: { x: 75, y: 76 },
   postgresql: { x: 79, y: 63 },
   github: { x: 15, y: 70 },
   vscode: { x: 29, y: 71 },
@@ -56,6 +56,8 @@ const positions: Record<string, Position> = {
   codex: { x: 22, y: 88 },
   claude: { x: 41, y: 86 },
 };
+
+const expressPrismaPath = `M ${positions.express.x} ${positions.express.y} Q ${positions.express.x} 60 ${positions.prisma.x} ${positions.prisma.y}`;
 
 const icons: Record<string, { path: string; hex: string }> = {
   react: siReact,
@@ -228,10 +230,14 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
           ))}
           <svg aria-hidden="true" focusable="false" className="constellation-edges" viewBox="0 0 100 100" preserveAspectRatio="none">
             {inactiveEdges.map((edge) => (
-              <line key={edge.key} x1={positions[edge.from].x} y1={positions[edge.from].y} x2={positions[edge.to].x} y2={positions[edge.to].y} />
+              edge.key === "express|prisma"
+                ? <path key={edge.key} d={expressPrismaPath} fill="none" style={{ stroke: "var(--constellation-line)", strokeWidth: 1, strokeLinecap: "round", vectorEffect: "non-scaling-stroke" }} />
+                : <line key={edge.key} x1={positions[edge.from].x} y1={positions[edge.from].y} x2={positions[edge.to].x} y2={positions[edge.to].y} />
             ))}
             {activeEdges.map((edge) => (
-              <line key={edge.key} x1={positions[edge.from].x} y1={positions[edge.from].y} x2={positions[edge.to].x} y2={positions[edge.to].y} className="is-active" />
+              edge.key === "express|prisma"
+                ? <path key={edge.key} d={expressPrismaPath} fill="none" className="is-active" style={{ stroke: "var(--constellation-line-active)", strokeWidth: 2, strokeLinecap: "round", vectorEffect: "non-scaling-stroke" }} />
+                : <line key={edge.key} x1={positions[edge.from].x} y1={positions[edge.from].y} x2={positions[edge.to].x} y2={positions[edge.to].y} className="is-active" />
             ))}
           </svg>
           {skills.map((skill) => (

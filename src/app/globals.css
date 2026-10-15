@@ -1302,8 +1302,8 @@ p {
 [data-theme="light"] .constellation-group-ai { color: #735e45; }
 
 .constellation-edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.constellation-edges line { stroke: var(--constellation-line); stroke-width: 1; stroke-linecap: round; vector-effect: non-scaling-stroke; transition: stroke 180ms ease, stroke-width 180ms ease; }
-.constellation-edges line.is-active { stroke: var(--constellation-line-active); stroke-width: 2; filter: drop-shadow(0 0 3px var(--constellation-line-active)); }
+.constellation-edges :is(line, path) { fill: none; stroke: var(--constellation-line); stroke-width: 1; stroke-linecap: round; vector-effect: non-scaling-stroke; transition: stroke 180ms ease, stroke-width 180ms ease; }
+.constellation-edges :is(line, path).is-active { stroke: var(--constellation-line-active); stroke-width: 2; filter: drop-shadow(0 0 3px var(--constellation-line-active)); }
 
 .constellation-node {
   position: relative;
@@ -1357,6 +1357,6 @@ p {
   .constellation-mobile-options { gap: 0.45rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .constellation-edges line,
+  .constellation-edges :is(line, path),
   .constellation-node { transition: none; }
 }
