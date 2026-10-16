@@ -58,7 +58,7 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
       </div>
       <div className="hero-inner">
       <div className="hero-content relative grid items-center gap-8 pb-12 sm:gap-10 sm:pb-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-4 lg:pb-14">
-        <div className="relative z-10 max-w-[48rem]">
+        <div className="hero-copy relative z-10 max-w-[48rem]">
           <h1 className="hero-enter hero-enter-title font-display text-[clamp(2.55rem,5.7vw,5.8rem)] font-normal leading-[1.03] tracking-[-0.04em] [overflow-wrap:anywhere]">
             {copy.headline}
           </h1>

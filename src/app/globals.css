@@ -426,6 +426,17 @@ p {
   padding-top: clamp(4rem, 7vw, 7rem);
 }
 
+@media (min-width: 1024px) {
+  .hero-content {
+    min-height: min(642px, 70svh);
+    padding-top: clamp(2rem, 4vw, 4rem);
+  }
+
+  .hero-copy {
+    margin-left: clamp(2rem, 6vw, 7rem);
+  }
+}
+
 .hero-cartography {
   position: absolute;
   top: -1rem;
