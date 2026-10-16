@@ -7,11 +7,11 @@ import {
 } from "simple-icons";
 
 const stackNodes = [
-  { name: "React", x: 167, y: 225, path: siReact.path, outer: 41, inner: 35 },
-  { name: "Next.js", x: 390, y: 127, path: siNextdotjs.path, outer: 41, inner: 35 },
-  { name: "Rails", x: 501, y: 325, path: siRubyonrails.path, outer: 41, inner: 35 },
-  { name: "TypeScript", x: 208, y: 493, path: siTypescript.path, outer: 49, inner: 43 },
-  { name: "SQL", x: 426, y: 495, path: siPostgresql.path, outer: 41, inner: 35 },
+  { name: "React", x: 167, y: 225, path: siReact.path, color: `#${siReact.hex}`, outer: 41, inner: 35 },
+  { name: "Next.js", x: 390, y: 127, path: siNextdotjs.path, color: "var(--hero-heading)", outer: 41, inner: 35 },
+  { name: "Rails", x: 501, y: 325, path: siRubyonrails.path, color: `#${siRubyonrails.hex}`, outer: 41, inner: 35 },
+  { name: "TypeScript", x: 208, y: 493, path: siTypescript.path, color: `#${siTypescript.hex}`, outer: 49, inner: 43 },
+  { name: "SQL", x: 426, y: 495, path: siPostgresql.path, color: `#${siPostgresql.hex}`, outer: 41, inner: 35 },
 ];
 
 export function HeroOrbit() {
@@ -40,12 +40,12 @@ export function HeroOrbit() {
         <circle cx="320" cy="320" r="6" className="hero-orbit-core-center" />
       </g>
 
-      {stackNodes.map(({ name, x, y, path, outer, inner }) => (
+      {stackNodes.map(({ name, x, y, path, color, outer, inner }) => (
         <g key={name} transform={`translate(${x} ${y})`}>
           <g className="hero-orbit-node">
             <circle r={outer} className="hero-orbit-node-rim" />
             <circle r={inner} className="hero-orbit-node-disc" />
-            <svg x="-13" y="-21" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="hero-orbit-node-icon">
+            <svg x="-13" y="-21" width="26" height="26" viewBox="0 0 24 24" fill={color} className="hero-orbit-node-icon">
               <path d={path} />
             </svg>
             <text y="22" textAnchor="middle">{name}</text>

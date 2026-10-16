@@ -217,8 +217,7 @@ export function StackConstellation({ copy }: { copy: StackCopy }) {
       </div>
       <SectionReveal>
         <div className="relative max-w-3xl">
-          <p className="constellation-eyebrow text-xs font-semibold uppercase tracking-[0.2em]">03 / {copy.section.eyebrow}</p>
-          <h2 className="constellation-title mt-5 text-[clamp(2.5rem,5vw,4.6rem)] leading-[1.08] [overflow-wrap:anywhere]">{copy.section.title}</h2>
+          <h2 className="constellation-title text-[clamp(2.5rem,5vw,4.6rem)] leading-[1.08] [overflow-wrap:anywhere]">{copy.section.title}</h2>
           <p className="constellation-intro mt-5 max-w-[60ch] text-base leading-relaxed sm:text-lg">{copy.section.description}</p>
         </div>
 

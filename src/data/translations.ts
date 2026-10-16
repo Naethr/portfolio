@@ -43,7 +43,7 @@ export type PortfolioTranslations = {
   };
   navigationLinks: ProjectLink[];
   hero: {
-    headline: { lead: string; ending: string };
+    headline: string;
     role: string;
     introduction: string;
     projectsCta: string;
@@ -60,7 +60,6 @@ export type PortfolioTranslations = {
     paragraphs: string[];
   };
   timeline: {
-    eyebrow: string;
     title: string;
     description: string;
     previousLabel: string;
@@ -73,7 +72,6 @@ export type PortfolioTranslations = {
     items: TimelineMilestone[];
   };
   projectsSection: {
-    eyebrow: string;
     title: string;
     description: string;
   };
@@ -88,7 +86,6 @@ export type PortfolioTranslations = {
   projects: Project[];
   stack: {
     section: {
-      eyebrow: string;
       title: string;
       description: string;
     };
@@ -478,8 +475,8 @@ export const translations = {
     },
     navigationLinks,
     hero: {
-      headline: { lead: "Créer des mondes", ending: "numériques." },
-      role: "Développeur Web Fullstack",
+      headline: "Théo Villalba",
+      role: "Développeur Fullstack",
       introduction:
         "Je conçois des applications web claires et durables, de l’interface à la logique métier.",
       projectsCta: "Voir les projets",
@@ -500,7 +497,6 @@ export const translations = {
       ],
     },
     timeline: {
-      eyebrow: "Parcours",
       title: "Mon parcours",
       description: "Un chemin d’apprentissage, de projets et de pratique.",
       previousLabel: "Étape précédente",
@@ -513,7 +509,6 @@ export const translations = {
       items: frTimelineItems,
     },
     projectsSection: {
-      eyebrow: "Projets",
       title: "Mes projets",
       description:
         "Des applications et des sites conçus avec attention, de l’interface à la logique métier.",
@@ -529,8 +524,7 @@ export const translations = {
     projects,
     stack: {
       section: {
-        eyebrow: "Stack",
-        title: "Un réseau de compétences",
+        title: "Mes compétences",
         description:
           "Une vue connectée des technologies que j’utilise pour concevoir, construire et livrer des applications web modernes.",
       },
@@ -579,8 +573,8 @@ export const translations = {
       { label: "My journey", href: "#parcours" },
     ],
     hero: {
-      headline: { lead: "Building digital", ending: "worlds." },
-      role: "Full-Stack Web Developer",
+      headline: "Théo Villalba",
+      role: "Full-Stack Developer",
       introduction:
         "I build clear, lasting web applications, from interface to business logic.",
       projectsCta: "View projects",
@@ -601,7 +595,6 @@ export const translations = {
       ],
     },
     timeline: {
-      eyebrow: "Journey",
       title: "My journey",
       description: "A path of learning, projects and hands-on practice.",
       previousLabel: "Previous milestone",
@@ -614,7 +607,6 @@ export const translations = {
       items: enTimelineItems,
     },
     projectsSection: {
-      eyebrow: "Projects",
       title: "My projects",
       description:
         "Applications and websites built with care, from interface to business logic.",
@@ -630,8 +622,7 @@ export const translations = {
     projects,
     stack: {
       section: {
-        eyebrow: "Stack",
-        title: "A network of skills",
+        title: "My Skills",
         description:
           "A connected view of the technologies I use to design, build and ship modern web applications.",
       },

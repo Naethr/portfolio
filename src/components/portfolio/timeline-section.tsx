@@ -92,7 +92,6 @@ export function TimelineSection({ copy }: { copy: TimelineCopy }) {
       <div aria-hidden="true" className={styles.backdrop}><div className={styles.landscape} /></div>
       <header className={styles.header}>
         <div className={styles.heading}>
-          <p className={styles.eyebrow}>{copy.eyebrow}</p>
           <h3 id="timeline-title" className={styles.title}>{copy.title}</h3>
           <p className={styles.intro}>{copy.description}</p>
         </div>

@@ -37,7 +37,7 @@ export function SiteHeader({
             href="#top"
             className="theme-text-primary inline-flex shrink-0 items-center gap-2 font-display text-[1.35rem] font-normal uppercase tracking-[0.04em] sm:text-[1.6rem]"
           >
-            Théo Villalba
+            Théo
           </a>
           <nav aria-label={copy.navigationLabel} className="hidden lg:block">
             <ul className="theme-text-muted flex items-center gap-5 text-[0.82rem] xl:gap-8">

@@ -45,15 +45,6 @@
   --shell-grid-line: rgba(127, 169, 155, 0.12);
   --shell-grid-opacity: 0.24;
   --shell-ambient: radial-gradient(circle at 88% 12%, rgba(127, 169, 155, 0.07), transparent 26%);
-  --contact-panel-background: radial-gradient(circle at 85% 10%, rgba(127, 169, 155, 0.1), transparent 38%),
-    linear-gradient(180deg, #1a3024, #11251b);
-  --contact-panel-border: rgba(189, 166, 122, 0.42);
-  --contact-panel-shadow: 0 24px 64px -50px rgba(0, 0, 0, 0.84);
-  --contact-cta-border: rgba(189, 166, 122, 0.64);
-  --contact-cta-background: rgba(189, 166, 122, 0.2);
-  --contact-cta-hover: rgba(189, 166, 122, 0.3);
-  --contact-cta-text: var(--ivory);
-  --contact-cta-shadow: 0 12px 38px -28px rgba(189, 166, 122, 0.7);
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(42, 88, 91, 0.48), transparent 43%),
     radial-gradient(ellipse at 13% 76%, rgba(35, 73, 65, 0.4), transparent 48%),
     linear-gradient(160deg, #071718 0%, #0d2526 49%, #08191b 100%);
@@ -91,8 +82,8 @@
   --project-index: #d0b98c;
   --project-link: var(--ivory);
   --project-link-hover: #d0b98c;
-  --hero-background: radial-gradient(ellipse at 76% 44%, rgba(47, 96, 73, 0.24), transparent 43%),
-    linear-gradient(116deg, #071b15 4%, #0b241b 52%, #102c21 100%);
+  --hero-background: radial-gradient(ellipse at 76% 44%, rgba(47, 96, 94, 0.24), transparent 43%),
+    linear-gradient(116deg, #071b1b 4%, #0b2425 52%, #102c2d 100%);
   --hero-grid-line: rgba(141, 180, 157, 0.035);
   --hero-rule: rgba(189, 166, 122, 0.32);
   --hero-heading: var(--ivory);
@@ -107,8 +98,8 @@
   --hero-orbit-line: rgba(189, 166, 122, 0.56);
   --hero-orbit-line-soft: rgba(189, 166, 122, 0.22);
   --hero-orbit-jade: rgba(127, 169, 155, 0.68);
-  --hero-orbit-center: #1b382b;
-  --hero-orbit-label-background: #10271d;
+  --hero-orbit-center: #1b3838;
+  --hero-orbit-label-background: #091e20;
   --shadow-xl: 0 25px 70px -52px rgba(0, 0, 0, 0.9);
   --shadow-control: 0 12px 32px -24px rgba(0, 0, 0, 0.82);
   --focus-ring: #d5bc8b;
@@ -161,15 +152,6 @@
   --shell-grid-line: rgba(40, 67, 48, 0.11);
   --shell-grid-opacity: 0.24;
   --shell-ambient: radial-gradient(circle at 88% 12%, rgba(127, 169, 155, 0.11), transparent 26%);
-  --contact-panel-background: radial-gradient(circle at 85% 10%, rgba(127, 169, 155, 0.15), transparent 38%),
-    linear-gradient(180deg, #f7f8f2, #e1ebdd);
-  --contact-panel-border: rgba(101, 84, 55, 0.36);
-  --contact-panel-shadow: 0 24px 64px -50px rgba(35, 61, 49, 0.42);
-  --contact-cta-border: rgba(101, 84, 55, 0.56);
-  --contact-cta-background: rgba(101, 84, 55, 0.13);
-  --contact-cta-hover: rgba(101, 84, 55, 0.21);
-  --contact-cta-text: #332a19;
-  --contact-cta-shadow: 0 12px 38px -28px rgba(101, 84, 55, 0.42);
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(80, 139, 141, 0.18), transparent 44%),
     radial-gradient(ellipse at 14% 75%, rgba(99, 144, 125, 0.2), transparent 49%),
     linear-gradient(160deg, #eff1ec 0%, #e1eae6 52%, #e8eeeb 100%);
@@ -205,8 +187,8 @@
   --project-index: #655437;
   --project-link: #172a1e;
   --project-link-hover: #655437;
-  --hero-background: radial-gradient(ellipse at 76% 44%, rgba(86, 138, 110, 0.14), transparent 44%),
-    linear-gradient(116deg, #edf3e9 4%, #e3eee2 56%, #d7e8dc 100%);
+  --hero-background: radial-gradient(ellipse at 76% 44%, rgba(86, 138, 137, 0.14), transparent 44%),
+    linear-gradient(116deg, #edf3ef 4%, #e3eeeb 56%, #d7e8e5 100%);
   --hero-grid-line: rgba(49, 95, 74, 0.045);
   --hero-rule: rgba(101, 84, 55, 0.34);
   --hero-heading: #172a1e;
@@ -221,8 +203,8 @@
   --hero-orbit-line: rgba(101, 84, 55, 0.56);
   --hero-orbit-line-soft: rgba(101, 84, 55, 0.3);
   --hero-orbit-jade: rgba(49, 95, 74, 0.63);
-  --hero-orbit-center: #e0ebdf;
-  --hero-orbit-label-background: #edf3e9;
+  --hero-orbit-center: #dae8e4;
+  --hero-orbit-label-background: #cedfdb;
   --shadow-xl: 0 25px 70px -52px rgba(35, 61, 49, 0.42);
   --shadow-control: 0 12px 32px -24px rgba(35, 61, 49, 0.48);
   --focus-ring: #655437;
@@ -375,12 +357,12 @@ p {
 /* The header and hero use one uninterrupted visual field. */
 .site-header.theme-nav {
   border: 0;
-  background: linear-gradient(116deg, #071b15 4%, #0b241b 52%, #102c21 100%);
+  background: linear-gradient(116deg, #071b1b 4%, #0b2425 52%, #102c2d 100%);
   box-shadow: none;
 }
 
 :root[data-theme="light"] .site-header.theme-nav {
-  background: linear-gradient(116deg, #edf3e9 4%, #e3eee2 56%, #d7e8dc 100%);
+  background: linear-gradient(116deg, #edf3ef 4%, #e3eeeb 56%, #d7e8e5 100%);
   box-shadow: none;
 }
 
@@ -553,22 +535,13 @@ p {
   }
 }
 
-.hero-kicker {
+.hero-role {
   color: var(--hero-kicker);
-}
-
-.hero-kicker-divider {
-  background: var(--hero-rule);
 }
 
 .hero-enter-title {
   color: var(--hero-heading);
-}
-
-@media (min-width: 1280px) {
-  .hero-title-lead {
-    display: block;
-  }
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
 }
 
 .hero-enter-description {
@@ -667,10 +640,6 @@ p {
 .hero-orbit-node-disc {
   fill: var(--hero-orbit-label-background);
   stroke: var(--hero-orbit-line);
-}
-
-.hero-orbit-node-icon {
-  color: var(--hero-kicker);
 }
 
 .hero-orbit-node text {
@@ -1031,9 +1000,7 @@ p {
 .theme-pill,
 .theme-inset,
 .theme-mobile-overlay,
-.theme-mobile-close,
-.theme-contact-panel,
-.theme-contact-cta {
+.theme-mobile-close {
   transition:
     background 260ms ease,
     background-color 260ms ease,
@@ -1127,23 +1094,6 @@ p {
   background: var(--nav-popover-control);
   color: var(--text-primary);
   box-shadow: var(--shadow-control);
-}
-
-.theme-contact-panel {
-  border-color: var(--contact-panel-border);
-  background: var(--contact-panel-background);
-  box-shadow: var(--contact-panel-shadow);
-}
-
-.theme-contact-cta {
-  border-color: var(--contact-cta-border);
-  background: var(--contact-cta-background);
-  color: var(--contact-cta-text);
-  box-shadow: var(--contact-cta-shadow);
-}
-
-.theme-contact-cta:hover {
-  background: var(--contact-cta-hover);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1272,7 +1222,7 @@ p {
   .about-title { font-size: clamp(2.35rem, 9vw, 3.2rem); }
   .about-prose { font-size: 0.98rem; line-height: 1.8; }
   .about-prose p + p { margin-top: 1.15rem; }
-  .about-portrait { width: 9rem; justify-self: end; }
+  .about-portrait { width: 9rem; justify-self: center; }
 }
 
 /* Skills atlas: local visual system and the Projects → Skills color passage. */
@@ -1316,7 +1266,6 @@ p {
 
 [data-theme="light"] .constellation-chart { mix-blend-mode: multiply; }
 
-.constellation-eyebrow { color: var(--project-index); }
 .constellation-title { color: var(--text-primary); font-family: var(--font-marcellus), Georgia, serif; font-weight: 400; }
 .constellation-intro { color: var(--text-secondary); }
 
@@ -1434,4 +1383,131 @@ p {
 @media (prefers-reduced-motion: reduce) {
   .constellation-edges :is(line, path),
   .constellation-node { transition: none; }
+}
+
+.contact-section {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(5.5rem, 9vw, 8rem) 0 clamp(6.5rem, 10vw, 9rem);
+}
+
+.contact-backdrop {
+  position: absolute;
+  z-index: -1;
+  top: -9rem;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 75% 48%, rgba(75, 126, 119, 0.19), transparent 42%),
+    linear-gradient(155deg, #0b252b 3%, #123139 56%, #10292d 100%);
+  mask-image: linear-gradient(180deg, transparent, #000 9rem, #000 calc(100% - 7rem), transparent);
+}
+
+.contact-cartography {
+  position: absolute;
+  top: 24%;
+  left: 56%;
+  width: min(67vw, 54rem);
+  height: auto;
+  opacity: 0.24;
+  mask-image: radial-gradient(ellipse 39% 66% at 24% 50%, #000 8%, rgba(0, 0, 0, 0.76) 48%, transparent 100%);
+}
+
+.contact-content {
+  position: relative;
+  max-width: 46rem;
+  margin-left: clamp(0rem, 3vw, 3rem);
+}
+
+.contact-title {
+  max-width: 18ch;
+  color: #f0eadb;
+  font-size: clamp(2.55rem, 5vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.contact-title::after {
+  content: "";
+  display: block;
+  width: 6rem;
+  height: 1px;
+  margin: 1.7rem 0 1.55rem;
+  background: linear-gradient(90deg, #cbb184, transparent);
+}
+
+.contact-description {
+  max-width: 48ch;
+  color: #c6d8d2;
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+  line-height: 1.8;
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  min-height: 3.25rem;
+  max-width: 100%;
+  margin-top: 2.25rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #bda67a;
+  border-radius: 0.2rem;
+  background: #bda67a;
+  color: #102621;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+  overflow-wrap: anywhere;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.contact-cta:hover {
+  border-color: #d0ba90;
+  background: #d0ba90;
+  transform: translateY(-2px);
+}
+
+.contact-cta:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.contact-cta:active { transform: translateY(0); }
+
+[data-theme="light"] .contact-backdrop {
+  background:
+    radial-gradient(ellipse at 75% 48%, rgba(105, 155, 145, 0.17), transparent 42%),
+    linear-gradient(155deg, #d9e7e1 3%, #d0e2e1 56%, #dce7da 100%);
+}
+[data-theme="light"] .contact-cartography { opacity: 0.13; mix-blend-mode: multiply; }
+[data-theme="light"] .contact-title { color: #1b3738; }
+[data-theme="light"] .contact-title::after { background: linear-gradient(90deg, #80653d, transparent); }
+[data-theme="light"] .contact-description { color: #294a49; }
+[data-theme="light"] .contact-cta { border-color: #655437; background: #655437; color: #f8f5e9; }
+[data-theme="light"] .contact-cta:hover { border-color: #806a46; background: #806a46; }
+
+@media (max-width: 767px) {
+  .contact-section { padding-block: 5.5rem 7rem; }
+  .contact-backdrop { top: -6rem; mask-image: linear-gradient(180deg, transparent, #000 6rem, #000 calc(100% - 6rem), transparent); }
+  .contact-cartography { top: 22%; left: 44%; width: 30rem; opacity: 0.1; }
+  .contact-title { max-width: 19ch; font-size: clamp(2.3rem, 8vw, 3.5rem); }
+  .contact-description { max-width: 36ch; line-height: 1.75; }
+  .contact-cta { margin-top: 2rem; }
+}
+
+@media (max-width: 390px) {
+  .contact-cta { width: 100%; padding-inline: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-cta { transition: none; }
+  .contact-cta:hover { transform: none; }
 }

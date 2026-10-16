@@ -51,14 +51,6 @@
   max-width: 72rem;
 }
 .heading { max-width: 37rem; }
-.eyebrow {
-  margin: 0 0 1rem;
-  color: var(--timeline-brass);
-  font-size: 0.71rem;
-  font-weight: 700;
-  letter-spacing: 0.23em;
-  text-transform: uppercase;
-}
 .title {
   color: var(--timeline-ink);
   font-family: var(--font-marcellus), Georgia, serif;

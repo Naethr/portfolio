@@ -19,15 +19,6 @@ const aboutPhoto = {
   alt: "Portrait de Théo",
 };
 
-function frame(className?: string) {
-  return [
-    "theme-frame rounded-[2rem] border p-2",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-}
-
 function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
   return (
     <div className="about-layout">
@@ -68,20 +59,15 @@ function HeroSection({ copy }: { copy: PortfolioTranslations["hero"] }) {
       <div className="hero-inner">
       <div className="hero-content relative grid items-center gap-8 pb-12 sm:gap-10 sm:pb-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-4 lg:pb-14">
         <div className="relative z-10 max-w-[48rem]">
-          <p className="hero-enter hero-kicker flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] sm:text-xs">
-            <span>{copy.role}</span>
-            <span aria-hidden="true" className="hero-kicker-divider h-px w-7" />
-            <span>Théo Villalba</span>
-          </p>
-
-          <h1 className="hero-enter hero-enter-title mt-8 max-w-[16ch] font-display text-[clamp(2.55rem,5.7vw,5.8rem)] font-normal leading-[1.03] tracking-[-0.04em] [overflow-wrap:anywhere] sm:mt-10 xl:max-w-none">
-            <span className="hero-title-lead">{copy.headline.lead} </span>
-            <span>{copy.headline.ending}</span>
+          <h1 className="hero-enter hero-enter-title font-display text-[clamp(2.55rem,5.7vw,5.8rem)] font-normal leading-[1.03] tracking-[-0.04em] [overflow-wrap:anywhere]">
+            {copy.headline}
           </h1>
+          <p className="hero-enter hero-role mt-4 text-[clamp(1.35rem,2.5vw,2.2rem)] font-medium leading-snug">
+            {copy.role}
+          </p>
           <div aria-hidden="true" className="hero-heading-rule mt-6 max-w-[27rem] sm:mt-8"><span /></div>
 
           <p className="hero-enter hero-enter-description mt-7 max-w-[34rem] text-base leading-relaxed sm:mt-8 sm:text-lg">
-            <span className="mb-1 block font-medium text-[var(--hero-heading)]">Ruby on Rails · React · TypeScript</span>
             {copy.introduction}
           </p>
 
@@ -161,8 +147,7 @@ function ProjectsSection({
 
       <div className="relative z-10">
         <div className="max-w-3xl">
-          <p className="project-index text-xs font-semibold uppercase tracking-[0.2em]">02 / {copy.eyebrow}</p>
-          <h2 className="theme-text-primary mt-5 text-[clamp(2.5rem,5vw,4.6rem)] font-normal leading-[1.08] [overflow-wrap:anywhere]">
+          <h2 className="theme-text-primary text-[clamp(2.5rem,5vw,4.6rem)] font-normal leading-[1.08] [overflow-wrap:anywhere]">
             {copy.title}
           </h2>
           <p className="theme-text-secondary mt-5 max-w-[60ch] text-base leading-relaxed sm:text-lg">
@@ -188,35 +173,23 @@ function ProjectsSection({
 
 function ContactSection({ copy }: { copy: PortfolioTranslations["contact"] }) {
   return (
-    <section id="contact" className="py-20 sm:py-24">
-      <SectionReveal className={frame()}>
-        <div className="theme-contact-panel relative overflow-hidden rounded-[1.55rem] border px-6 py-12 text-center sm:px-10 sm:py-16 lg:px-16">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(189,166,122,0.82),transparent)]"
-          />
-
-          <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6">
-            <h2 className="theme-text-primary max-w-3xl text-balance text-center text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-              {copy.title}
-            </h2>
-
-            <p className="theme-text-secondary max-w-2xl text-center text-base leading-8 sm:text-lg">
-              {copy.description}
-            </p>
-
-            <a
-              href="mailto:theovbpro@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="theme-contact-cta inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full border px-6 py-3.5 text-center text-sm font-semibold transition duration-300 hover:border-[rgba(189,166,122,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--focus-ring)] active:scale-[0.98] sm:w-auto"
-            >
-              <EnvelopeSimple size={18} weight="regular" />
-              theovbpro@gmail.com
-            </a>
-          </div>
-        </div>
-      </SectionReveal>
+    <section id="contact" aria-labelledby="contact-title" className="contact-section">
+      <div aria-hidden="true" className="contact-backdrop">
+        <Image src="/images/about/jade-cartography.webp" alt="" width={960} height={540} sizes="(max-width: 767px) 480px, (max-width: 1023px) 650px, 860px" className="contact-cartography" />
+      </div>
+      <div className="contact-content">
+        <h2 id="contact-title" className="contact-title font-display">{copy.title}</h2>
+        <p className="contact-description">{copy.description}</p>
+        <a
+          href="mailto:theovbpro@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-cta"
+        >
+          <EnvelopeSimple size={19} weight="regular" aria-hidden="true" />
+          theovbpro@gmail.com
+        </a>
+      </div>
     </section>
   );
 }
