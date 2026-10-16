@@ -1,34 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Geist_Mono,
-  Manrope,
-  Oxanium,
-  Space_Grotesk,
-} from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const manrope = Manrope({
+const manrope = localFont({
+  src: "../fonts/Manrope-Latin.woff2",
+  weight: "200 800",
   variable: "--font-manrope",
-  subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const marcellus = localFont({
+  src: "../fonts/Marcellus-Latin.woff2",
+  weight: "400",
+  variable: "--font-marcellus",
   display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const oxanium = Oxanium({
-  variable: "--font-oxanium",
-  subsets: ["latin"],
-  display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
 export const metadata: Metadata = {
@@ -67,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050816",
+  themeColor: "#0D1C17",
 };
 
 const themeInitScript = `
@@ -94,7 +80,7 @@ export default function RootLayout({
       lang="fr"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${manrope.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${oxanium.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${marcellus.variable} h-full scroll-smooth antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

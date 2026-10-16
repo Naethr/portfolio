@@ -1,0 +1,217 @@
+.section {
+  --timeline-ink: #eee9da;
+  --timeline-copy: #c2d5d1;
+  --timeline-brass: #d1b782;
+  --timeline-logo: #e6eae4;
+  --timeline-css: #a98ade;
+  --timeline-control: rgba(14, 39, 40, 0.72);
+  --timeline-edge: rgba(190, 164, 111, 0.52);
+  --milestone-width: clamp(19rem, 26vw, 24rem);
+  --cycle-gap: var(--milestone-width);
+  --orb-scale: 0.48;
+  --edge-fade: clamp(4rem, 16vw, 18rem);
+  position: relative;
+  isolation: isolate;
+  padding: 6.5rem 0 5.5rem;
+  scroll-margin-top: 6rem;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: -1;
+  inset: -3rem auto -3rem 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 36%, rgba(74, 139, 130, 0.24), transparent 64%),
+    linear-gradient(155deg, #0c282c 12%, #153b3c 49%, #0a222a 90%);
+  mask-image: linear-gradient(180deg, transparent, #000 17%, #000 80%, transparent);
+}
+
+.landscape {
+  position: absolute;
+  inset: 2% 0 0;
+  background: url("/images/timeline/ruins-horizon.webp") center 70% / max(100%, 1100px) auto no-repeat;
+  opacity: 0.36;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent),
+    linear-gradient(180deg, transparent, #000 22%, #000 65%, transparent 98%);
+  mask-composite: intersect;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 auto 1.8rem;
+  max-width: 72rem;
+}
+.heading { max-width: 37rem; }
+.title {
+  color: var(--timeline-ink);
+  font-family: var(--font-marcellus), Georgia, serif;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 1.08;
+  font-weight: 400;
+}
+.intro { margin-top: 1.15rem; color: var(--timeline-copy); font-size: 0.98rem; line-height: 1.7; max-width: 34ch; }
+
+.controls { display: flex; flex: none; gap: 0.6rem; padding-bottom: 0.2rem; }
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border: 1px solid var(--timeline-edge);
+  border-radius: 50%;
+  color: var(--timeline-brass);
+  background: var(--timeline-control);
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.controls button:hover { background: rgba(189, 166, 122, 0.16); border-color: var(--timeline-brass); }
+.controls button:disabled { opacity: 0.5; cursor: default; }
+.controls button:focus-visible, .resource:focus-visible { outline: 2px solid var(--timeline-brass); outline-offset: 5px; }
+
+.viewport {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  cursor: grab;
+  mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3) calc(var(--edge-fade) * 0.4), #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), rgba(0, 0, 0, 0.3) calc(100% - var(--edge-fade) * 0.4), transparent);
+}
+.viewport:active { cursor: grabbing; }
+.viewport:focus-visible { outline: 2px solid var(--timeline-brass); outline-offset: -4px; }
+.track {
+  display: flex;
+  width: max-content;
+  transform: translateX(-50%);
+}
+.track[data-motion="auto"], .track[data-motion="manual"] { will-change: transform; }
+.sequence {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  width: max-content;
+  margin: 0;
+  padding: 0 var(--cycle-gap) 0 0;
+  list-style: none;
+}
+.sequence::before {
+  content: "";
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: calc(100% - var(--cycle-gap));
+  height: 2px;
+  background: linear-gradient(180deg, #dec28b, #8c734a);
+  box-shadow: 0 0 9px rgba(210, 181, 126, 0.19);
+}
+.sequence::after {
+  content: "";
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  width: var(--cycle-gap);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #b59a65 0 4px, transparent 4px 12px);
+  mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.4) 50%, #000);
+}
+.milestone {
+  position: relative;
+  flex: 0 0 var(--milestone-width);
+  width: var(--milestone-width);
+  min-width: 0;
+  padding: 2.5rem 1.7rem 2rem;
+  text-align: center;
+}
+.orb {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.5rem;
+  transform: scale(var(--orb-scale));
+  display: grid;
+  place-items: center;
+}
+.orb::before {
+  content: "";
+  position: absolute;
+  inset: 0.15rem;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 187, 133, 0.63);
+  box-shadow: 0 0 0 5px rgba(182, 167, 121, 0.06), 0 0 27px rgba(151, 196, 153, 0.18);
+  transition: box-shadow 240ms ease, border-color 240ms ease;
+}
+.orb::after {
+  content: "";
+  position: absolute;
+  top: -0.85rem;
+  left: calc(50% - 2px);
+  width: 4px;
+  height: 4px;
+  border: 1px solid var(--timeline-brass);
+  transform: rotate(45deg);
+}
+.orb img { width: 3.95rem; height: 3.95rem; position: relative; filter: drop-shadow(0 0 7px rgba(190, 180, 130, 0.13)); }
+.brassOrb img { filter: sepia(0.42) saturate(0.75) brightness(1.1); }
+.milestone:hover .orb::before { border-color: #f0d8a0; box-shadow: 0 0 0 5px rgba(182, 167, 121, 0.09), 0 0 28px rgba(195, 194, 140, 0.37); }
+.period { margin: 0 0 0.7rem; color: var(--timeline-brass); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.025em; line-height: 1.5; }
+.periodDot { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--timeline-brass); vertical-align: middle; }
+.milestoneTitle { max-width: 21ch; margin: 0 auto; font-family: var(--font-marcellus), Georgia, serif; color: var(--timeline-ink); font-size: 1.55rem; font-weight: 400; line-height: 1.25; text-wrap: balance; }
+.description { margin: 1rem auto 0; max-width: 31ch; color: var(--timeline-copy); font-size: 0.88rem; line-height: 1.8; }
+.logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem; margin: 1.4rem auto 0; max-width: 15rem; }
+.logo { display: inline-flex; align-items: center; justify-content: center; width: 1.4rem; height: 1.4rem; }
+.logo svg, .logo img { display: block; flex: none; }
+.openaiLight { display: none !important; }
+.resource { display: inline-block; margin-top: 1rem; color: var(--timeline-brass); text-decoration: underline; text-underline-offset: 4px; }
+.hint { margin: 0.8rem auto 0; color: var(--timeline-copy); opacity: 0.8; font-size: 0.7rem; line-height: 1.7; text-align: center; }
+
+:global(:root[data-theme="light"]) .section {
+  --timeline-ink: #203b36;
+  --timeline-copy: #36594f;
+  --timeline-brass: #72572e;
+  --timeline-logo: #233c34;
+  --timeline-css: #663399;
+  --timeline-control: rgba(230, 241, 230, 0.65);
+  --timeline-edge: rgba(113, 88, 43, 0.5);
+}
+:global(:root[data-theme="light"]) .backdrop {
+  background: radial-gradient(ellipse at 48% 36%, rgba(115, 165, 148, 0.2), transparent 64%), linear-gradient(155deg, #e1ece4 12%, #c9dfd6 49%, #d9e7e1 90%);
+}
+:global(:root[data-theme="light"]) .landscape { opacity: 0.16; mix-blend-mode: multiply; }
+:global(:root[data-theme="light"]) .sequence::before { background: linear-gradient(180deg, #a28750, #71552e); }
+:global(:root[data-theme="light"]) .orb::before { border-color: rgba(116, 93, 48, 0.65); }
+:global(:root[data-theme="light"]) .openaiDark { display: none !important; }
+:global(:root[data-theme="light"]) .openaiLight { display: block !important; }
+
+@media (min-width: 1600px) {
+  .section { --milestone-width: 25rem; }
+}
+@media (max-width: 767px) {
+  .section { --cycle-gap: calc(var(--milestone-width) * 0.5); --edge-fade: clamp(2.25rem, 10vw, 4rem); --milestone-width: 19rem; margin-inline: -1rem; padding: 4.5rem 0 4rem; }
+  .header { align-items: flex-start; flex-direction: column; gap: 1.5rem; padding-inline: 0.5rem; margin-bottom: 0.8rem; }
+  .intro { font-size: 0.9rem; max-width: 31ch; }
+  .controls { align-self: flex-end; }
+  .landscape { background-size: auto 80%; background-position: center 65%; opacity: 0.25; }
+  .milestone { padding-inline: 1.5rem; }
+  .milestoneTitle { font-size: 1.4rem; }
+  .hint { padding-inline: 0.5rem; max-width: 38ch; }
+}
+@media (max-width: 359px) {
+  .section { --milestone-width: 17rem; }
+  .milestone { padding-inline: 1.4rem; }
+  .description { font-size: 0.85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .controls button, .orb::before { transition: none; }
+}

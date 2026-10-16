@@ -87,7 +87,7 @@ export function MobileNav({
   const ThemeIcon = theme === "dark" ? SunIcon : MoonIcon;
 
   return (
-    <div className="relative md:hidden">
+    <div className="relative lg:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -95,7 +95,7 @@ export function MobileNav({
         aria-controls="mobile-navigation"
         aria-label={open ? copy.closeLabel : copy.openLabel}
         onClick={() => setOpen((value) => !value)}
-        className="theme-control-strong relative z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.98]"
+        className="theme-control-strong relative z-50 inline-flex h-12 w-12 items-center justify-center rounded-[0.2rem] border transition-transform duration-200 active:scale-[0.98]"
       >
         {open ? <X size={20} weight="regular" /> : <List size={20} weight="regular" />}
       </button>
@@ -110,7 +110,7 @@ export function MobileNav({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.25 }}
                   onClick={() => closeMenu(true)}
-                  className="theme-mobile-overlay fixed inset-0 z-20 px-6 pb-10 pt-28 backdrop-blur-xl"
+                  className="theme-mobile-overlay fixed inset-0 z-40 px-6 pb-10 pt-28 backdrop-blur-xl"
                 >
                   <button
                     ref={closeButtonRef}
@@ -152,7 +152,7 @@ export function MobileNav({
                         type="button"
                         aria-label={languageSwitchAriaLabel}
                         onClick={onToggleLanguage}
-                        className="theme-control inline-flex h-12 min-w-12 items-center justify-center rounded-full border px-3 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
+                        className="theme-control inline-flex h-12 min-w-12 items-center justify-center rounded-full border px-3 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(127,169,155,0.72)] active:scale-[0.98]"
                       >
                         {languageSwitchText}
                       </button>
@@ -160,7 +160,7 @@ export function MobileNav({
                         type="button"
                         aria-label={themeSwitchAriaLabel}
                         onClick={onToggleTheme}
-                        className="theme-control inline-flex h-12 w-12 items-center justify-center rounded-full border transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(67,137,255,0.72)] active:scale-[0.98]"
+                        className="theme-control inline-flex h-12 w-12 items-center justify-center rounded-full border transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(127,169,155,0.72)] active:scale-[0.98]"
                       >
                         <ThemeIcon size={18} weight="regular" />
                       </button>
