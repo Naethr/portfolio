@@ -6,8 +6,6 @@ import {
   ArrowRight,
   EnvelopeSimple,
 } from "@phosphor-icons/react";
-import { motion } from "motion/react";
-
 import type { Language, PortfolioTranslations } from "@/data/translations";
 
 import { SectionReveal } from "../ui/section-reveal";
@@ -32,42 +30,28 @@ function frame(className?: string) {
 
 function AboutIntro({ copy }: { copy: PortfolioTranslations["about"] }) {
   return (
-    <div className="mb-14 grid gap-6 p-5 sm:mb-16 sm:p-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-center lg:p-8 xl:grid-cols-[minmax(0,1fr)_18rem]">
-      <div className="max-w-3xl space-y-5">
-        <span className="theme-pill inline-flex rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.24em]">
-          {copy.eyebrow}
-        </span>
-        <h2 className="theme-text-primary text-[clamp(2.35rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-balance">
+    <div className="about-layout">
+      <div className="about-copy">
+        <h2 className="about-title font-display">
           {copy.title}
         </h2>
 
-        <div className="theme-text-secondary max-w-[62ch] space-y-3 text-sm leading-7 sm:text-base sm:leading-8">
+        <div className="about-prose">
           {copy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: 22, scale: 0.98 }}
-        whileInView={{ opacity: 1, x: 0, scale: 1 }}
-        whileHover={{ y: -3, scale: 1.006 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="theme-photo-shell group relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[999px] border shadow-[0_22px_62px_-46px_rgba(127,169,155,0.52)] transition-shadow duration-500 hover:shadow-[0_26px_70px_-50px_rgba(127,169,155,0.68)] sm:max-w-[17rem] lg:mr-0"
-      >
-        <div
-          aria-hidden="true"
-          className="theme-photo-overlay absolute inset-0 z-10 rounded-[999px] transition-opacity duration-500 group-hover:opacity-80"
-        />
+      <div className="about-portrait">
         <Image
           src={aboutPhoto.src}
           alt={aboutPhoto.alt}
           fill
-          sizes="(max-width: 1024px) 17rem, 18rem"
-          className="scale-[1.04] rounded-[999px] object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.055]"
+          sizes="(max-width: 767px) 144px, (max-width: 1023px) 192px, 256px"
+          className="object-cover object-center"
         />
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -137,19 +121,16 @@ function ProfileSection({
   return (
     <section
       id="profil"
-      className="relative pb-12 pt-20 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-28"
+      className="relative"
     >
-      <div
-        aria-hidden="true"
-        className="theme-section-band pointer-events-none absolute left-1/2 top-[-7rem] h-[calc(100%+14rem)] w-screen -translate-x-1/2 [mask-image:linear-gradient(180deg,transparent_0%,black_18%,black_82%,transparent_100%)]"
-      />
-      <SectionReveal>
-        <div className="relative p-4 sm:p-5 lg:p-6">
-          <div className="relative space-y-5">
-            <AboutIntro copy={aboutCopy} />
-            <TimelineSection copy={timelineCopy} />
-          </div>
+      <div className="about-scene">
+        <div aria-hidden="true" className="about-backdrop pointer-events-none">
+          <Image src="/images/about/jade-cartography.webp" alt="" width={960} height={540} sizes="(max-width: 767px) 416px, (max-width: 1023px) 608px, (max-width: 1181px) 65vw, 768px" className="about-cartography" />
         </div>
+        <AboutIntro copy={aboutCopy} />
+      </div>
+      <SectionReveal>
+        <TimelineSection copy={timelineCopy} />
       </SectionReveal>
     </section>
   );

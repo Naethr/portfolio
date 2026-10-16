@@ -45,7 +45,6 @@
   --shell-grid-line: rgba(127, 169, 155, 0.12);
   --shell-grid-opacity: 0.24;
   --shell-ambient: radial-gradient(circle at 88% 12%, rgba(127, 169, 155, 0.07), transparent 26%);
-  --section-band-background: rgba(35, 61, 49, 0.36);
   --contact-panel-background: radial-gradient(circle at 85% 10%, rgba(127, 169, 155, 0.1), transparent 38%),
     linear-gradient(180deg, #1a3024, #11251b);
   --contact-panel-border: rgba(189, 166, 122, 0.42);
@@ -55,7 +54,6 @@
   --contact-cta-hover: rgba(189, 166, 122, 0.3);
   --contact-cta-text: var(--ivory);
   --contact-cta-shadow: 0 12px 38px -28px rgba(189, 166, 122, 0.7);
-  --photo-overlay: linear-gradient(180deg, transparent, rgba(13, 28, 23, 0.22));
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(42, 88, 91, 0.48), transparent 43%),
     radial-gradient(ellipse at 13% 76%, rgba(35, 73, 65, 0.4), transparent 48%),
     linear-gradient(160deg, #071718 0%, #0d2526 49%, #08191b 100%);
@@ -163,7 +161,6 @@
   --shell-grid-line: rgba(40, 67, 48, 0.11);
   --shell-grid-opacity: 0.24;
   --shell-ambient: radial-gradient(circle at 88% 12%, rgba(127, 169, 155, 0.11), transparent 26%);
-  --section-band-background: rgba(170, 184, 163, 0.22);
   --contact-panel-background: radial-gradient(circle at 85% 10%, rgba(127, 169, 155, 0.15), transparent 38%),
     linear-gradient(180deg, #f7f8f2, #e1ebdd);
   --contact-panel-border: rgba(101, 84, 55, 0.36);
@@ -173,7 +170,6 @@
   --contact-cta-hover: rgba(101, 84, 55, 0.21);
   --contact-cta-text: #332a19;
   --contact-cta-shadow: 0 12px 38px -28px rgba(101, 84, 55, 0.42);
-  --photo-overlay: linear-gradient(180deg, transparent, rgba(23, 42, 30, 0.08));
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(80, 139, 141, 0.18), transparent 44%),
     radial-gradient(ellipse at 14% 75%, rgba(99, 144, 125, 0.2), transparent 49%),
     linear-gradient(160deg, #eff1ec 0%, #e1eae6 52%, #e8eeeb 100%);
@@ -1036,9 +1032,6 @@ p {
 .theme-inset,
 .theme-mobile-overlay,
 .theme-mobile-close,
-.theme-section-band,
-.theme-photo-shell,
-.theme-photo-overlay,
 .theme-contact-panel,
 .theme-contact-cta {
   transition:
@@ -1136,19 +1129,6 @@ p {
   box-shadow: var(--shadow-control);
 }
 
-.theme-section-band {
-  background: var(--section-band-background);
-}
-
-.theme-photo-shell {
-  border-color: var(--border);
-  background: var(--surface-inset);
-}
-
-.theme-photo-overlay {
-  background: var(--photo-overlay);
-}
-
 .theme-contact-panel {
   border-color: var(--contact-panel-border);
   background: var(--contact-panel-background);
@@ -1188,6 +1168,111 @@ p {
   }
 
   .project-media-image { transform: none !important; }
+}
+
+/* The About passage meets the Constellation and the timeline at their actual edge colors. */
+.about-scene {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(5rem, 8vw, 8rem) 0 clamp(4.5rem, 7vw, 6.5rem);
+}
+
+.about-backdrop {
+  position: absolute;
+  z-index: -1;
+  top: -10rem;
+  bottom: -8rem;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  background: linear-gradient(180deg, #10312c 0%, #142f3e 28%, #122b39 61%, #0c282c 100%);
+  mask-image: linear-gradient(180deg, transparent, #000 10rem, #000 calc(100% - 8rem), transparent);
+}
+
+.about-cartography {
+  display: block;
+  position: absolute;
+  bottom: 3rem;
+  left: -6rem;
+  width: min(65vw, 48rem);
+  height: auto;
+  opacity: 0.27;
+  /* Fade every edge, including the source's cropped cartographic lines. */
+  mask-image:
+    linear-gradient(90deg, transparent, #000 22%, #000 72%, transparent),
+    linear-gradient(180deg, transparent, #000 30%, #000 65%, transparent);
+  mask-composite: intersect;
+}
+
+.about-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 16rem);
+  align-items: center;
+  gap: clamp(2rem, 8vw, 8rem);
+  max-width: 70rem;
+  margin-inline: auto;
+}
+
+.about-copy { max-width: 42rem; }
+.about-title {
+  color: #f0eadb;
+  font-size: clamp(2.45rem, 4.7vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.about-title::after {
+  content: "";
+  display: block;
+  width: 5.25rem;
+  height: 1px;
+  margin: 1.6rem 0 1.7rem;
+  background: linear-gradient(90deg, #cbb184, rgba(203, 177, 132, 0));
+}
+.about-prose {
+  max-width: 62ch;
+  color: #d7e3df;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.about-prose p + p { margin-top: 1.2rem; }
+.about-portrait {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(203, 177, 132, 0.7);
+  border-radius: 999px;
+  box-shadow: 0 24px 52px -36px rgba(3, 15, 17, 0.75);
+}
+
+[data-theme="light"] .about-backdrop {
+  background: linear-gradient(180deg, #d9e8df 0%, #cedee5 28%, #cbdce3 61%, #e1ece4 100%);
+}
+[data-theme="light"] .about-cartography { opacity: 0.12; mix-blend-mode: multiply; }
+[data-theme="light"] .about-title { color: #1b3738; }
+[data-theme="light"] .about-prose { color: #294a49; }
+[data-theme="light"] .about-title::after { background: linear-gradient(90deg, #80653d, rgba(128, 101, 61, 0)); }
+[data-theme="light"] .about-portrait { border-color: rgba(101, 84, 55, 0.62); box-shadow: 0 24px 52px -36px rgba(25, 56, 53, 0.4); }
+
+@media (max-width: 1023px) {
+  .about-cartography { left: -5rem; bottom: 4rem; width: 38rem; opacity: 0.2; }
+  .about-layout { gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 1fr) minmax(9rem, 12rem); }
+}
+
+@media (max-width: 767px) {
+  .about-scene { padding-block: 5rem 4rem; }
+  .about-cartography { left: -7rem; bottom: 5rem; width: 26rem; opacity: 0.24; }
+  .about-layout { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+  .about-title { font-size: clamp(2.35rem, 9vw, 3.2rem); }
+  .about-prose { font-size: 0.98rem; line-height: 1.8; }
+  .about-prose p + p { margin-top: 1.15rem; }
+  .about-portrait { width: 9rem; justify-self: end; }
 }
 
 /* Skills atlas: local visual system and the Projects → Skills color passage. */

@@ -56,7 +56,6 @@ export type PortfolioTranslations = {
     };
   };
   about: {
-    eyebrow: string;
     title: string;
     paragraphs: string[];
   };
@@ -493,7 +492,6 @@ export const translations = {
       },
     },
     about: {
-      eyebrow: "À propos",
       title: "Derrière l’écran",
       paragraphs: [
         "Je suis Théo, développeur full-stack passionné par le développement web et les nouvelles technologies.",
@@ -595,7 +593,6 @@ export const translations = {
       },
     },
     about: {
-      eyebrow: "About",
       title: "Behind the screen",
       paragraphs: [
         "I’m Théo, a full-stack developer passionate about web development and new technologies.",
