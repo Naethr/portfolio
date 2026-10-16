@@ -56,11 +56,6 @@
   --contact-cta-text: var(--ivory);
   --contact-cta-shadow: 0 12px 38px -28px rgba(189, 166, 122, 0.7);
   --photo-overlay: linear-gradient(180deg, transparent, rgba(13, 28, 23, 0.22));
-  --timeline-date-background: #233d31;
-  --timeline-date-border: rgba(189, 166, 122, 0.6);
-  --timeline-date-text: var(--ivory);
-  --timeline-point-background: #1b3327;
-  --timeline-muted-connector: rgba(127, 169, 155, 0.27);
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(42, 88, 91, 0.48), transparent 43%),
     radial-gradient(ellipse at 13% 76%, rgba(35, 73, 65, 0.4), transparent 48%),
     linear-gradient(160deg, #071718 0%, #0d2526 49%, #08191b 100%);
@@ -179,11 +174,6 @@
   --contact-cta-text: #332a19;
   --contact-cta-shadow: 0 12px 38px -28px rgba(101, 84, 55, 0.42);
   --photo-overlay: linear-gradient(180deg, transparent, rgba(23, 42, 30, 0.08));
-  --timeline-date-background: #edf2e9;
-  --timeline-date-border: rgba(101, 84, 55, 0.56);
-  --timeline-date-text: #332a19;
-  --timeline-point-background: #f7f8f2;
-  --timeline-muted-connector: rgba(40, 67, 48, 0.28);
   --projects-background: radial-gradient(ellipse at 81% 20%, rgba(80, 139, 141, 0.18), transparent 44%),
     radial-gradient(ellipse at 14% 75%, rgba(99, 144, 125, 0.2), transparent 49%),
     linear-gradient(160deg, #eff1ec 0%, #e1eae6 52%, #e8eeeb 100%);

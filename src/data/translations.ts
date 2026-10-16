@@ -1,3 +1,5 @@
+import { getTimelineItems, type TimelineMilestone } from "./timeline";
+
 import {
   navigationLinks,
   projects,
@@ -7,21 +9,6 @@ import {
 } from "./portfolio";
 
 export type Language = "fr" | "en";
-
-type TimelineTextItem =
-  | {
-      id: string;
-      type: "date";
-      label: string;
-    }
-  | {
-      id: string;
-      type: "event";
-      title: string;
-      emphasizedText?: string;
-      detail?: string;
-      fallbackLabel?: string;
-    };
 
 type SkillCategory = "frontend" | "backend" | "database" | "tools" | "ai";
 
@@ -76,9 +63,15 @@ export type PortfolioTranslations = {
   timeline: {
     eyebrow: string;
     title: string;
-    expandLabel: string;
-    collapseLabel: string;
-    items: TimelineTextItem[];
+    description: string;
+    previousLabel: string;
+    nextLabel: string;
+    pauseLabel: string;
+    playLabel: string;
+    reducedMotionLabel: string;
+    navigationLabel: string;
+    interactionHint: string;
+    items: TimelineMilestone[];
   };
   projectsSection: {
     eyebrow: string;
@@ -116,157 +109,8 @@ export type PortfolioTranslations = {
   };
 };
 
-const frTimelineItems: TimelineTextItem[] = [
-  {
-    id: "ai-project",
-    type: "event",
-    title: "Projet IA",
-    detail: "Projet Sokwak AI · intégration d’une API OpenAI moderne",
-  },
-  {
-    id: "node-js",
-    type: "event",
-    title: "Node.js",
-    detail: "Express.js · NestJS · backend JavaScript",
-  },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Certification backend",
-    detail: "Obtenue à mi-parcours THP",
-    fallbackLabel: "Certification",
-  },
-  { id: "date-april-2026", type: "date", label: "Avril 2026" },
-  {
-    id: "react-next",
-    type: "event",
-    title: "React / Next.js",
-    detail: "Composants · JavaScript · TypeScript",
-  },
-  {
-    id: "rails-sql",
-    type: "event",
-    title: "Ruby on Rails / SQL",
-    detail: "MVC · CRUD · base de données · Hotwire",
-  },
-  {
-    id: "tools-mastery",
-    type: "event",
-    title: "Maîtrise d’outils",
-    detail: "GitHub · Vercel · VS Code",
-  },
-  {
-    id: "ruby",
-    type: "event",
-    title: "Ruby",
-    detail: "Niveau : maîtrise · scripts · POO",
-  },
-  {
-    id: "thp-start",
-    type: "event",
-    title: "Début de formation THP",
-    detail: "Formation intensive de Dev Web",
-    fallbackLabel: "Apprentissage",
-  },
-  { id: "date-january-2026", type: "date", label: "Janvier 2026" },
-  {
-    id: "html-css-fundamentals",
-    type: "event",
-    title: "Fondamentaux HTML/CSS",
-    detail: "Mise en page, fondamentaux du web, responsive design",
-  },
-  {
-    id: "freecodecamp-responsive-web-design",
-    type: "event",
-    title: "Parcours Responsive Web Design",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Apprentissage",
-  },
-  { id: "date-september-2025", type: "date", label: "Septembre 2025" },
-  {
-    id: "career-shift",
-    type: "event",
-    title: "Reconversion vers le dev web",
-  },
-  { id: "date-august-2025", type: "date", label: "Août 2025" },
-];
-
-const enTimelineItems: TimelineTextItem[] = [
-  {
-    id: "ai-project",
-    type: "event",
-    title: "AI project",
-    detail: "Sokwak AI project · integration of a modern OpenAI API",
-  },
-  {
-    id: "node-js",
-    type: "event",
-    title: "Node.js",
-    detail: "Express.js · NestJS · JavaScript backend",
-  },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Backend certification",
-    detail: "Completed halfway through THP",
-    fallbackLabel: "Certification",
-  },
-  { id: "date-april-2026", type: "date", label: "April 2026" },
-  {
-    id: "react-next",
-    type: "event",
-    title: "React / Next.js",
-    detail: "Components · JavaScript · TypeScript",
-  },
-  {
-    id: "rails-sql",
-    type: "event",
-    title: "Ruby on Rails / SQL",
-    detail: "MVC · CRUD · database · Hotwire",
-  },
-  {
-    id: "tools-mastery",
-    type: "event",
-    title: "Tooling fundamentals",
-    detail: "GitHub · Vercel · VS Code",
-  },
-  {
-    id: "ruby",
-    type: "event",
-    title: "Ruby",
-    detail: "Level: proficient · scripts · OOP",
-  },
-  {
-    id: "thp-start",
-    type: "event",
-    title: "Started THP training",
-    detail: "Intensive Web Developer training",
-    fallbackLabel: "Learning",
-  },
-  { id: "date-january-2026", type: "date", label: "January 2026" },
-  {
-    id: "html-css-fundamentals",
-    type: "event",
-    title: "HTML/CSS fundamentals",
-    detail: "Layout, web fundamentals, responsive design",
-  },
-  {
-    id: "freecodecamp-responsive-web-design",
-    type: "event",
-    title: "Responsive Web Design path",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Learning",
-  },
-  { id: "date-september-2025", type: "date", label: "September 2025" },
-  {
-    id: "career-shift",
-    type: "event",
-    title: "Career shift into web development",
-  },
-  { id: "date-august-2025", type: "date", label: "August 2025" },
-];
+const frTimelineItems = getTimelineItems("fr");
+const enTimelineItems = getTimelineItems("en");
 
 const frSkills: SkillCopy[] = [
   {
@@ -659,9 +503,15 @@ export const translations = {
     },
     timeline: {
       eyebrow: "Parcours",
-      title: "Mon parcours de développeur",
-      expandLabel: "Découvrir mon parcours",
-      collapseLabel: "Replier le parcours",
+      title: "Mon parcours",
+      description: "Un chemin d’apprentissage, de projets et de pratique.",
+      previousLabel: "Étape précédente",
+      nextLabel: "Étape suivante",
+      pauseLabel: "Suspendre le défilement",
+      playLabel: "Reprendre le défilement",
+      reducedMotionLabel: "Défilement automatique désactivé : mouvement réduit",
+      navigationLabel: "Frise chronologique : utilisez les flèches gauche et droite",
+      interactionHint: "Glissez ou utilisez les flèches. Pause au survol et au focus.",
       items: frTimelineItems,
     },
     projectsSection: {
@@ -755,9 +605,15 @@ export const translations = {
     },
     timeline: {
       eyebrow: "Journey",
-      title: "My developer journey",
-      expandLabel: "View my journey",
-      collapseLabel: "Collapse journey",
+      title: "My journey",
+      description: "A path of learning, projects and hands-on practice.",
+      previousLabel: "Previous milestone",
+      nextLabel: "Next milestone",
+      pauseLabel: "Pause scrolling",
+      playLabel: "Resume scrolling",
+      reducedMotionLabel: "Automatic scrolling disabled: reduced motion",
+      navigationLabel: "Timeline: use the left and right arrow keys",
+      interactionHint: "Swipe or use the arrows. Pauses on hover and keyboard focus.",
       items: enTimelineItems,
     },
     projectsSection: {
