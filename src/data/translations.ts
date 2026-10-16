@@ -1,3 +1,5 @@
+import { getTimelineItems, type TimelineMilestone } from "./timeline";
+
 import {
   navigationLinks,
   projects,
@@ -7,21 +9,6 @@ import {
 } from "./portfolio";
 
 export type Language = "fr" | "en";
-
-type TimelineTextItem =
-  | {
-      id: string;
-      type: "date";
-      label: string;
-    }
-  | {
-      id: string;
-      type: "event";
-      title: string;
-      emphasizedText?: string;
-      detail?: string;
-      fallbackLabel?: string;
-    };
 
 type SkillCategory = "frontend" | "backend" | "database" | "tools" | "ai";
 
@@ -56,50 +43,55 @@ export type PortfolioTranslations = {
   };
   navigationLinks: ProjectLink[];
   hero: {
-    eyebrow: string;
+    headline: string;
     role: string;
+    introduction: string;
     projectsCta: string;
     contactCta: string;
+    waypointsLabel: string;
+    waypoints: {
+      projects: string;
+      skills: string;
+      journey: string;
+    };
   };
   about: {
-    eyebrow: string;
     title: string;
     paragraphs: string[];
   };
   timeline: {
-    eyebrow: string;
-    title: string;
-    expandLabel: string;
-    collapseLabel: string;
-    items: TimelineTextItem[];
-  };
-  projectsSection: {
-    eyebrow: string;
     title: string;
     description: string;
-    previousAriaLabel: string;
-    nextAriaLabel: string;
+    previousLabel: string;
+    nextLabel: string;
+    pauseLabel: string;
+    playLabel: string;
+    reducedMotionLabel: string;
+    navigationLabel: string;
+    interactionHint: string;
+    items: TimelineMilestone[];
   };
-  projectCard: {
+  projectsSection: {
+    title: string;
+    description: string;
+  };
+  projectShowcase: {
     projectLabel: string;
-    illustrationPending: string;
-    liveContext: string;
-    stackUsed: string;
-    intention: string;
-    defaultIntention: string;
-    screenshots: Record<string, string>;
+    technologyLabel: string;
+    codeLinkLabel: string;
+    liveLinkLabel: string;
+    openScreenshotLabel: string;
+    visualPendingLabel: string;
   };
   projects: Project[];
   stack: {
     section: {
-      eyebrow: string;
       title: string;
       description: string;
     };
     categories: Record<SkillCategory, StackCategoryCopy>;
-    detailsLabel: string;
     relatedTechnologiesLabel: string;
-    showDetailAriaLabel: string;
+    selectTechnologyAriaLabel: string;
     skills: SkillCopy[];
   };
   contact: {
@@ -113,161 +105,8 @@ export type PortfolioTranslations = {
   };
 };
 
-const projectBySlug = Object.fromEntries(
-  projects.map((project) => [project.slug, project]),
-) as Record<Project["slug"], Project>;
-
-const frTimelineItems: TimelineTextItem[] = [
-  {
-    id: "ai-project",
-    type: "event",
-    title: "Projet IA",
-    detail: "Projet Sokwak AI · intégration d’une API OpenAI moderne",
-  },
-  {
-    id: "node-js",
-    type: "event",
-    title: "Node.js",
-    detail: "Express.js · NestJS · backend JavaScript",
-  },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Certification backend",
-    detail: "Obtenue à mi-parcours THP",
-    fallbackLabel: "Certification",
-  },
-  { id: "date-april-2026", type: "date", label: "Avril 2026" },
-  {
-    id: "react-next",
-    type: "event",
-    title: "React / Next.js",
-    detail: "Composants · JavaScript · TypeScript",
-  },
-  {
-    id: "rails-sql",
-    type: "event",
-    title: "Ruby on Rails / SQL",
-    detail: "MVC · CRUD · base de données · Hotwire",
-  },
-  {
-    id: "tools-mastery",
-    type: "event",
-    title: "Maîtrise d’outils",
-    detail: "GitHub · Vercel · VS Code",
-  },
-  {
-    id: "ruby",
-    type: "event",
-    title: "Ruby",
-    detail: "Niveau : maîtrise · scripts · POO",
-  },
-  {
-    id: "thp-start",
-    type: "event",
-    title: "Début de formation THP",
-    detail: "Formation intensive de Dev Web",
-    fallbackLabel: "Apprentissage",
-  },
-  { id: "date-january-2026", type: "date", label: "Janvier 2026" },
-  {
-    id: "html-css-fundamentals",
-    type: "event",
-    title: "Fondamentaux HTML/CSS",
-    detail: "Mise en page, fondamentaux du web, responsive design",
-  },
-  {
-    id: "freecodecamp-responsive-web-design",
-    type: "event",
-    title: "Parcours Responsive Web Design",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Apprentissage",
-  },
-  { id: "date-september-2025", type: "date", label: "Septembre 2025" },
-  {
-    id: "career-shift",
-    type: "event",
-    title: "Reconversion vers le dev web",
-  },
-  { id: "date-august-2025", type: "date", label: "Août 2025" },
-];
-
-const enTimelineItems: TimelineTextItem[] = [
-  {
-    id: "ai-project",
-    type: "event",
-    title: "AI project",
-    detail: "Sokwak AI project · integration of a modern OpenAI API",
-  },
-  {
-    id: "node-js",
-    type: "event",
-    title: "Node.js",
-    detail: "Express.js · NestJS · JavaScript backend",
-  },
-  {
-    id: "backend-certification",
-    type: "event",
-    title: "Backend certification",
-    detail: "Completed halfway through THP",
-    fallbackLabel: "Certification",
-  },
-  { id: "date-april-2026", type: "date", label: "April 2026" },
-  {
-    id: "react-next",
-    type: "event",
-    title: "React / Next.js",
-    detail: "Components · JavaScript · TypeScript",
-  },
-  {
-    id: "rails-sql",
-    type: "event",
-    title: "Ruby on Rails / SQL",
-    detail: "MVC · CRUD · database · Hotwire",
-  },
-  {
-    id: "tools-mastery",
-    type: "event",
-    title: "Tooling fundamentals",
-    detail: "GitHub · Vercel · VS Code",
-  },
-  {
-    id: "ruby",
-    type: "event",
-    title: "Ruby",
-    detail: "Level: proficient · scripts · OOP",
-  },
-  {
-    id: "thp-start",
-    type: "event",
-    title: "Started THP training",
-    detail: "Intensive Web Developer training",
-    fallbackLabel: "Learning",
-  },
-  { id: "date-january-2026", type: "date", label: "January 2026" },
-  {
-    id: "html-css-fundamentals",
-    type: "event",
-    title: "HTML/CSS fundamentals",
-    detail: "Layout, web fundamentals, responsive design",
-  },
-  {
-    id: "freecodecamp-responsive-web-design",
-    type: "event",
-    title: "Responsive Web Design path",
-    emphasizedText: "Responsive Web Design",
-    detail: "FreeCodeCamp",
-    fallbackLabel: "Learning",
-  },
-  { id: "date-september-2025", type: "date", label: "September 2025" },
-  {
-    id: "career-shift",
-    type: "event",
-    title: "Career shift into web development",
-  },
-  { id: "date-august-2025", type: "date", label: "August 2025" },
-];
+const frTimelineItems = getTimelineItems("fr");
+const enTimelineItems = getTimelineItems("en");
 
 const frSkills: SkillCopy[] = [
   {
@@ -316,7 +155,7 @@ const frSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Styling utility-first pour concevoir rapidement des interfaces responsive, cohérentes et faciles à ajuster.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "bootstrap",
@@ -324,7 +163,7 @@ const frSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Pratique pour assembler vite des layouts responsive et des patterns UI standards.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "hotwire",
@@ -340,7 +179,7 @@ const frSkills: SkillCopy[] = [
     category: "backend",
     description:
       "Framework backend productif pour créer des applications web structurées et livrer rapidement un MVP solide.",
-    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
+    related: ["postgresql", "sqlite", "hotwire"],
   },
   {
     id: "node",
@@ -404,7 +243,7 @@ const frSkills: SkillCopy[] = [
     category: "tools",
     description:
       "Environnement principal pour écrire, déboguer et naviguer efficacement dans le code.",
-    related: ["codex", "ai-workflow", "github"],
+    related: ["codex", "claude", "github"],
   },
   {
     id: "vercel",
@@ -420,15 +259,15 @@ const frSkills: SkillCopy[] = [
     category: "ai",
     description:
       "Workflow de développement assisté par IA pour accélérer l’implémentation, l’itération et la revue de code.",
-    related: ["vscode", "ai-workflow"],
+    related: ["vscode"],
   },
   {
-    id: "ai-workflow",
-    name: "Workflow assisté par IA",
+    id: "claude",
+    name: "Claude",
     category: "ai",
     description:
-      "Méthode de travail moderne où l’IA aide à cadrer, produire, relire et améliorer le code sans remplacer le jugement technique.",
-    related: ["codex", "vscode"],
+      "Assistant IA d’Anthropic pour l’analyse et l’aide au développement.",
+    related: ["vscode"],
   },
 ];
 
@@ -479,7 +318,7 @@ const enSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Utility-first styling for quickly designing responsive, consistent and easy-to-adjust interfaces.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "bootstrap",
@@ -487,7 +326,7 @@ const enSkills: SkillCopy[] = [
     category: "frontend",
     description:
       "Useful for quickly assembling responsive layouts and standard UI patterns.",
-    related: ["react", "rails", "nextjs"],
+    related: ["react", "nextjs"],
   },
   {
     id: "hotwire",
@@ -503,7 +342,7 @@ const enSkills: SkillCopy[] = [
     category: "backend",
     description:
       "Productive backend framework for building structured web applications and shipping a solid MVP quickly.",
-    related: ["postgresql", "sqlite", "hotwire", "bootstrap", "tailwind"],
+    related: ["postgresql", "sqlite", "hotwire"],
   },
   {
     id: "node",
@@ -567,7 +406,7 @@ const enSkills: SkillCopy[] = [
     category: "tools",
     description:
       "Main environment for writing, debugging and navigating code efficiently.",
-    related: ["codex", "ai-workflow", "github"],
+    related: ["codex", "claude", "github"],
   },
   {
     id: "vercel",
@@ -583,38 +422,38 @@ const enSkills: SkillCopy[] = [
     category: "ai",
     description:
       "AI-assisted development workflow for speeding up implementation, iteration and code review.",
-    related: ["vscode", "ai-workflow"],
+    related: ["vscode"],
   },
   {
-    id: "ai-workflow",
-    name: "AI-assisted workflow",
+    id: "claude",
+    name: "Claude",
     category: "ai",
     description:
-      "Modern working method where AI helps scope, produce, review and improve code without replacing technical judgment.",
-    related: ["codex", "vscode"],
+      "Anthropic’s AI assistant for analysis and development support.",
+    related: ["vscode"],
   },
 ];
 
 const categoryColors: Record<SkillCategory, Pick<StackCategoryCopy, "accent" | "soft">> = {
   frontend: {
-    accent: "rgba(96,165,250,0.92)",
-    soft: "rgba(96,165,250,0.12)",
+    accent: "var(--skill-frontend)",
+    soft: "var(--skill-frontend-soft)",
   },
   backend: {
-    accent: "rgba(52,211,153,0.9)",
-    soft: "rgba(52,211,153,0.1)",
+    accent: "var(--skill-backend)",
+    soft: "var(--skill-backend-soft)",
   },
   database: {
-    accent: "rgba(251,191,36,0.92)",
-    soft: "rgba(251,191,36,0.1)",
+    accent: "var(--skill-database)",
+    soft: "var(--skill-database-soft)",
   },
   tools: {
-    accent: "rgba(148,163,184,0.95)",
-    soft: "rgba(148,163,184,0.1)",
+    accent: "var(--skill-tools)",
+    soft: "var(--skill-tools-soft)",
   },
   ai: {
-    accent: "rgba(167,139,250,0.92)",
-    soft: "rgba(167,139,250,0.1)",
+    accent: "var(--skill-ai)",
+    soft: "var(--skill-ai-soft)",
   },
 };
 
@@ -636,13 +475,20 @@ export const translations = {
     },
     navigationLinks,
     hero: {
-      eyebrow: "Portfolio",
-      role: "Développeur Web Fullstack",
+      headline: "Théo Villalba",
+      role: "Développeur Fullstack",
+      introduction:
+        "Je conçois des applications web claires et durables, de l’interface à la logique métier.",
       projectsCta: "Voir les projets",
       contactCta: "Me contacter",
+      waypointsLabel: "Accès aux sections",
+      waypoints: {
+        projects: "Projets sélectionnés",
+        skills: "Compétences",
+        journey: "Parcours",
+      },
     },
     about: {
-      eyebrow: "À propos",
       title: "Derrière l’écran",
       paragraphs: [
         "Je suis Théo, développeur full-stack passionné par le développement web et les nouvelles technologies.",
@@ -651,38 +497,34 @@ export const translations = {
       ],
     },
     timeline: {
-      eyebrow: "Parcours",
-      title: "Mon parcours de développeur",
-      expandLabel: "Découvrir mon parcours",
-      collapseLabel: "Replier le parcours",
+      title: "Mon parcours",
+      description: "Un chemin d’apprentissage, de projets et de pratique.",
+      previousLabel: "Étape précédente",
+      nextLabel: "Étape suivante",
+      pauseLabel: "Suspendre le défilement",
+      playLabel: "Reprendre le défilement",
+      reducedMotionLabel: "Défilement automatique désactivé : mouvement réduit",
+      navigationLabel: "Frise chronologique : utilisez les flèches gauche et droite",
+      interactionHint: "Glissez ou utilisez les flèches. Pause au survol et au focus.",
       items: frTimelineItems,
     },
     projectsSection: {
-      eyebrow: "Projets",
-      title: "Quelques projets réalisés seul ou en équipe.",
+      title: "Mes projets",
       description:
-        "Chacun m’a permis de travailler un aspect concret du développement web : interface, logique métier, architecture ou performance.",
-      previousAriaLabel: "Projet précédent",
-      nextAriaLabel: "Projet suivant",
+        "Des applications et des sites conçus avec attention, de l’interface à la logique métier.",
     },
-    projectCard: {
+    projectShowcase: {
       projectLabel: "Projet",
-      illustrationPending: "Illustration à venir",
-      liveContext: "Voir le contexte",
-      stackUsed: "Stack utilisée",
-      intention: "Intention",
-      defaultIntention:
-        "Une fenêtre claire, lisible et extensible pour ajouter d’autres projets sans revoir la structure.",
-      screenshots: {
-        "sokwak.com": "Capture d’écran du projet Sokwak",
-        questonaut: "Capture d’écran du projet Questonaut",
-      },
+      technologyLabel: "Technologies",
+      codeLinkLabel: "Voir le code sur GitHub",
+      liveLinkLabel: "Voir le site",
+      openScreenshotLabel: "Ouvrir la capture",
+      visualPendingLabel: "Visuel provisoire",
     },
     projects,
     stack: {
       section: {
-        eyebrow: "Stack",
-        title: "Compétences & Stack",
+        title: "Mes compétences",
         description:
           "Une vue connectée des technologies que j’utilise pour concevoir, construire et livrer des applications web modernes.",
       },
@@ -691,11 +533,10 @@ export const translations = {
         backend: { label: "Backend", ...categoryColors.backend },
         database: { label: "Base de données", ...categoryColors.database },
         tools: { label: "Outils & déploiement", ...categoryColors.tools },
-        ai: { label: "Workflow IA", ...categoryColors.ai },
+        ai: { label: "Assistants IA", ...categoryColors.ai },
       },
-      detailsLabel: "Détail actif",
       relatedTechnologiesLabel: "Technologies liées",
-      showDetailAriaLabel: "Afficher le détail de",
+      selectTechnologyAriaLabel: "Sélectionner",
       skills: frSkills,
     },
     contact: {
@@ -732,13 +573,20 @@ export const translations = {
       { label: "My journey", href: "#parcours" },
     ],
     hero: {
-      eyebrow: "Portfolio",
-      role: "Full-Stack Web Developer",
+      headline: "Théo Villalba",
+      role: "Full-Stack Developer",
+      introduction:
+        "I build clear, lasting web applications, from interface to business logic.",
       projectsCta: "View projects",
       contactCta: "Contact me",
+      waypointsLabel: "Section shortcuts",
+      waypoints: {
+        projects: "Selected projects",
+        skills: "Skills",
+        journey: "Journey",
+      },
     },
     about: {
-      eyebrow: "About",
       title: "Behind the screen",
       paragraphs: [
         "I’m Théo, a full-stack developer passionate about web development and new technologies.",
@@ -747,64 +595,34 @@ export const translations = {
       ],
     },
     timeline: {
-      eyebrow: "Journey",
-      title: "My developer journey",
-      expandLabel: "View my journey",
-      collapseLabel: "Collapse journey",
+      title: "My journey",
+      description: "A path of learning, projects and hands-on practice.",
+      previousLabel: "Previous milestone",
+      nextLabel: "Next milestone",
+      pauseLabel: "Pause scrolling",
+      playLabel: "Resume scrolling",
+      reducedMotionLabel: "Automatic scrolling disabled: reduced motion",
+      navigationLabel: "Timeline: use the left and right arrow keys",
+      interactionHint: "Swipe or use the arrows. Pauses on hover and keyboard focus.",
       items: enTimelineItems,
     },
     projectsSection: {
-      eyebrow: "Projects",
-      title: "A few projects built solo or as part of a team.",
+      title: "My projects",
       description:
-        "Each one helped me work on a concrete aspect of web development: interface, business logic, architecture or performance.",
-      previousAriaLabel: "Previous project",
-      nextAriaLabel: "Next project",
+        "Applications and websites built with care, from interface to business logic.",
     },
-    projectCard: {
+    projectShowcase: {
       projectLabel: "Project",
-      illustrationPending: "Illustration coming soon",
-      liveContext: "View context",
-      stackUsed: "Stack",
-      intention: "Intention",
-      defaultIntention:
-        "A clear, readable and extensible window for adding other projects without reworking the structure.",
-      screenshots: {
-        "sokwak.com": "Screenshot of the Sokwak project",
-        questonaut: "Screenshot of the Questonaut project",
-      },
+      technologyLabel: "Technologies",
+      codeLinkLabel: "View code on GitHub",
+      liveLinkLabel: "View website",
+      openScreenshotLabel: "Open screenshot",
+      visualPendingLabel: "Visual placeholder",
     },
-    projects: [
-      {
-        ...projectBySlug["sokwak.com"],
-        description:
-          "An AI that doesn’t write the solution for you, but helps you learn how to find it.",
-        metric: "An AI app designed to support learning first.",
-        intention:
-          "Create an AI app that acts like a mentor: it questions, reframes and guides the reasoning until things click.",
-      },
-      {
-        ...projectBySlug.questonaut,
-        description:
-          "A gamified habit tracker that makes sticking to daily goals more engaging.",
-        status: "In progress (MVP complete)",
-        metric:
-          "Gamified UI with a level system and reward badges to help users stick to their habits.",
-        intention:
-          "Offer a gamified UI, with a level system and reward badges, to help users keep up with their habits.",
-      },
-      {
-        ...projectBySlug.portfolio,
-        description: "The portfolio you are currently browsing.",
-        status: "Deployed",
-        metric: "A clean and clear interface.",
-        intention: "Create a clean, clear interface with modern components.",
-      },
-    ],
+    projects,
     stack: {
       section: {
-        eyebrow: "Stack",
-        title: "Skills & Stack",
+        title: "My Skills",
         description:
           "A connected view of the technologies I use to design, build and ship modern web applications.",
       },
@@ -813,11 +631,10 @@ export const translations = {
         backend: { label: "Backend", ...categoryColors.backend },
         database: { label: "Database", ...categoryColors.database },
         tools: { label: "Tools & deployment", ...categoryColors.tools },
-        ai: { label: "AI workflow", ...categoryColors.ai },
+        ai: { label: "AI assistants", ...categoryColors.ai },
       },
-      detailsLabel: "Active detail",
       relatedTechnologiesLabel: "Related technologies",
-      showDetailAriaLabel: "Show details for",
+      selectTechnologyAriaLabel: "Select",
       skills: enSkills,
     },
     contact: {
