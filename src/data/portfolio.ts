@@ -13,6 +13,7 @@ export type Project = {
   placeholder?: "portfolio" | "code" | "editorial";
   githubUrl?: string;
   liveUrl?: string;
+  comingSoon?: boolean;
 };
 
 export const navigationLinks: ProjectLink[] = [
@@ -89,6 +90,47 @@ export const projects: Project[] = [
         en: "Sokwak AI prototype input screen, noting that a model will be available later",
       },
     },
+    comingSoon: true,
+  },
+  {
+    slug: "portfolio-l-huguin",
+    name: "Portfolio L. Huguin",
+    category: { fr: "Site vitrine / Portfolio", en: "Showcase / Portfolio" },
+    description: {
+      fr: "Portfolio personnel destiné à présenter des projets de graphisme et de communication, avec une gestion des contenus via une interface d’administration.",
+      en: "Personal portfolio showcasing graphic design and communication projects, with content management through an administration interface.",
+    },
+    technologies: ["Ruby on Rails", "ActiveRecord", "PostgreSQL", "React"],
+    screenshot: {
+      src: "/images/portfolio_lh.png",
+      width: 1432,
+      height: 891,
+      alt: {
+        fr: "Capture du portfolio de L. Huguin",
+        en: "Screenshot of L. Huguin's portfolio",
+      },
+    },
+    comingSoon: true,
+  },
+  {
+    slug: "snipstack",
+    name: "SnipStack",
+    category: { fr: "Outil de développement", en: "Developer tool" },
+    description: {
+      fr: "Application de gestion de snippets permettant d’organiser et de retrouver des extraits de code.",
+      en: "Application for managing code snippets, designed to organize and retrieve reusable code.",
+    },
+    technologies: ["Ruby on Rails", "React", "TypeScript", "Vite"],
+    screenshot: {
+      src: "/images/snipstack.png",
+      width: 1409,
+      height: 941,
+      alt: {
+        fr: "Capture de l’application SnipStack",
+        en: "Screenshot of the SnipStack application",
+      },
+    },
+    githubUrl: "https://github.com/Naethr/SnipStack",
   },
   {
     slug: "portfolio",
@@ -101,28 +143,6 @@ export const projects: Project[] = [
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     placeholder: "portfolio",
     githubUrl: "https://github.com/Naethr/portfolio",
-  },
-  {
-    slug: "snipstack",
-    name: "SnipStack",
-    category: { fr: "Outil de développement", en: "Developer tool" },
-    description: {
-      fr: "Application de gestion de snippets permettant d’organiser et de retrouver des extraits de code.",
-      en: "Application for managing code snippets, designed to organize and retrieve reusable code.",
-    },
-    technologies: ["Ruby on Rails", "React", "TypeScript", "Vite"],
-    placeholder: "code",
-  },
-  {
-    slug: "portfolio-l-huguin",
-    name: "Portfolio L. Huguin",
-    category: { fr: "Site vitrine / Portfolio", en: "Showcase / Portfolio" },
-    description: {
-      fr: "Portfolio personnel destiné à présenter des projets de graphisme et de communication, avec une gestion des contenus via une interface d’administration.",
-      en: "Personal portfolio showcasing graphic design and communication projects, with content management through an administration interface.",
-    },
-    technologies: ["Ruby on Rails", "ActiveRecord", "PostgreSQL", "React"],
-    placeholder: "editorial",
   },
 ];
 
