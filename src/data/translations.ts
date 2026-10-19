@@ -76,12 +76,13 @@ export type PortfolioTranslations = {
     description: string;
   };
   projectShowcase: {
-    projectLabel: string;
     technologyLabel: string;
     codeLinkLabel: string;
     liveLinkLabel: string;
     openScreenshotLabel: string;
-    visualPendingLabel: string;
+    screenshotDialogLabel: string;
+    closeScreenshotLabel: string;
+    comingSoonLabel: string;
   };
   projects: Project[];
   stack: {
@@ -514,12 +515,13 @@ export const translations = {
         "Des applications et des sites conçus avec attention, de l’interface à la logique métier.",
     },
     projectShowcase: {
-      projectLabel: "Projet",
       technologyLabel: "Technologies",
-      codeLinkLabel: "Voir le code sur GitHub",
+      codeLinkLabel: "Voir sur GitHub",
       liveLinkLabel: "Voir le site",
       openScreenshotLabel: "Ouvrir la capture",
-      visualPendingLabel: "Visuel provisoire",
+      screenshotDialogLabel: "Capture agrandie",
+      closeScreenshotLabel: "Fermer la capture",
+      comingSoonLabel: "Lien à venir",
     },
     projects,
     stack: {
@@ -612,12 +614,13 @@ export const translations = {
         "Applications and websites built with care, from interface to business logic.",
     },
     projectShowcase: {
-      projectLabel: "Project",
       technologyLabel: "Technologies",
-      codeLinkLabel: "View code on GitHub",
+      codeLinkLabel: "View on GitHub",
       liveLinkLabel: "View website",
       openScreenshotLabel: "Open screenshot",
-      visualPendingLabel: "Visual placeholder",
+      screenshotDialogLabel: "Enlarged screenshot",
+      closeScreenshotLabel: "Close screenshot",
+      comingSoonLabel: "Coming soon",
     },
     projects,
     stack: {

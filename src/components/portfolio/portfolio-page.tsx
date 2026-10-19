@@ -156,13 +156,12 @@ function ProjectsSection({
         </div>
 
         <div className="project-grid mt-12 grid gap-5 sm:mt-14 sm:gap-6">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <ProjectCard
               key={project.slug}
               project={project}
               copy={projectShowcaseCopy}
               language={language}
-              number={index + 1}
             />
           ))}
         </div>

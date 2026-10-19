@@ -861,7 +861,6 @@ p {
 }
 
 .project-card:focus-within { border-color: var(--project-case-border-active); border-top-color: transparent; }
-.project-index { color: var(--project-index); }
 .project-card-title { color: var(--text-primary); font-family: var(--font-marcellus); }
 .project-description { color: var(--project-copy); }
 .project-category { border-color: var(--project-case-border); color: var(--project-index); }
@@ -887,19 +886,28 @@ p {
   outline-offset: -4px;
 }
 
-.project-media-open {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  border: 1px solid rgba(189, 166, 122, 0.75);
-  border-radius: 0.2rem;
-  background: rgba(9, 26, 20, 0.86);
-  color: #e8e3d7;
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 1rem;
+  border: 0;
+  background: transparent;
 }
+
+.project-lightbox[open] { display: grid; place-items: center; }
+.project-lightbox::backdrop { background: rgba(3, 16, 18, 0.88); transition: background-color 160ms ease; }
+.project-lightbox-closing::backdrop { background: transparent; }
+.project-lightbox-panel { position: relative; width: fit-content; max-width: 100%; border-radius: 0.55rem; box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5); }
+.project-lightbox[open] .project-lightbox-panel { animation: project-lightbox-enter 160ms ease-out both; }
+.project-lightbox[open].project-lightbox-closing .project-lightbox-panel { animation: project-lightbox-exit 160ms ease-in both; }
+.project-lightbox-image { display: block; width: auto; height: auto; max-width: calc(100vw - 2rem); max-height: calc(100dvh - 2rem); border-radius: 0.55rem; object-fit: contain; }
+@keyframes project-lightbox-enter { from { opacity: 0; transform: scale(0.985); } to { opacity: 1; transform: scale(1); } }
+@keyframes project-lightbox-exit { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.985); } }
 
 .project-visual {
   position: relative;
@@ -940,16 +948,13 @@ p {
   pointer-events: none;
 }
 
-.project-visual-name,
-.project-visual-note {
+.project-visual-name {
   position: relative;
   z-index: 1;
   font-size: 0.6rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-
-.project-visual-note { color: #bda67a; text-align: right; }
 
 .project-portfolio-mark {
   position: relative;
@@ -973,26 +978,18 @@ p {
 .project-portfolio-mark span:first-child { position: absolute; inset: 43px; border: 1px solid rgba(189, 166, 122, 0.5); border-radius: 50%; }
 .project-portfolio-mark span:last-child { position: absolute; top: 60px; left: -28px; width: 186px; height: 1px; background: rgba(189, 166, 122, 0.48); }
 
-.project-code-glyph { display: flex; align-items: center; gap: 19px; color: rgba(189, 166, 122, 0.65); font: 400 5.3rem/1 var(--font-marcellus); }
-.project-code-glyph i { width: 66px; height: 1px; background: rgba(127, 169, 155, 0.58); transform: rotate(-52deg); }
-
-.project-editorial-mark { position: relative; width: 156px; height: 144px; transform: rotate(-8deg); }
-.project-editorial-mark span { position: absolute; display: block; border: 1px solid rgba(189, 166, 122, 0.48); }
-.project-editorial-mark span:first-child { inset: 7px 43px 19px 8px; background: rgba(189, 166, 122, 0.06); }
-.project-editorial-mark span:nth-child(2) { inset: 25px 8px 7px 53px; border-color: rgba(127, 169, 155, 0.5); background: rgba(127, 169, 155, 0.06); }
-.project-editorial-mark span:last-child { top: 56px; left: 30px; width: 104px; height: 1px; border: 0; background: rgba(189, 166, 122, 0.6); transform: rotate(-27deg); }
-
 .project-action {
   border-color: var(--project-case-border-active);
   background: var(--project-action-background);
   color: var(--project-link);
   transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
 }
+.project-action-unavailable { opacity: 0.58; cursor: default; }
 
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover { border-color: var(--project-case-border-active); border-top-color: transparent; transform: translateY(-3px); box-shadow: 0 28px 50px -37px rgba(0, 0, 0, 0.85); }
   .project-media-link:hover .project-media-image { transform: scale(1.025); }
-  .project-action:hover { background: var(--project-action-hover); color: var(--project-link-hover); }
+  .project-action:not(:disabled):hover { background: var(--project-action-hover); color: var(--project-link-hover); }
 }
 
 .theme-frame {

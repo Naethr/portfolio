@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight, GitBranch } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
@@ -11,47 +12,112 @@ type ProjectCardProps = {
   project: Project;
   copy: PortfolioTranslations["projectShowcase"];
   language: Language;
-  number: number;
 };
 
-function ProjectVisual({ project, label }: { project: Project; label: string }) {
+function ProjectVisual({ project }: { project: Project }) {
   return (
     <div className={`project-visual project-visual-${project.placeholder ?? "portfolio"}`}>
       <div aria-hidden="true" className="project-visual-art">
-        {project.placeholder === "code" ? (
-          <div className="project-code-glyph"><span>{"{"}</span><i /><span>{"}"}</span></div>
-        ) : project.placeholder === "editorial" ? (
-          <div className="project-editorial-mark"><span /><span /><span /></div>
-        ) : (
-          <div className="project-portfolio-mark"><span /><span /></div>
-        )}
+        <div className="project-portfolio-mark"><span /><span /></div>
       </div>
       <span className="project-visual-name">{project.name}</span>
-      <span className="project-visual-note">{label}</span>
     </div>
   );
 }
 
-export function ProjectCard({ project, copy, language, number }: ProjectCardProps) {
+function ProjectScreenshot({ project, screenshot, copy, language, reducedMotion }: ProjectCardProps & { screenshot: NonNullable<Project["screenshot"]>; reducedMotion: boolean | null }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+  }, []);
+
+  function closeDialog() {
+    const dialog = dialogRef.current;
+    if (!dialog?.open || closeTimer.current !== null) return;
+    if (reducedMotion) {
+      dialog.close();
+      return;
+    }
+    dialog.classList.add("project-lightbox-closing");
+    closeTimer.current = window.setTimeout(() => {
+      dialog.close();
+      dialog.classList.remove("project-lightbox-closing");
+      closeTimer.current = null;
+    }, 160);
+  }
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-label={`${copy.openScreenshotLabel} : ${project.name}`}
+        className="project-media project-media-link relative block w-full cursor-pointer overflow-hidden border-0 p-0"
+        onClick={() => {
+          dialogRef.current?.showModal();
+          dialogRef.current?.focus();
+        }}
+      >
+        <Image
+          src={screenshot.src}
+          alt={screenshot.alt[language]}
+          width={screenshot.width}
+          height={screenshot.height}
+          sizes="(min-width: 1100px) 400px, (min-width: 680px) 48vw, 100vw"
+          className="project-media-image"
+        />
+      </button>
+      <dialog
+        ref={dialogRef}
+        tabIndex={-1}
+        aria-label={`${copy.screenshotDialogLabel} : ${project.name}`}
+        className="project-lightbox"
+        onCancel={(event) => { event.preventDefault(); closeDialog(); }}
+        onClose={() => {
+          if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+          closeTimer.current = null;
+          dialogRef.current?.classList.remove("project-lightbox-closing");
+          triggerRef.current?.focus();
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Tab") {
+            event.preventDefault();
+            dialogRef.current?.focus();
+          }
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            closeDialog();
+          }
+        }}
+        onClick={closeDialog}
+      >
+        <div className="project-lightbox-panel">
+          <Image
+            src={screenshot.src}
+            alt={screenshot.alt[language]}
+            width={screenshot.width}
+            height={screenshot.height}
+            sizes="(min-width: 1200px) 90vw, 100vw"
+            className="project-lightbox-image"
+            style={{ width: `min(calc(100vw - 2rem), calc((100dvh - 2rem) * ${screenshot.width / screenshot.height}), ${screenshot.width}px)` }}
+          />
+        </div>
+      </dialog>
+    </>
+  );
+}
+
+export function ProjectCard({ project, copy, language }: ProjectCardProps) {
   const reducedMotion = useReducedMotion();
   const titleId = `project-${project.slug}-title`;
-  const media = project.screenshot ? (
-    <Image
-      src={project.screenshot.src}
-      alt={project.screenshot.alt[language]}
-      width={project.screenshot.width}
-      height={project.screenshot.height}
-      sizes="(min-width: 1100px) 380px, (min-width: 680px) 48vw, 100vw"
-      className="project-media-image"
-    />
-  ) : (
-    <ProjectVisual project={project} label={copy.visualPendingLabel} />
-  );
 
   return (
     <motion.article
-      initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       aria-labelledby={titleId}
@@ -59,24 +125,12 @@ export function ProjectCard({ project, copy, language, number }: ProjectCardProp
     >
       <span aria-hidden="true" className="project-card-corner" />
       {project.screenshot ? (
-        <a
-          href={project.screenshot.src}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${copy.openScreenshotLabel} : ${project.name}`}
-          className="project-media project-media-link relative block overflow-hidden"
-        >
-          {media}
-          <span aria-hidden="true" className="project-media-open"><ArrowUpRight size={17} /></span>
-        </a>
+        <ProjectScreenshot project={project} screenshot={project.screenshot} copy={copy} language={language} reducedMotion={reducedMotion} />
       ) : (
-        <div className="project-media relative overflow-hidden">{media}</div>
+        <div className="project-media relative overflow-hidden"><ProjectVisual project={project} /></div>
       )}
       <div className="project-card-body flex flex-1 flex-col px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
-        <p className="project-index text-[0.64rem] font-semibold uppercase tracking-[0.2em]">
-          {copy.projectLabel} / {String(number).padStart(2, "0")}
-        </p>
-        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <h3 id={titleId} className="project-card-title text-[clamp(1.7rem,2.2vw,2.05rem)] leading-[1.12]">
             {project.name}
           </h3>
@@ -92,7 +146,7 @@ export function ProjectCard({ project, copy, language, number }: ProjectCardProp
             </li>
           ))}
         </ul>
-        {(project.liveUrl || project.githubUrl) && (
+        {(project.liveUrl || project.githubUrl || project.comingSoon) && (
           <div className="mt-auto flex flex-wrap gap-2 pt-6">
             {project.liveUrl && (
               <a className="project-action inline-flex min-h-11 items-center gap-2 rounded-[0.2rem] border px-3.5 py-2 text-xs font-semibold" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -103,6 +157,11 @@ export function ProjectCard({ project, copy, language, number }: ProjectCardProp
               <a className="project-action inline-flex min-h-11 items-center gap-2 rounded-[0.2rem] border px-3.5 py-2 text-xs font-semibold" href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                 {copy.codeLinkLabel}<GitBranch aria-hidden="true" size={16} />
               </a>
+            )}
+            {project.comingSoon && (
+              <button type="button" disabled className="project-action project-action-unavailable inline-flex min-h-11 items-center gap-2 rounded-[0.2rem] border px-3.5 py-2 text-xs font-semibold">
+                {copy.comingSoonLabel}
+              </button>
             )}
           </div>
         )}
