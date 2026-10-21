@@ -40,11 +40,35 @@ export function PortfolioShell() {
   }, []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const requestedLanguage = params.get("lang");
+    let savedLanguage: string | null = null;
+    try {
+      savedLanguage = window.localStorage.getItem("portfolio-language");
+    } catch {
+      // Language navigation still works without browser storage.
+    }
+    const initialLanguage = requestedLanguage === "en" || requestedLanguage === "fr"
+      ? requestedLanguage
+      : savedLanguage === "en" ? "en" : "fr";
+    const languageFrame = window.requestAnimationFrame(() => setLanguage(initialLanguage));
+    return () => window.cancelAnimationFrame(languageFrame);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
   function toggleLanguage() {
-    setLanguage((currentLanguage) => (currentLanguage === "fr" ? "en" : "fr"));
+    setLanguage((currentLanguage) => {
+      const nextLanguage = currentLanguage === "fr" ? "en" : "fr";
+      try {
+        window.localStorage.setItem("portfolio-language", nextLanguage);
+      } catch {
+        // The switch works for this visit even without browser storage.
+      }
+      return nextLanguage;
+    });
   }
 
   function toggleTheme() {

@@ -354,6 +354,52 @@ p {
   outline-offset: 4px;
 }
 
+.legal-header {
+  color: var(--text-muted);
+}
+
+.legal-control {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-control);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.legal-control:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.legal-main {
+  overflow-wrap: anywhere;
+}
+
+.legal-kicker {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.legal-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-border);
+  text-underline-offset: 0.25em;
+}
+
+.legal-link:hover {
+  color: var(--text-primary);
+}
+
 /* The header and hero use one uninterrupted visual field. */
 .site-header.theme-nav {
   border: 0;
