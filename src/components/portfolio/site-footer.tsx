@@ -1,4 +1,5 @@
 import type { PortfolioTranslations } from "@/data/translations";
+import Link from "next/link";
 
 type SiteFooterProps = {
   copy: PortfolioTranslations["footer"];
@@ -12,19 +13,24 @@ export function SiteFooter({ copy }: SiteFooterProps) {
           <p className="theme-text-muted text-sm">{copy.rights}</p>
           <p className="text-xs leading-relaxed">{copy.trademarkNotice}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+        <nav aria-label={copy.navigationLabel} className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          {copy.legalLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="inline-flex min-h-11 items-center transition-colors duration-300 hover:text-[var(--text-primary)]">
+              {link.label}
+            </Link>
+          ))}
           {copy.socialLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors duration-300 hover:text-[var(--text-primary)]"
+              className="inline-flex min-h-11 items-center transition-colors duration-300 hover:text-[var(--text-primary)]"
             >
               {link.label}
             </a>
           ))}
-        </div>
+        </nav>
       </div>
     </footer>
   );

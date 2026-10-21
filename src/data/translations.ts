@@ -103,6 +103,8 @@ export type PortfolioTranslations = {
     rights: string;
     trademarkNotice: string;
     socialLinks: ProjectLink[];
+    legalLinks: ProjectLink[];
+    navigationLabel: string;
   };
 };
 
@@ -551,6 +553,11 @@ export const translations = {
       trademarkNotice:
         "Les marques, logos et noms de produits tiers appartiennent à leurs propriétaires respectifs.",
       socialLinks,
+      legalLinks: [
+        { label: "Mentions légales", href: "/mentions-legales" },
+        { label: "Confidentialité", href: "/confidentialite" },
+      ],
+      navigationLabel: "Liens légaux et réseaux",
     },
   },
   en: {
@@ -650,6 +657,11 @@ export const translations = {
       trademarkNotice:
         "Third-party trademarks, logos and product names belong to their respective owners.",
       socialLinks,
+      legalLinks: [
+        { label: "Legal Notice", href: "/en/legal-notice" },
+        { label: "Privacy Policy", href: "/en/privacy-policy" },
+      ],
+      navigationLabel: "Legal and social links",
     },
   },
 } satisfies Record<Language, PortfolioTranslations>;

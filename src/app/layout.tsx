@@ -59,6 +59,15 @@ export const viewport: Viewport = {
 const themeInitScript = `
 (() => {
   try {
+    const path = window.location.pathname;
+    const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+    document.documentElement.lang = path.startsWith("/en/") ? "en" : path === "/"
+      ? (requestedLanguage === "en" || requestedLanguage === "fr" ? requestedLanguage : window.localStorage.getItem("portfolio-language") === "en" ? "en" : "fr")
+      : "fr";
+  } catch {
+    document.documentElement.lang = "fr";
+  }
+  try {
     const storedTheme = window.localStorage.getItem("portfolio-theme");
     const theme = storedTheme === "light" ? "light" : "dark";
     document.documentElement.dataset.theme = theme;
